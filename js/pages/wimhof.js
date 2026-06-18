@@ -1,9 +1,9 @@
 import { el, clear, fmtTime, fmtClock, toast } from "../ui.js";
 import { go } from "../router.js";
-import { playSoundscape, Bg, cue, SOUNDSCAPES, stopAll } from "../audio.js";
+import { cue, youtubeMusicSearch, stopAll } from "../audio.js";
 import { Sessions, Settings } from "../store.js";
 
-const DEFAULTS = { rounds:3, breaths:30, pace:3.2, recovery:15, cueVisual:true, cueSound:true, sound:"calm", vol:0.6 };
+const DEFAULTS = { rounds:3, breaths:30, pace:3.2, recovery:15, cueVisual:true, cueSound:true };
 
 export async function render(root){
   let cfg = { ...DEFAULTS };
@@ -23,12 +23,8 @@ export async function render(root){
     const pace = stepper("Темп дихання, с", cfg.pace, 2, 6, v=>{ cfg.pace=v; }, 0.2, 1);
     const recovery = stepper("Відновлення, с", cfg.recovery, 10, 30, v=>{ cfg.recovery=v; });
 
-    const soundSel = el("select",{class:"select", onchange:e=>{ cfg.sound=e.target.value; }});
-    SOUNDSCAPES.forEach(s=> soundSel.append(el("option",{value:s.id, text:s.label, selected: s.id===cfg.sound})));
-    const volume = slider("Гучність музики", Math.round(cfg.vol*100), 0, 100, 5, v=>{ cfg.vol=v/100; }, "%");
-
     const cueV = toggle("Візуальні підказки", cfg.cueVisual, v=> cfg.cueVisual=v);
-    const cueS = toggle("Звукові підказки", cfg.cueSound, v=> cfg.cueSound=v);
+    const cueS = toggle("Звукові підказки (вдих/видих)", cfg.cueSound, v=> cfg.cueSound=v);
 
     screen.append(
       el("header",{class:"page-head center"},
@@ -36,10 +32,9 @@ export async function render(root){
         el("h1",{class:"page-title", text:"Метод Віма Хофа"}),
         el("p",{class:"page-sub", text:"Глибокі дихання, потім затримка на видиху. Подвійний тап або кнопка завершують затримку."})
       ),
-      el("div",{class:"wh-config"}, rounds, breaths, pace, recovery,
-        el("label",{class:"field"}, el("span",{class:"field-label", text:"Фонова музика"}), soundSel),
-        volume, cueV, cueS
-      ),
+      el("div",{class:"wh-config"}, rounds, breaths, pace, recovery, cueV, cueS),
+      el("a",{class:"yt-music-btn", href:youtubeMusicSearch("meditation music relax"), target:"_blank", rel:"noopener"},
+        "♪ Увімкнути музику в YouTube Music"),
       el("button",{class:"btn primary big", onclick:start}, "Почати"),
       el("div",{class:"wh-note", text:"Не практикуй у воді, за кермом або стоячи. Можливе запаморочення."})
     );
@@ -95,8 +90,6 @@ function runSession(cfg, screen, { onFinish, onExit }){
   let stopped = false;
   let endRetentionFn = null;
 
-  if(cfg.sound !== "none") playSoundscape(cfg.sound, cfg.vol);
-
   const orb = el("div",{class:"orb"}, el("span",{class:"orb-label"}));
   const phaseLbl = el("div",{class:"wh-phase"});
   const roundLbl = el("div",{class:"wh-round"});
@@ -130,7 +123,7 @@ function runSession(cfg, screen, { onFinish, onExit }){
       onExit();
     }
   }
-  function stop(){ stopped=true; endRetentionFn=null; clearTimers(); Bg.stop(0.3); }
+  function stop(){ stopped=true; endRetentionFn=null; clearTimers(); }
 
   function nextRound(){
     if(stopped) return;

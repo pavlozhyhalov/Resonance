@@ -1,12 +1,12 @@
 import { el, clear, fmtTime, toast } from "../ui.js";
 import { go } from "../router.js";
-import { playSoundscape, Bg, blip, SOUNDSCAPES, stopAll } from "../audio.js";
+import { blip, youtubeMusicSearch, stopAll } from "../audio.js";
 import { Sessions, Settings } from "../store.js";
 
 const PRESETS = [30, 60, 120, 180, 300];
 
 export async function render(root){
-  let cfg = { mode:"shower", target:60, sound:"none", vol:0.6 };
+  let cfg = { mode:"shower", target:60 };
   try{ const s = await Settings.get(); if(s.cold) cfg = { ...cfg, ...s.cold }; }catch(e){}
 
   const screen = el("div",{class:"cold-screen"});
@@ -36,13 +36,6 @@ export async function render(root){
     }
     renderPresets();
 
-    const soundSel = el("select",{class:"select", onchange:e=> cfg.sound=e.target.value});
-    SOUNDSCAPES.forEach(s=> soundSel.append(el("option",{value:s.id, text:s.label, selected:s.id===cfg.sound})));
-
-    const volVal = el("span",{class:"slider-val", text:Math.round(cfg.vol*100)+"%"});
-    const volInput = el("input",{type:"range", min:"0", max:"100", step:"5", value:String(Math.round(cfg.vol*100)), class:"slider-input",
-      oninput:e=>{ cfg.vol=e.target.value/100; volVal.textContent=e.target.value+"%"; }});
-
     screen.append(
       el("header",{class:"page-head center"},
         el("p",{class:"eyebrow", text:"Холод"}),
@@ -51,10 +44,10 @@ export async function render(root){
       ),
       el("div",{class:"cold-config"},
         el("div",{class:"field"}, el("span",{class:"field-label", text:"Тип"}), modeSeg),
-        el("div",{class:"field"}, el("span",{class:"field-label", text:"Тривалість"}), presetRow),
-        el("label",{class:"field"}, el("span",{class:"field-label", text:"Фонова музика"}), soundSel),
-        el("div",{class:"slider-row"}, el("div",{class:"slider-top"}, el("span",{class:"slider-label", text:"Гучність музики"}), volVal), volInput)
+        el("div",{class:"field"}, el("span",{class:"field-label", text:"Тривалість"}), presetRow)
       ),
+      el("a",{class:"yt-music-btn", href:youtubeMusicSearch("focus calm music"), target:"_blank", rel:"noopener"},
+        "♪ Увімкнути музику в YouTube Music"),
       el("button",{class:"btn primary big cold", onclick:start}, "Зануритись")
     );
   }
@@ -90,7 +83,6 @@ function runTimer(cfg, screen, { onFinish, onExit }){
   let elapsed = 0, paused = false, stopped = false;
   const start = Date.now();
   let id = null;
-  if(cfg.sound!=="none") playSoundscape(cfg.sound, cfg.vol);
 
   const R = 130, C = 2*Math.PI*R;
   const ring = svgRing(R, C);
@@ -128,10 +120,10 @@ function runTimer(cfg, screen, { onFinish, onExit }){
 
   function end(){
     if(stopped) return;
-    stopped = true; clearInterval(id); Bg.stop(0.3);
+    stopped = true; clearInterval(id);
     onFinish(elapsed);
   }
-  function stop(){ stopped=true; clearInterval(id); Bg.stop(0.2); }
+  function stop(){ stopped=true; clearInterval(id); }
   return { stop };
 }
 
