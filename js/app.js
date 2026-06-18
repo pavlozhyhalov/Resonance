@@ -91,13 +91,20 @@ function authGate(){
     if(!e || !p){ msg.textContent = "Введи пошту й пароль."; return; }
     submit.disabled = true; submit.textContent = "…";
     try{
-      const res = mode==="in" ? await Auth.signIn(e,p) : await Auth.signUp(e,p);
-      if(res.error){ msg.textContent = translate(res.error.message); }
-      else if(mode==="up" && !res.data.session){
-        msg.classList.add("ok"); msg.textContent = "Перевір пошту й підтверди акаунт, потім увійди.";
-        setMode("in");
+      if(mode==="up"){
+        const res = await Auth.signUp(e,p);
+        if(res.error){ msg.textContent = translate(res.error.message); }
+        else if(res.data.session){ boot(); return; }
+        else {
+          // account is auto-confirmed in the DB → sign in right away
+          const si = await Auth.signIn(e,p);
+          if(si.error){ msg.classList.add("ok"); msg.textContent = "Акаунт створено. Тепер увійди."; setMode("in"); }
+          else { boot(); return; }
+        }
       } else {
-        boot(); // session established
+        const res = await Auth.signIn(e,p);
+        if(res.error){ msg.textContent = translate(res.error.message); }
+        else { boot(); return; }
       }
     }catch(err){ msg.textContent = "Помилка зʼєднання."; }
     submit.disabled = false; setMode(mode);
