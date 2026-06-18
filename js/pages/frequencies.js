@@ -1,13 +1,13 @@
 import { el, clear, fmtTime, toast } from "../ui.js";
 import { FREQUENCIES, EFFECT_LABELS, CAT_LABELS, STATUS_LABELS } from "../data.js";
-import { Tone, youtubeSearchEmbed, stopAll } from "../audio.js";
+import { Main, youtubeSearchEmbed, stopAll } from "../audio.js";
+import { ICON } from "../icons.js";
 import { Sessions } from "../store.js";
 
 export async function render(root){
-  const state = { effect:"all", cats:new Set(["binaural","solfeggio","other"]), source:"synth" };
-  let player = null; // active player controller
+  const state = { effect:"all", cats:new Set(["binaural","solfeggio","other"]), source:"audio", vol:0.6 };
+  let player = null;
 
-  // ---- filters ----
   const effectSel = el("select",{class:"select", onchange:e=>{ state.effect=e.target.value; renderList(); }});
   effectSel.append(el("option",{value:"all", text:"Усі ефекти"}));
   Object.entries(EFFECT_LABELS).forEach(([k,v])=> effectSel.append(el("option",{value:k, text:v})));
@@ -32,7 +32,7 @@ export async function render(root){
   root.append(
     el("header",{class:"page-head"},
       el("h1",{class:"page-title", text:"Музика по частотах"}),
-      el("p",{class:"page-sub", text:"Синтез грає точну частоту офлайн. Для бінаурал-ритмів потрібні навушники."})
+      el("p",{class:"page-sub", text:"Аудіо грає всередині застосунку. Для бінаурал-ритмів потрібні навушники."})
     ),
     filters, list, sheet
   );
@@ -69,43 +69,35 @@ export async function render(root){
   }
 
   renderList();
-
-  // cleanup on leaving page
   return () => { if(player) player.dispose(); };
 }
 
-// ----------------------------------------------------------------------------
 function buildPlayer(f, state, sheet, onClose){
-  let playing = false;
-  let startedAt = null;
-  let tick = null;
-  let source = state.source;
+  let playing = false, startedAt = null, tick = null, source = state.source;
 
   const viz = el("div",{class:"viz"},
     el("span",{class:"viz-ring r1"}), el("span",{class:"viz-ring r2"}), el("span",{class:"viz-ring r3"}),
     el("span",{class:"viz-core", text:f.hzLabel})
   );
-  // ring animation speed scales with frequency (faster = quicker pulse, clamped)
-  const period = Math.max(0.6, Math.min(4, 60 / Math.max(f.hz, 2)));
+  const period = Math.max(0.8, Math.min(3.4, 60 / Math.max(f.hz, 2)));
   viz.style.setProperty("--pulse", period.toFixed(2)+"s");
 
   const timeLbl = el("div",{class:"player-time", text:"0:00"});
-
-  const segSynth = el("button",{class:"seg "+(source==="synth"?"on":""), text:"Синтез"});
+  const segAudio = el("button",{class:"seg "+(source==="audio"?"on":""), text:"Аудіо"});
   const segYt = el("button",{class:"seg "+(source==="yt"?"on":""), text:"YouTube"});
-  const seg = el("div",{class:"seg-group"}, segSynth, segYt);
-
+  const seg = el("div",{class:"seg-group"}, segAudio, segYt);
   const ytWrap = el("div",{class:"yt-wrap", style:"display:none"});
 
-  const playBtn = el("button",{class:"play-btn", onclick:toggle}, playIcon());
-  const vol = el("input",{type:"range", min:"0", max:"100", value:"40", class:"vol",
-    oninput:e=> Tone.setVolume(e.target.value/100) });
+  const playBtn = el("button",{class:"play-btn", onclick:toggle}, ICON.play());
+  const vol = el("input",{type:"range", min:"0", max:"100", value:String(Math.round(state.vol*100)), class:"vol",
+    oninput:e=>{ state.vol=e.target.value/100; Main.setVolume(state.vol); }});
+  const volRow = el("div",{class:"vol-row"}, el("span",{class:"vol-ic", text:"🔊"}), vol);
 
-  const hint = f.synth.kind==="binaural"
+  const hint = f.synth && f.synth.kind==="binaural"
     ? el("div",{class:"player-hint", text:"🎧 Бінаурал-ритм — слухай у навушниках"})
     : null;
 
-  const closeBtn = el("button",{class:"sheet-close", onclick:close, text:"✕"});
+  const closeBtn = el("button",{class:"sheet-close", onclick:close}, ICON.close());
 
   const body = el("div",{class:"player-body"},
     closeBtn,
@@ -113,84 +105,61 @@ function buildPlayer(f, state, sheet, onClose){
       el("div",{class:"player-name", text:f.name}),
       el("div",{class:"player-cat", text:CAT_LABELS[f.cat]})
     ),
-    seg,
-    viz,
-    ytWrap,
-    timeLbl,
+    seg, viz, ytWrap, timeLbl,
     el("div",{class:"player-controls"}, playBtn),
-    el("div",{class:"vol-row"}, el("span",{class:"vol-ic", text:"🔊"}), vol),
-    hint,
+    volRow, hint,
     el("p",{class:"player-desc", text:f.desc})
   );
 
   function setSource(s){
     source = s; state.source = s;
-    segSynth.classList.toggle("on", s==="synth");
+    segAudio.classList.toggle("on", s==="audio");
     segYt.classList.toggle("on", s==="yt");
-    stopSound();
+    stopAudio(false);
     if(s==="yt"){
-      viz.style.display="none";
-      ytWrap.style.display="block";
-      ytWrap.innerHTML = "";
-      ytWrap.append(el("iframe",{
-        class:"yt-frame", src:youtubeSearchEmbed(f.yt), allow:"autoplay; encrypted-media",
-        allowfullscreen:true, frameborder:"0"
-      }));
-      playBtn.style.display="none";
-      timeLbl.style.display="none";
-      document.querySelector(".vol-row").style.display="none";
+      viz.style.display="none"; ytWrap.style.display="block"; ytWrap.innerHTML="";
+      ytWrap.append(el("iframe",{ class:"yt-frame", src:youtubeSearchEmbed(f.yt),
+        allow:"autoplay; encrypted-media", allowfullscreen:true, frameborder:"0" }));
+      playBtn.style.display="none"; timeLbl.style.display="none"; volRow.style.display="none";
     } else {
-      viz.style.display="grid";
-      ytWrap.style.display="none"; ytWrap.innerHTML="";
-      playBtn.style.display="";
-      timeLbl.style.display="";
-      document.querySelector(".vol-row").style.display="";
+      viz.style.display="grid"; ytWrap.style.display="none"; ytWrap.innerHTML="";
+      playBtn.style.display=""; timeLbl.style.display=""; volRow.style.display="";
     }
   }
-  segSynth.onclick = ()=> setSource("synth");
+  segAudio.onclick = ()=> setSource("audio");
   segYt.onclick = ()=> setSource("yt");
 
-  function toggle(){ playing ? stopSound(true) : startSound(); }
+  function toggle(){ playing ? stopAudio(true) : startAudio(); }
 
-  function startSound(){
-    Tone.setVolume(vol.value/100);
-    Tone.play(f.synth);
+  function startAudio(){
+    if(!f.file){ toast("Для цієї частоти лише YouTube"); setSource("yt"); return; }
+    Main.play(f.file, { loop:true, vol:state.vol });
     playing = true; startedAt = Date.now();
     viz.classList.add("active");
-    playBtn.replaceChildren(pauseIcon());
-    tick = setInterval(()=>{
-      timeLbl.textContent = fmtTime((Date.now()-startedAt)/1000);
-    }, 500);
+    playBtn.replaceChildren(ICON.pause());
+    tick = setInterval(()=>{ timeLbl.textContent = fmtTime((Date.now()-startedAt)/1000); }, 500);
   }
 
-  async function stopSound(logIt=false){
-    Tone.stop();
+  async function stopAudio(logIt=false){
+    Main.stop();
     viz.classList.remove("active");
-    playBtn.replaceChildren(playIcon());
+    playBtn.replaceChildren(ICON.play());
     if(tick){ clearInterval(tick); tick=null; }
     if(playing && logIt){
       const dur = Math.round((Date.now()-startedAt)/1000);
       if(dur >= 20){
         try{ await Sessions.add({ type:"frequency", duration_seconds:dur,
-          details:{ id:f.id, name:f.name, hz:f.hz, source:"synth" } });
+          details:{ id:f.id, name:f.name, hz:f.hz } });
           toast(`Записано: ${f.name} • ${fmtTime(dur)}`);
-        }catch(e){ /* not logged-in or offline */ }
+        }catch(e){}
       }
     }
     playing = false;
   }
 
-  function open(){
-    sheet.innerHTML = ""; sheet.append(body);
-    sheet.classList.add("show");
-    setSource(source);
-  }
-  function close(){ stopSound(true); sheet.classList.remove("show"); setTimeout(()=>{ sheet.innerHTML=""; }, 260); onClose&&onClose(); }
-  function dispose(){ stopSound(false); sheet.classList.remove("show"); sheet.innerHTML=""; }
+  function open(){ sheet.innerHTML=""; sheet.append(body); sheet.classList.add("show"); setSource(source); }
+  function close(){ stopAudio(true); sheet.classList.remove("show"); setTimeout(()=>{ sheet.innerHTML=""; }, 260); onClose&&onClose(); }
+  function dispose(){ stopAudio(false); sheet.classList.remove("show"); sheet.innerHTML=""; }
 
   return { open, close, dispose };
 }
-
-function playIcon(){ const s=icon(); s.innerHTML='<path d="M8 5v14l11-7z"/>'; return s; }
-function pauseIcon(){ const s=icon(); s.innerHTML='<path d="M6 5h4v14H6zM14 5h4v14h-4z"/>'; return s; }
-function icon(){ const ns="http://www.w3.org/2000/svg"; const s=document.createElementNS(ns,"svg"); s.setAttribute("viewBox","0 0 24 24"); s.setAttribute("class","ico"); return s; }

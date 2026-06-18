@@ -1,4 +1,6 @@
 import { el, clear, fmtClock, todayStr, MONTHS, confirmModal, toast } from "../ui.js";
+import { go } from "../router.js";
+import { ICON } from "../icons.js";
 import { Sessions } from "../store.js";
 
 const TYPE_META = {
@@ -13,8 +15,13 @@ export async function render(root){
   let sessions = [];
 
   const head = el("header",{class:"page-head"},
-    el("h1",{class:"page-title", text:"Календар"}),
-    el("p",{class:"page-sub", text:"Кожна практика лишає слід."})
+    el("div",{class:"row between"},
+      el("div",{},
+        el("h1",{class:"page-title", text:"Календар"}),
+        el("p",{class:"page-sub", text:"Кожна практика лишає слід."})
+      ),
+      el("button",{class:"analyze-btn", onclick:()=>go("analytics")}, ICON.chart(), el("span",{text:"Аналіз"}))
+    )
   );
   const monthBar = el("div",{class:"cal-bar"});
   const grid = el("div",{class:"cal-grid"});

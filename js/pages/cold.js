@@ -1,12 +1,12 @@
 import { el, clear, fmtTime, toast } from "../ui.js";
 import { go } from "../router.js";
-import { Soundscape, SOUNDSCAPES, blip, stopAll } from "../audio.js";
+import { playSoundscape, Bg, blip, SOUNDSCAPES, stopAll } from "../audio.js";
 import { Sessions, Settings } from "../store.js";
 
 const PRESETS = [30, 60, 120, 180, 300];
 
 export async function render(root){
-  let cfg = { mode:"shower", target:60, sound:"none" };
+  let cfg = { mode:"shower", target:60, sound:"none", vol:0.6 };
   try{ const s = await Settings.get(); if(s.cold) cfg = { ...cfg, ...s.cold }; }catch(e){}
 
   const screen = el("div",{class:"cold-screen"});
@@ -29,18 +29,19 @@ export async function render(root){
     const presetRow = el("div",{class:"preset-row"});
     function renderPresets(){
       clear(presetRow);
-      PRESETS.forEach(p=>{
-        presetRow.append(el("button",{class:"preset"+(cfg.target===p?" on":""), onclick:()=>{ cfg.target=p; renderPresets(); }, text:fmtTime(p)}));
-      });
+      PRESETS.forEach(p=> presetRow.append(el("button",{class:"preset"+(cfg.target===p?" on":""), onclick:()=>{ cfg.target=p; renderPresets(); }, text:fmtTime(p)})));
       presetRow.append(el("button",{class:"preset"+(!PRESETS.includes(cfg.target)?" on":""), onclick:()=>{
-        const v = prompt("Скільки секунд?", cfg.target);
-        const n = parseInt(v,10); if(n>0){ cfg.target=n; renderPresets(); }
+        const v = prompt("Скільки секунд?", cfg.target); const n=parseInt(v,10); if(n>0){ cfg.target=n; renderPresets(); }
       }, text:"Інше"}));
     }
     renderPresets();
 
     const soundSel = el("select",{class:"select", onchange:e=> cfg.sound=e.target.value});
     SOUNDSCAPES.forEach(s=> soundSel.append(el("option",{value:s.id, text:s.label, selected:s.id===cfg.sound})));
+
+    const volVal = el("span",{class:"slider-val", text:Math.round(cfg.vol*100)+"%"});
+    const volInput = el("input",{type:"range", min:"0", max:"100", step:"5", value:String(Math.round(cfg.vol*100)), class:"slider-input",
+      oninput:e=>{ cfg.vol=e.target.value/100; volVal.textContent=e.target.value+"%"; }});
 
     screen.append(
       el("header",{class:"page-head center"},
@@ -52,6 +53,7 @@ export async function render(root){
         el("div",{class:"field"}, el("span",{class:"field-label", text:"Тип"}), modeSeg),
         el("div",{class:"field"}, el("span",{class:"field-label", text:"Тривалість"}), presetRow),
         el("label",{class:"field"}, el("span",{class:"field-label", text:"Фонова музика"}), soundSel),
+        el("div",{class:"slider-row"}, el("div",{class:"slider-top"}, el("span",{class:"slider-label", text:"Гучність музики"}), volVal), volInput)
       ),
       el("button",{class:"btn primary big cold", onclick:start}, "Зануритись")
     );
@@ -62,8 +64,7 @@ export async function render(root){
   async function finish(elapsed){
     let saved = false;
     try{
-      await Sessions.add({ type:"cold", duration_seconds: elapsed,
-        details:{ mode: cfg.mode, target: cfg.target } });
+      await Sessions.add({ type:"cold", duration_seconds: elapsed, details:{ mode: cfg.mode, target: cfg.target } });
       saved = true;
     }catch(e){}
     clear(screen);
@@ -89,7 +90,7 @@ function runTimer(cfg, screen, { onFinish, onExit }){
   let elapsed = 0, paused = false, stopped = false;
   const start = Date.now();
   let id = null;
-  if(cfg.sound!=="none") Soundscape.play(cfg.sound);
+  if(cfg.sound!=="none") playSoundscape(cfg.sound, cfg.vol);
 
   const R = 130, C = 2*Math.PI*R;
   const ring = svgRing(R, C);
@@ -105,8 +106,7 @@ function runTimer(cfg, screen, { onFinish, onExit }){
   screen.append(
     el("div",{class:"cold-running"},
       el("div",{class:"cold-mode-tag", text: cfg.mode==="bath"?"🛁 Крижана ванна":"🚿 Холодний душ"}),
-      wrap,
-      el("div",{class:"row gap center"}, pauseBtn, stopBtn)
+      wrap, el("div",{class:"row gap center"}, pauseBtn, stopBtn)
     )
   );
 
@@ -122,36 +122,29 @@ function runTimer(cfg, screen, { onFinish, onExit }){
     elapsed = Math.round((Date.now()-start-pausedAccum)/1000);
     const left = Math.max(0, cfg.target - elapsed);
     timeLbl.textContent = fmtTime(left);
-    const frac = Math.min(1, elapsed/cfg.target);
-    prog.style.strokeDashoffset = String(C*(1-frac));
+    prog.style.strokeDashoffset = String(C*(1-Math.min(1, elapsed/cfg.target)));
     if(left<=0){ blip("end"); end(true); }
   }, 250);
 
-  function end(completed){
+  function end(){
     if(stopped) return;
-    stopped = true; clearInterval(id); Soundscape.stop(0.3);
+    stopped = true; clearInterval(id); Bg.stop(0.3);
     onFinish(elapsed);
   }
-  function stop(){ stopped=true; clearInterval(id); Soundscape.stop(0.2); }
-
+  function stop(){ stopped=true; clearInterval(id); Bg.stop(0.2); }
   return { stop };
 }
 
 function svgRing(R, C){
   const ns="http://www.w3.org/2000/svg";
-  const size = (R+18)*2;
-  const svg = document.createElementNS(ns,"svg");
+  const size=(R+18)*2, cx=size/2;
+  const svg=document.createElementNS(ns,"svg");
   svg.setAttribute("viewBox",`0 0 ${size} ${size}`); svg.setAttribute("class","cold-ring");
-  const cx = size/2;
-  const bg = document.createElementNS(ns,"circle");
-  bg.setAttribute("cx",cx); bg.setAttribute("cy",cx); bg.setAttribute("r",R);
-  bg.setAttribute("class","ring-bg");
-  const pr = document.createElementNS(ns,"circle");
-  pr.setAttribute("cx",cx); pr.setAttribute("cy",cx); pr.setAttribute("r",R);
-  pr.setAttribute("class","ring-prog");
+  const bg=document.createElementNS(ns,"circle");
+  bg.setAttribute("cx",cx); bg.setAttribute("cy",cx); bg.setAttribute("r",R); bg.setAttribute("class","ring-bg");
+  const pr=document.createElementNS(ns,"circle");
+  pr.setAttribute("cx",cx); pr.setAttribute("cy",cx); pr.setAttribute("r",R); pr.setAttribute("class","ring-prog");
   pr.setAttribute("transform",`rotate(-90 ${cx} ${cx})`);
-  pr.style.strokeDasharray = String(C);
-  pr.style.strokeDashoffset = String(C);
-  svg.append(bg, pr);
-  return svg;
+  pr.style.strokeDasharray=String(C); pr.style.strokeDashoffset=String(C);
+  svg.append(bg,pr); return svg;
 }

@@ -96,3 +96,13 @@ export const EFFECT_LABELS = {
 };
 export const CAT_LABELS = { binaural:"Бінауральні", solfeggio:"Solfeggio", other:"Інше" };
 export const STATUS_LABELS = { researched:"Дослідження є", unverified:"Без доказів" };
+
+// Attach hosted audio files (reliable iOS playback) to each frequency.
+const FREQ_FILES = {
+  delta:"bin-delta.mp3", theta:"bin-theta.mp3", alpha:"bin-alpha.mp3",
+  beta:"bin-beta.mp3", gamma:"bin-gamma.mp3", schumann:"bin-schumann.mp3",
+  f174:"tone-174.mp3", f285:"tone-285.mp3", f396:"tone-396.mp3", f417:"tone-417.mp3",
+  f528:"tone-528.mp3", f639:"tone-639.mp3", f741:"tone-741.mp3", f852:"tone-852.mp3",
+  f963:"tone-963.mp3", f432:"tone-432.mp3",
+};
+FREQUENCIES.forEach(f => { f.file = FREQ_FILES[f.id] || null; });

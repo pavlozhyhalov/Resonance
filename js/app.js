@@ -1,6 +1,8 @@
 import { register, startRouter, navigate, go } from "./router.js";
 import { Auth } from "./store.js";
 import { el, toast } from "./ui.js";
+import { ICON } from "./icons.js";
+import { unlockAudio, onAudioUnlock, isAudioUnlocked, cue } from "./audio.js";
 
 import * as Home from "./pages/home.js";
 import * as Frequencies from "./pages/frequencies.js";
@@ -8,21 +10,23 @@ import * as WimHof from "./pages/wimhof.js";
 import * as Cold from "./pages/cold.js";
 import * as Calendar from "./pages/calendar.js";
 import * as Tasks from "./pages/tasks.js";
+import * as Analytics from "./pages/analytics.js";
 
 register("home",        { theme:"cosmic",  navKey:"home",        render: Home.render });
-register("frequencies", { theme:"cosmic",  navKey:"frequencies", render: Frequencies.render });
+register("frequencies", { theme:"freq",    navKey:"frequencies", render: Frequencies.render });
 register("wimhof",      { theme:"breath",  navKey:"wimhof",      render: WimHof.render });
 register("cold",        { theme:"cold",    navKey:"cold",        render: Cold.render });
-register("calendar",    { theme:"cosmic",  navKey:"calendar",    render: Calendar.render });
+register("calendar",    { theme:"cal",     navKey:"calendar",    render: Calendar.render });
+register("analytics",   { theme:"cal",     navKey:"calendar",    render: Analytics.render });
 register("tasks",       { theme:"warm",    navKey:"tasks",       render: Tasks.render });
 
 const NAV = [
-  { route:"home",        label:"Головна",  glyph:"⌂" },
-  { route:"frequencies", label:"Частоти",  glyph:"◎" },
-  { route:"wimhof",      label:"Дихання",  glyph:"❂" },
-  { route:"cold",        label:"Холод",    glyph:"❄" },
-  { route:"calendar",    label:"Календар", glyph:"▦" },
-  { route:"tasks",       label:"Цілі",     glyph:"✦" },
+  { route:"home",        label:"Головна",  icon:"home" },
+  { route:"frequencies", label:"Частоти",  icon:"freq" },
+  { route:"wimhof",      label:"Дихання",  icon:"breath" },
+  { route:"cold",        label:"Холод",    icon:"cold" },
+  { route:"calendar",    label:"Календар", icon:"calendar" },
+  { route:"tasks",       label:"Цілі",     icon:"tasks" },
 ];
 
 function buildShell(){
@@ -40,12 +44,26 @@ function buildShell(){
   const nav = el("nav",{class:"bottom-nav"});
   NAV.forEach(n=>{
     nav.append(el("button",{class:"nav-item", "data-route":n.route, onclick:()=>go(n.route)},
-      el("span",{class:"nav-glyph", text:n.glyph}),
+      el("span",{class:"nav-glyph"}, ICON[n.icon]()),
       el("span",{class:"nav-label", text:n.label})
     ));
   });
 
   app.append(topbar, view, nav);
+
+  // visible "enable sound" button (iOS needs a gesture to allow audio)
+  if(!isAudioUnlocked()){
+    const banner = el("button",{class:"audio-banner", onclick:()=>{
+      unlockAudio();
+      try{ cue("in"); }catch(e){}
+      toast("Звук увімкнено");
+    }},
+      el("span",{class:"ab-ic", text:"🔊"}),
+      el("span",{class:"ab-text", text:"Натисни, щоб увімкнути звук"})
+    );
+    app.append(banner);
+    onAudioUnlock(()=>{ banner.classList.add("hide"); setTimeout(()=>banner.remove(), 350); });
+  }
 }
 
 // ---------------- auth gate ----------------
@@ -117,5 +135,10 @@ Auth.onChange((session)=>{
   // react to token refresh / external sign-out
   if(!session && document.getElementById("view")){ location.reload(); }
 });
+
+// Unlock audio on the very first user interaction (iOS requirement).
+["pointerdown","touchend","click"].forEach(ev=>
+  window.addEventListener(ev, ()=>unlockAudio(), { once:false, passive:true })
+);
 
 boot();

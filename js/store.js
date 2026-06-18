@@ -103,10 +103,21 @@ export const Rewards = {
   }
 };
 
+// ---------- practice minutes (1 min = 1 point) ----------
+export async function practiceMinutes(){
+  const { data, error } = await sb.from("sessions").select("duration_seconds");
+  if(error) throw error;
+  return (data||[]).reduce((s,r)=> s + Math.floor((r.duration_seconds||0)/60), 0);
+}
+
 // ---------- points balance ----------
+// balance = task points + practice minutes − redeemed rewards
 export async function pointsBalance(){
-  const [earned, spent] = await Promise.all([ Tasks.totalEarned(), Rewards.totalSpent() ]);
-  return { earned, spent, balance: earned - spent };
+  const [taskPts, minutes, spent] = await Promise.all([
+    Tasks.totalEarned(), practiceMinutes(), Rewards.totalSpent()
+  ]);
+  const earned = taskPts + minutes;
+  return { earned, taskPts, minutes, spent, balance: earned - spent };
 }
 
 // ---------- settings (per-user prefs) ----------
