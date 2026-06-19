@@ -589,3 +589,5 @@ body[data-theme="cal"]{
 .assistant-input:focus{outline:2px solid var(--accent);}
 .assistant-send{width:46px;height:46px;flex:none;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));color:var(--accentInk);font-size:20px;}
 .assistant-send:active{transform:scale(.94);}
+
+.app-ver{text-align:center;color:var(--ink-dim2);font-size:11px;opacity:.5;padding:18px 0 4px;font-family:var(--mono);}

@@ -3,7 +3,7 @@
 // YouTube Music app via deep links (opens the native app on the right track).
 // ============================================================================
 
-import { ASSET_VER } from "./config.js?v=20260619085346";
+import { ASSET_VER } from "./config.js?v=20260619121404";
 
 const BASE = "audio/";
 let unlocked = false;
@@ -13,7 +13,9 @@ export function isAudioUnlocked(){ return unlocked; }
 export function onAudioUnlock(cb){ if(unlocked) cb(); else unlockCbs.push(cb); }
 
 function setPlaybackSession(){
-  try{ if (navigator.audioSession) navigator.audioSession.type = "playback"; }catch(e){}
+  // "ambient" lets our short cues MIX with background audio (e.g. YouTube Music)
+  // instead of interrupting it. Note: silenced by the hardware mute switch.
+  try{ if (navigator.audioSession) navigator.audioSession.type = "ambient"; }catch(e){}
 }
 
 export function unlockAudio(){

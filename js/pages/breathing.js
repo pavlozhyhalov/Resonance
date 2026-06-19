@@ -1,7 +1,7 @@
-import { el } from "../ui.js?v=20260619085346";
-import { go } from "../router.js?v=20260619085346";
-import { ICON } from "../icons.js?v=20260619085346";
-import { BREATH_PRACTICES } from "../content.js?v=20260619085346";
+import { el } from "../ui.js?v=20260619121404";
+import { go } from "../router.js?v=20260619121404";
+import { ICON } from "../icons.js?v=20260619121404";
+import { BREATH_PRACTICES } from "../content.js?v=20260619121404";
 
 export async function render(root){
   root.append(

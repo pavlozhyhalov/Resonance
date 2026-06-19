@@ -1,5 +1,5 @@
 // Hash router. Each route = { theme, render(root) -> optional cleanup fn }.
-import { stopAll } from "./audio.js?v=20260619085346";
+import { stopAll } from "./audio.js?v=20260619121404";
 
 const routes = {};
 let currentCleanup = null;

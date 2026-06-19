@@ -2,9 +2,9 @@
 // assistant.js — free in-app helper. Knows the app, gives tips, reads progress.
 // No API key, no cost. (Hook left for a live LLM later via aiReply().)
 // ============================================================================
-import { el, clear, todayStr, fmtClock } from "./ui.js?v=20260619085346";
-import { go } from "./router.js?v=20260619085346";
-import { sb, Sessions, pointsBalance } from "./store.js?v=20260619085346";
+import { el, clear, todayStr, fmtClock } from "./ui.js?v=20260619121404";
+import { go } from "./router.js?v=20260619121404";
+import { sb, Sessions, pointsBalance } from "./store.js?v=20260619121404";
 
 const KB = [
   { k:["почати","з чого","новач","що робити","користув","порадь"], a:
@@ -111,9 +111,9 @@ async function buildContext(){
 async function aiReply(message, history, context){
   try{
     const { data, error } = await sb.functions.invoke("assistant", { body:{ message, history, context } });
-    if(error) return null;
-    if(data && data.reply) return data.reply;
-    return null;
+    if(error) return null;                 // network / not reachable → local fallback
+    if(!data || data.error || !data.reply) return null; // not configured yet → local fallback
+    return data.reply;                     // live Gemini answer
   }catch(e){ return null; }
 }
 
