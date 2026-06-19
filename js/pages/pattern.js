@@ -1,8 +1,19 @@
-import { el, clear, fmtTime, fmtClock, toast } from "../ui.js?v=20260619121404";
-import { go } from "../router.js?v=20260619121404";
-import { cue, youtubeMusicSearch, stopAll } from "../audio.js?v=20260619121404";
-import { BREATH_PATTERNS } from "../content.js?v=20260619121404";
-import { Sessions, Settings } from "../store.js?v=20260619121404";
+import { el, clear, fmtTime, fmtClock, toast } from "../ui.js?v=20260619124933";
+import { go } from "../router.js?v=20260619124933";
+import { cue, youtubeMusicSearch, stopAll } from "../audio.js?v=20260619124933";
+import { Sessions, Settings } from "../store.js?v=20260619124933";
+
+const BREATH_PATTERNS = {
+  box: { title:"Квадратне дихання", inhale:4, holdIn:4, exhale:4, holdOut:4, cycles:8,
+    info:"Рівні фази 4-4-4-4: вдих, затримка, видих, затримка. Заспокоює, повертає контроль над собою у стресі, гострить концентрацію. Використовують військові та спортсмени перед навантаженням.",
+    benefits:["Знижує стрес і тривогу","Покращує концентрацію","Стабілізує пульс і тиск"] },
+  r478: { title:"Дихання 4-7-8", inhale:4, holdIn:7, exhale:8, holdOut:0, cycles:6,
+    info:"Вдих на 4, затримка на 7, повільний видих на 8. Довгий видих активує парасимпатичну нервову систему — тіло переходить у режим спокою. Найкраще працює перед сном.",
+    benefits:["Допомагає швидше засинати","Знижує тривожність","Уповільнює серцебиття"] },
+  coherent: { title:"Когерентне дихання", inhale:5.5, holdIn:0, exhale:5.5, holdOut:0, cycles:18,
+    info:"Повільне рівне дихання ~5.5 секунди вдих і видих (≈5.5 циклів за хвилину). Максимізує варіабельність серцевого ритму (HRV) — показник стресостійкості й балансу нервової системи.",
+    benefits:["Підвищує HRV (стресостійкість)","Балансує нервову систему","Покращує фокус і настрій"] },
+};
 
 export async function render(root, params){
   const type = params && params.type;

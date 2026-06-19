@@ -2,9 +2,9 @@
 // assistant.js — free in-app helper. Knows the app, gives tips, reads progress.
 // No API key, no cost. (Hook left for a live LLM later via aiReply().)
 // ============================================================================
-import { el, clear, todayStr, fmtClock } from "./ui.js?v=20260619121404";
-import { go } from "./router.js?v=20260619121404";
-import { sb, Sessions, pointsBalance } from "./store.js?v=20260619121404";
+import { el, clear, todayStr, fmtClock } from "./ui.js?v=20260619124933";
+import { go } from "./router.js?v=20260619124933";
+import { sb, Sessions, pointsBalance } from "./store.js?v=20260619124933";
 
 const KB = [
   { k:["почати","з чого","новач","що робити","користув","порадь"], a:

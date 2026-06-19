@@ -1,8 +1,8 @@
-import { el, spinner, fmtClock, todayStr } from "../ui.js?v=20260619121404";
-import { go } from "../router.js?v=20260619121404";
-import { ICON } from "../icons.js?v=20260619121404";
-import { Sessions, pointsBalance } from "../store.js?v=20260619121404";
-import { ASSET_VER } from "../config.js?v=20260619121404";
+import { el, spinner, fmtClock, todayStr } from "../ui.js?v=20260619124933";
+import { go } from "../router.js?v=20260619124933";
+import { ICON } from "../icons.js?v=20260619124933";
+import { Sessions, pointsBalance } from "../store.js?v=20260619124933";
+import { ASSET_VER } from "../config.js?v=20260619124933";
 
 const TILES = [
   { route:"frequencies", title:"Музика по частотах", sub:"Бінаурал, Solfeggio, своя музика", icon:"freq",  cls:"t-freq" },

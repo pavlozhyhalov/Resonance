@@ -1,7 +1,13 @@
-import { el } from "../ui.js?v=20260619121404";
-import { go } from "../router.js?v=20260619121404";
-import { ICON } from "../icons.js?v=20260619121404";
-import { BREATH_PRACTICES } from "../content.js?v=20260619121404";
+import { el } from "../ui.js?v=20260619124933";
+import { go } from "../router.js?v=20260619124933";
+import { ICON } from "../icons.js?v=20260619124933";
+
+const PRACTICES = [
+  { route:"wimhof",            title:"Метод Віма Хофа",    tagline:"Енергія, стійкість до холоду, фокус" },
+  { route:"pattern?type=box",  title:"Квадратне дихання",  tagline:"Спокій і концентрація під тиском" },
+  { route:"pattern?type=r478", title:"Дихання 4-7-8",      tagline:"Засинання та зняття тривоги" },
+  { route:"pattern?type=coherent", title:"Когерентне дихання", tagline:"Баланс, рівний пульс (HRV)" },
+];
 
 export async function render(root){
   root.append(
@@ -11,9 +17,8 @@ export async function render(root){
       el("p",{class:"page-sub", text:"Обери техніку — кожна веде на свою сторінку з описом і таймером."})
     )
   );
-
   const grid = el("div",{class:"tile-grid"});
-  BREATH_PRACTICES.forEach(p=>{
+  PRACTICES.forEach(p=>{
     grid.append(
       el("button",{class:"tile t-breath", onclick:()=>go(p.route)},
         el("span",{class:"tile-glyph"}, ICON.breath()),

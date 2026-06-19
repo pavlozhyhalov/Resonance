@@ -1,6 +1,6 @@
-import { el, clear } from "../ui.js?v=20260619121404";
-import { go } from "../router.js?v=20260619121404";
-import { FREQUENCIES, EFFECT_LABELS, CAT_LABELS, STATUS_LABELS } from "../data.js?v=20260619121404";
+import { el, clear } from "../ui.js?v=20260619124933";
+import { go } from "../router.js?v=20260619124933";
+import { FREQUENCIES, EFFECT_LABELS, CAT_LABELS, STATUS_LABELS } from "../data.js?v=20260619124933";
 
 export async function render(root){
   const state = { effect:"all", cats:new Set(["binaural","solfeggio","other"]) };

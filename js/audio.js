@@ -3,7 +3,7 @@
 // YouTube Music app via deep links (opens the native app on the right track).
 // ============================================================================
 
-import { ASSET_VER } from "./config.js?v=20260619121404";
+import { ASSET_VER } from "./config.js?v=20260619124933";
 
 const BASE = "audio/";
 let unlocked = false;
