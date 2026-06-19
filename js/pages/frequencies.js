@@ -1,6 +1,6 @@
-import { el, clear } from "../ui.js";
-import { go } from "../router.js";
-import { FREQUENCIES, EFFECT_LABELS, CAT_LABELS, STATUS_LABELS } from "../data.js";
+import { el, clear } from "../ui.js?v=20260619080452";
+import { go } from "../router.js?v=20260619080452";
+import { FREQUENCIES, EFFECT_LABELS, CAT_LABELS, STATUS_LABELS } from "../data.js?v=20260619080452";
 
 export async function render(root){
   const state = { effect:"all", cats:new Set(["binaural","solfeggio","other"]) };
@@ -49,12 +49,9 @@ export async function render(root){
           el("div",{class:"freq-hz", text:f.hzLabel}),
           el("div",{class:"freq-meta"},
             el("div",{class:"freq-name", text:f.name}),
-            el("div",{class:"freq-desc", text:f.desc})
+            el("span",{class:`freq-badge ${f.status}`, text:STATUS_LABELS[f.status]})
           ),
-          el("div",{class:"freq-right"},
-            el("span",{class:`freq-badge ${f.status}`, text:STATUS_LABELS[f.status]}),
-            el("span",{class:"freq-more", text:"Детально →"})
-          )
+          el("span",{class:"freq-more", text:"Детально →"})
         )
       );
     });

@@ -1,8 +1,8 @@
-import { el, clear, fmtTime, fmtClock, toast } from "../ui.js";
-import { go } from "../router.js";
-import { cue, youtubeMusicSearch, stopAll } from "../audio.js";
-import { BREATH_PATTERNS } from "../content.js";
-import { Sessions, Settings } from "../store.js";
+import { el, clear, fmtTime, fmtClock, toast } from "../ui.js?v=20260619080452";
+import { go } from "../router.js?v=20260619080452";
+import { cue, youtubeMusicSearch, stopAll } from "../audio.js?v=20260619080452";
+import { BREATH_PATTERNS } from "../content.js?v=20260619080452";
+import { Sessions, Settings } from "../store.js?v=20260619080452";
 
 export async function render(root, params){
   const type = params && params.type;

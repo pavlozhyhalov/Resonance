@@ -1,8 +1,8 @@
-import { el, toast, modal } from "../ui.js";
-import { go } from "../router.js";
-import { FREQUENCIES, CAT_LABELS, STATUS_LABELS } from "../data.js";
-import { FREQ_CONTENT, freqLinks } from "../content.js";
-import { Sessions } from "../store.js";
+import { el, toast, modal } from "../ui.js?v=20260619080452";
+import { go } from "../router.js?v=20260619080452";
+import { FREQUENCIES, CAT_LABELS, STATUS_LABELS } from "../data.js?v=20260619080452";
+import { FREQ_CONTENT, freqLinks } from "../content.js?v=20260619080452";
+import { Sessions } from "../store.js?v=20260619080452";
 
 export async function render(root, params){
   const f = FREQUENCIES.find(x=>x.id===(params&&params.id));
