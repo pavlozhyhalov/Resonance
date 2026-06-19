@@ -1,19 +1,20 @@
-import { register, startRouter, navigate, go } from "./router.js?v=20260619080452";
-import { Auth } from "./store.js?v=20260619080452";
-import { el, toast } from "./ui.js?v=20260619080452";
-import { ICON } from "./icons.js?v=20260619080452";
-import { unlockAudio, onAudioUnlock, isAudioUnlocked, cue } from "./audio.js?v=20260619080452";
+import { register, startRouter, navigate, go } from "./router.js?v=20260619085346";
+import { Auth } from "./store.js?v=20260619085346";
+import { el, toast } from "./ui.js?v=20260619085346";
+import { ICON } from "./icons.js?v=20260619085346";
+import { unlockAudio, onAudioUnlock, isAudioUnlocked, cue } from "./audio.js?v=20260619085346";
+import { buildAssistant } from "./assistant.js?v=20260619085346";
 
-import * as Home from "./pages/home.js?v=20260619080452";
-import * as Frequencies from "./pages/frequencies.js?v=20260619080452";
-import * as FreqDetail from "./pages/freq.js?v=20260619080452";
-import * as Breathing from "./pages/breathing.js?v=20260619080452";
-import * as WimHof from "./pages/wimhof.js?v=20260619080452";
-import * as Pattern from "./pages/pattern.js?v=20260619080452";
-import * as Cold from "./pages/cold.js?v=20260619080452";
-import * as Calendar from "./pages/calendar.js?v=20260619080452";
-import * as Tasks from "./pages/tasks.js?v=20260619080452";
-import * as Analytics from "./pages/analytics.js?v=20260619080452";
+import * as Home from "./pages/home.js?v=20260619085346";
+import * as Frequencies from "./pages/frequencies.js?v=20260619085346";
+import * as FreqDetail from "./pages/freq.js?v=20260619085346";
+import * as Breathing from "./pages/breathing.js?v=20260619085346";
+import * as WimHof from "./pages/wimhof.js?v=20260619085346";
+import * as Pattern from "./pages/pattern.js?v=20260619085346";
+import * as Cold from "./pages/cold.js?v=20260619085346";
+import * as Calendar from "./pages/calendar.js?v=20260619085346";
+import * as Tasks from "./pages/tasks.js?v=20260619085346";
+import * as Analytics from "./pages/analytics.js?v=20260619085346";
 
 register("home",        { theme:"cosmic",  navKey:"home",        render: Home.render });
 register("frequencies", { theme:"freq",    navKey:"frequencies", render: Frequencies.render });
@@ -56,6 +57,8 @@ function buildShell(){
   });
 
   app.append(topbar, view, nav);
+
+  buildAssistant(app);
 
   // visible "enable sound" button (iOS needs a gesture to allow audio)
   if(!isAudioUnlocked()){

@@ -1,7 +1,7 @@
 // ============================================================================
 // content.js — educational text + curated YouTube Music links + practices.
 // ============================================================================
-import { youtubeMusicSearch } from "./audio.js?v=20260619080452";
+import { youtubeMusicSearch } from "./audio.js?v=20260619085346";
 
 const TONE_SUFFIX = [
   ["Основний трек", ""],

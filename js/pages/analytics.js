@@ -1,6 +1,6 @@
-import { el, clear, fmtClock, todayStr, spinner } from "../ui.js?v=20260619080452";
-import { go } from "../router.js?v=20260619080452";
-import { Sessions } from "../store.js?v=20260619080452";
+import { el, clear, fmtClock, todayStr, spinner } from "../ui.js?v=20260619085346";
+import { go } from "../router.js?v=20260619085346";
+import { Sessions } from "../store.js?v=20260619085346";
 
 const TYPE_LABEL = { frequency:"Частоти", wimhof:"Дихання", cold:"Холод", meditation:"Практики" };
 const TYPE_COLOR = { frequency:"#E3B873", wimhof:"#5FD0C4", cold:"#7FD4F2", meditation:"#9B7EDE" };
