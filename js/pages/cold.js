@@ -46,6 +46,14 @@ export async function render(root){
         el("div",{class:"field"}, el("span",{class:"field-label", text:"Тип"}), modeSeg),
         el("div",{class:"field"}, el("span",{class:"field-label", text:"Тривалість"}), presetRow)
       ),
+      el("div",{class:"info-card"},
+        el("p",{class:"info-text", text:"Контрольоване перебування в холоді тренує судини й нервову систему. Це підвищує рівень дофаміну й бадьорості надовго, зменшує запалення, гартує імунітет і вчить керувати реакцією на стрес через спокійне дихання."}),
+        el("div",{class:"benefit-list"},
+          el("div",{class:"benefit"}, el("span",{class:"benefit-dot"}), "Заряд бадьорості й дофаміну"),
+          el("div",{class:"benefit"}, el("span",{class:"benefit-dot"}), "Менше запалень, швидше відновлення"),
+          el("div",{class:"benefit"}, el("span",{class:"benefit-dot"}), "Контроль над стресовою реакцією")
+        )
+      ),
       el("a",{class:"yt-music-btn", href:youtubeMusicSearch("focus calm music"), target:"_blank", rel:"noopener"},
         "♪ Увімкнути музику в YouTube Music"),
       el("button",{class:"btn primary big cold", onclick:start}, "Зануритись")

@@ -5,7 +5,7 @@ import { Sessions, pointsBalance } from "../store.js";
 
 const TILES = [
   { route:"frequencies", title:"Музика по частотах", sub:"Бінаурал, Solfeggio, своя музика", icon:"freq",  cls:"t-freq" },
-  { route:"wimhof",      title:"Дихання Віма Хофа",  sub:"Раунди та затримки",            icon:"breath",cls:"t-breath" },
+  { route:"breathing",   title:"Дихальні практики",  sub:"Вім Хоф, 4-7-8, квадратне…",     icon:"breath",cls:"t-breath" },
   { route:"cold",        title:"Практика холоду",    sub:"Душ і крижані ванни",           icon:"cold",  cls:"t-cold" },
   { route:"calendar",    title:"Календар і аналіз",  sub:"Твоя активність у динаміці",    icon:"calendar",cls:"t-cal" },
   { route:"tasks",       title:"Завдання й винагороди", sub:"Бали за корисний час",       icon:"tasks", cls:"t-task" },

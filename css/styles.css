@@ -486,3 +486,50 @@ body[data-theme="cal"]{
   padding:14px;margin:8px 0 4px;border-radius:var(--radius-sm);border:1px solid var(--line-strong);
   color:var(--ink);font-size:14px;font-weight:600;text-decoration:none;background:var(--surface);}
 .yt-music-btn:active{transform:scale(.985);background:var(--surface-2);}
+
+/* ============================================================
+   v3: sections, detail pages, info cards, links
+   ============================================================ */
+/* frequency list card (navigates to detail) */
+.freq-card{display:flex;align-items:center;gap:14px;width:100%;text-align:left;
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+  padding:14px;transition:transform .12s,border-color .2s;}
+.freq-card:active{transform:scale(.99);border-color:var(--line-strong);}
+.freq-meta{flex:1;min-width:0;}
+.freq-right{display:flex;flex-direction:column;align-items:flex-end;gap:6px;flex:none;}
+.freq-more{font-size:11px;color:var(--accent);font-weight:700;white-space:nowrap;}
+
+/* back button */
+.back-btn{background:none;color:var(--ink-dim);font-size:13px;padding:8px 2px;margin-bottom:4px;}
+.back-btn:active{color:var(--accent);}
+
+/* detail header */
+.detail-head{padding:4px 2px 14px;}
+.detail-hz{font-family:var(--mono);color:var(--accent);font-size:15px;font-weight:700;}
+.detail-title{font-family:var(--serif);font-size:28px;margin:4px 0 10px;line-height:1.1;}
+.detail-tags{display:flex;gap:8px;align-items:center;}
+.detail-tag{font-size:11px;color:var(--ink-dim);background:var(--surface-2);padding:4px 11px;border-radius:999px;}
+
+/* info card */
+.info-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:16px;margin-bottom:16px;}
+.info-lead{font-size:15.5px;font-weight:600;margin:0 0 8px;line-height:1.45;}
+.info-text{font-size:13.5px;color:var(--ink-dim);line-height:1.6;margin:0;}
+.info-note{display:flex;gap:8px;margin-top:12px;padding:10px 12px;background:var(--surface-2);border-radius:10px;font-size:12.5px;color:var(--ink-dim);line-height:1.5;}
+.info-note.headphones{color:var(--ink);}
+.info-note-ic{flex:none;}
+.benefit-list{display:flex;flex-direction:column;gap:9px;margin-top:14px;}
+.benefit{display:flex;align-items:center;gap:10px;font-size:13.5px;color:var(--ink);}
+.benefit-dot{width:7px;height:7px;border-radius:50%;background:var(--accent);flex:none;}
+
+/* YouTube Music link list */
+.link-list{display:flex;flex-direction:column;gap:9px;margin-bottom:16px;}
+.yt-link{display:flex;align-items:center;justify-content:space-between;background:var(--surface);
+  border:1px solid var(--line-strong);border-radius:var(--radius-sm);padding:14px 16px;
+  text-decoration:none;color:var(--ink);font-size:14px;font-weight:600;}
+.yt-link:active{transform:scale(.99);background:var(--surface-2);}
+.yt-link-go{color:var(--accent);font-size:13px;}
+
+/* pattern practice */
+.pattern-badge{display:inline-block;font-family:var(--mono);font-size:13px;color:var(--accent);
+  background:var(--surface-2);padding:7px 15px;border-radius:999px;margin-top:8px;}
+.wh-est{text-align:center;font-size:12px;color:var(--ink-dim2);padding:6px 0;}

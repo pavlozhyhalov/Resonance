@@ -6,7 +6,10 @@ import { unlockAudio, onAudioUnlock, isAudioUnlocked, cue } from "./audio.js";
 
 import * as Home from "./pages/home.js";
 import * as Frequencies from "./pages/frequencies.js";
+import * as FreqDetail from "./pages/freq.js";
+import * as Breathing from "./pages/breathing.js";
 import * as WimHof from "./pages/wimhof.js";
+import * as Pattern from "./pages/pattern.js";
 import * as Cold from "./pages/cold.js";
 import * as Calendar from "./pages/calendar.js";
 import * as Tasks from "./pages/tasks.js";
@@ -14,7 +17,10 @@ import * as Analytics from "./pages/analytics.js";
 
 register("home",        { theme:"cosmic",  navKey:"home",        render: Home.render });
 register("frequencies", { theme:"freq",    navKey:"frequencies", render: Frequencies.render });
-register("wimhof",      { theme:"breath",  navKey:"wimhof",      render: WimHof.render });
+register("freq",        { theme:"freq",    navKey:"frequencies", render: FreqDetail.render });
+register("breathing",   { theme:"breath",  navKey:"breathing",   render: Breathing.render });
+register("wimhof",      { theme:"breath",  navKey:"breathing",   render: WimHof.render });
+register("pattern",     { theme:"breath",  navKey:"breathing",   render: Pattern.render });
 register("cold",        { theme:"cold",    navKey:"cold",        render: Cold.render });
 register("calendar",    { theme:"cal",     navKey:"calendar",    render: Calendar.render });
 register("analytics",   { theme:"cal",     navKey:"calendar",    render: Analytics.render });
@@ -23,7 +29,7 @@ register("tasks",       { theme:"warm",    navKey:"tasks",       render: Tasks.r
 const NAV = [
   { route:"home",        label:"Головна",  icon:"home" },
   { route:"frequencies", label:"Частоти",  icon:"freq" },
-  { route:"wimhof",      label:"Дихання",  icon:"breath" },
+  { route:"breathing",   label:"Дихання",  icon:"breath" },
   { route:"cold",        label:"Холод",    icon:"cold" },
   { route:"calendar",    label:"Календар", icon:"calendar" },
   { route:"tasks",       label:"Цілі",     icon:"tasks" },

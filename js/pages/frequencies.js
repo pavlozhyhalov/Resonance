@@ -1,8 +1,6 @@
-import { el, clear, toast, modal } from "../ui.js";
+import { el, clear } from "../ui.js";
+import { go } from "../router.js";
 import { FREQUENCIES, EFFECT_LABELS, CAT_LABELS, STATUS_LABELS } from "../data.js";
-import { youtubeMusicSearch } from "../audio.js";
-import { ICON } from "../icons.js";
-import { Sessions } from "../store.js";
 
 export async function render(root){
   const state = { effect:"all", cats:new Set(["binaural","solfeggio","other"]) };
@@ -30,7 +28,7 @@ export async function render(root){
   root.append(
     el("header",{class:"page-head"},
       el("h1",{class:"page-title", text:"Музика по частотах"}),
-      el("p",{class:"page-sub", text:"Тап по треку відкриває його в застосунку YouTube Music. Для бінаурал-ритмів — у навушниках."})
+      el("p",{class:"page-sub", text:"Обери частоту — на сторінці буде опис, користь і кілька треків у YouTube Music на вибір."})
     ),
     filters, list
   );
@@ -46,42 +44,21 @@ export async function render(root){
     const items = FREQUENCIES.filter(passes);
     if(!items.length){ list.append(el("div",{class:"muted small", text:"Нічого не знайдено."})); return; }
     items.forEach(f=>{
-      const link = el("a",{class:"freq-main", href:youtubeMusicSearch(f.yt), target:"_blank", rel:"noopener"},
-        el("div",{class:"freq-hz", text:f.hzLabel}),
-        el("div",{class:"freq-meta"},
-          el("div",{class:"freq-name"},
-            el("span",{text:f.name}),
-            el("span",{class:"yt-tag", text:"YT Music ▶"})
+      list.append(
+        el("button",{class:"freq-card click", onclick:()=>go("freq?id="+f.id)},
+          el("div",{class:"freq-hz", text:f.hzLabel}),
+          el("div",{class:"freq-meta"},
+            el("div",{class:"freq-name", text:f.name}),
+            el("div",{class:"freq-desc", text:f.desc})
           ),
-          el("div",{class:"freq-desc", text:f.desc})
-        ),
-        el("span",{class:`freq-badge ${f.status}`, text:STATUS_LABELS[f.status]})
+          el("div",{class:"freq-right"},
+            el("span",{class:`freq-badge ${f.status}`, text:STATUS_LABELS[f.status]}),
+            el("span",{class:"freq-more", text:"Детально →"})
+          )
+        )
       );
-      const logBtn = el("button",{class:"freq-log", title:"Відмітити в календарі", onclick:()=>logSheet(f)}, ICON.calendar());
-      list.append(el("div",{class:"freq-card"}, link, logBtn));
     });
   }
 
   renderList();
-}
-
-function logSheet(f){
-  const pick = (min)=>async()=>{
-    try{
-      await Sessions.add({ type:"frequency", duration_seconds:min*60, details:{ id:f.id, name:f.name, hz:f.hz, source:"youtube" } });
-      toast(`Записано: ${f.name} • ${min} хв`);
-    }catch(e){ toast("Не вдалося (увійди)","err"); }
-    m.close();
-  };
-  const body = el("div",{},
-    el("h3",{class:"modal-title", text:`Відмітити: ${f.name}`}),
-    el("p",{class:"modal-msg", text:"Скільки хвилин ти слухав? (1 хв = 1 бал)"}),
-    el("div",{class:"row gap", style:"flex-wrap:wrap"},
-      el("button",{class:"btn ghost", onclick:pick(5)}, "5 хв"),
-      el("button",{class:"btn ghost", onclick:pick(15)}, "15 хв"),
-      el("button",{class:"btn ghost", onclick:pick(30)}, "30 хв"),
-      el("button",{class:"btn primary", onclick:()=>{ const v=parseInt(prompt("Хвилин?","20"),10); if(v>0) pick(v)(); }}, "Інше")
-    )
-  );
-  const m = modal(body);
 }
