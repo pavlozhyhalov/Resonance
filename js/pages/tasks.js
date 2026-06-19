@@ -1,5 +1,5 @@
-import { el, clear, toast, todayStr, confirmModal, modal } from "../ui.js";
-import { Tasks, Rewards, pointsBalance } from "../store.js";
+import { el, clear, toast, todayStr, confirmModal, modal } from "../ui.js?v=20260619124933";
+import { Tasks, Rewards, pointsBalance } from "../store.js?v=20260619124933";
 
 export async function render(root){
   const balanceEl = el("div",{class:"points-pill"}, "…");

@@ -1,7 +1,7 @@
-import { el, clear, fmtTime, fmtClock, toast } from "../ui.js";
-import { go } from "../router.js";
-import { cue, youtubeMusicSearch, stopAll } from "../audio.js";
-import { Sessions, Settings } from "../store.js";
+import { el, clear, fmtTime, fmtClock, toast } from "../ui.js?v=20260619124933";
+import { go } from "../router.js?v=20260619124933";
+import { cue, youtubeMusicSearch, stopAll } from "../audio.js?v=20260619124933";
+import { Sessions, Settings } from "../store.js?v=20260619124933";
 
 const DEFAULTS = { rounds:3, breaths:30, pace:3.2, recovery:15, cueVisual:true, cueSound:true };
 
@@ -27,10 +27,19 @@ export async function render(root){
     const cueS = toggle("Звукові підказки (вдих/видих)", cfg.cueSound, v=> cfg.cueSound=v);
 
     screen.append(
+      el("button",{class:"back-btn", onclick:()=>go("breathing"), text:"← Практики"}),
       el("header",{class:"page-head center"},
         el("p",{class:"eyebrow", text:"Дихання"}),
         el("h1",{class:"page-title", text:"Метод Віма Хофа"}),
         el("p",{class:"page-sub", text:"Глибокі дихання, потім затримка на видиху. Подвійний тап або кнопка завершують затримку."})
+      ),
+      el("div",{class:"info-card"},
+        el("p",{class:"info-text", text:"Серія глибоких дихань насичує кров киснем і знижує CO₂, після чого затримка на видиху тренує стійкість до стресу. Регулярна практика додає енергії, покращує настрій, зміцнює імунітет і підвищує переносимість холоду."}),
+        el("div",{class:"benefit-list"},
+          el("div",{class:"benefit"}, el("span",{class:"benefit-dot"}), "Більше енергії та ясності"),
+          el("div",{class:"benefit"}, el("span",{class:"benefit-dot"}), "Стійкість до стресу й холоду"),
+          el("div",{class:"benefit"}, el("span",{class:"benefit-dot"}), "Підтримка імунітету")
+        )
       ),
       el("div",{class:"wh-config"}, rounds, breaths, pace, recovery, cueV, cueS),
       el("a",{class:"yt-music-btn", href:youtubeMusicSearch("meditation music relax"), target:"_blank", rel:"noopener"},
@@ -43,16 +52,17 @@ export async function render(root){
   function start(){ saveCfg(); engine = runSession(cfg, screen, { onFinish:finish, onExit:showSetup }); }
 
   async function finish(result){
+    const hold = result.retentions.reduce((a,b)=>a+b,0); // only time actually held
     let saved = false;
     try{
-      await Sessions.add({ type:"wimhof", duration_seconds: result.totalSeconds,
+      await Sessions.add({ type:"wimhof", duration_seconds: hold,
         details:{ rounds: result.retentions.length, breaths: cfg.breaths, retentions: result.retentions, partial: !!result.partial } });
       saved = true;
     }catch(e){}
-    showFinish(result, saved);
+    showFinish(result, saved, hold);
   }
 
-  function showFinish(result, saved){
+  function showFinish(result, saved, hold){
     clear(screen);
     const has = result.retentions.length>0;
     const best = has ? Math.max(...result.retentions) : 0;
@@ -70,7 +80,7 @@ export async function render(root){
             el("span",{class:"wh-result-time", text:fmtTime(r)})
           ))
       ) : el("div",{class:"muted small", text:"Жодної затримки не зафіксовано."}),
-      el("div",{class:"wh-total"}, el("span",{text:"Загалом"}), el("strong",{text:fmtClock(result.totalSeconds)})),
+      el("div",{class:"wh-total"}, el("span",{text:"Час у затримці"}), el("strong",{text:fmtClock(hold)})),
       el("div",{class:"row gap"},
         el("button",{class:"btn primary", onclick:showSetup}, "Ще раз"),
         el("button",{class:"btn ghost", onclick:()=>go("home")}, "Додому")

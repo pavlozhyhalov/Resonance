@@ -3,6 +3,8 @@
 // YouTube Music app via deep links (opens the native app on the right track).
 // ============================================================================
 
+import { ASSET_VER } from "./config.js?v=20260619124933";
+
 const BASE = "audio/";
 let unlocked = false;
 const unlockCbs = [];
@@ -11,7 +13,9 @@ export function isAudioUnlocked(){ return unlocked; }
 export function onAudioUnlock(cb){ if(unlocked) cb(); else unlockCbs.push(cb); }
 
 function setPlaybackSession(){
-  try{ if (navigator.audioSession) navigator.audioSession.type = "playback"; }catch(e){}
+  // "ambient" lets our short cues MIX with background audio (e.g. YouTube Music)
+  // instead of interrupting it. Note: silenced by the hardware mute switch.
+  try{ if (navigator.audioSession) navigator.audioSession.type = "ambient"; }catch(e){}
 }
 
 export function unlockAudio(){
@@ -25,7 +29,7 @@ export function unlockAudio(){
 }
 
 // ---------- timing cues ----------
-function mk(src){ const a=new Audio(BASE+src); a.preload="auto"; a.setAttribute("playsinline",""); return a; }
+function mk(src){ const a=new Audio(BASE+src+"?v="+ASSET_VER); a.preload="auto"; a.setAttribute("playsinline",""); return a; }
 const cueIn = mk("cue-in.mp3"), cueOut = mk("cue-out.mp3"), cueGong = mk("cue-gong.mp3");
 export function cue(kind){
   const a = kind==="in"?cueIn : kind==="out"?cueOut : cueGong;

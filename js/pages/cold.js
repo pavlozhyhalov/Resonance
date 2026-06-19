@@ -1,7 +1,7 @@
-import { el, clear, fmtTime, toast } from "../ui.js";
-import { go } from "../router.js";
-import { blip, youtubeMusicSearch, stopAll } from "../audio.js";
-import { Sessions, Settings } from "../store.js";
+import { el, clear, fmtTime, toast } from "../ui.js?v=20260619124933";
+import { go } from "../router.js?v=20260619124933";
+import { blip, youtubeMusicSearch, stopAll } from "../audio.js?v=20260619124933";
+import { Sessions, Settings } from "../store.js?v=20260619124933";
 
 const PRESETS = [30, 60, 120, 180, 300];
 
@@ -45,6 +45,14 @@ export async function render(root){
       el("div",{class:"cold-config"},
         el("div",{class:"field"}, el("span",{class:"field-label", text:"Тип"}), modeSeg),
         el("div",{class:"field"}, el("span",{class:"field-label", text:"Тривалість"}), presetRow)
+      ),
+      el("div",{class:"info-card"},
+        el("p",{class:"info-text", text:"Контрольоване перебування в холоді тренує судини й нервову систему. Це підвищує рівень дофаміну й бадьорості надовго, зменшує запалення, гартує імунітет і вчить керувати реакцією на стрес через спокійне дихання."}),
+        el("div",{class:"benefit-list"},
+          el("div",{class:"benefit"}, el("span",{class:"benefit-dot"}), "Заряд бадьорості й дофаміну"),
+          el("div",{class:"benefit"}, el("span",{class:"benefit-dot"}), "Менше запалень, швидше відновлення"),
+          el("div",{class:"benefit"}, el("span",{class:"benefit-dot"}), "Контроль над стресовою реакцією")
+        )
       ),
       el("a",{class:"yt-music-btn", href:youtubeMusicSearch("focus calm music"), target:"_blank", rel:"noopener"},
         "♪ Увімкнути музику в YouTube Music"),

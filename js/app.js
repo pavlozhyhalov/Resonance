@@ -1,20 +1,27 @@
-import { register, startRouter, navigate, go } from "./router.js";
-import { Auth } from "./store.js";
-import { el, toast } from "./ui.js";
-import { ICON } from "./icons.js";
-import { unlockAudio, onAudioUnlock, isAudioUnlocked, cue } from "./audio.js";
+import { register, startRouter, navigate, go } from "./router.js?v=20260619124933";
+import { Auth } from "./store.js?v=20260619124933";
+import { el, toast } from "./ui.js?v=20260619124933";
+import { ICON } from "./icons.js?v=20260619124933";
+import { unlockAudio, onAudioUnlock, isAudioUnlocked, cue } from "./audio.js?v=20260619124933";
+import { buildAssistant } from "./assistant.js?v=20260619124933";
 
-import * as Home from "./pages/home.js";
-import * as Frequencies from "./pages/frequencies.js";
-import * as WimHof from "./pages/wimhof.js";
-import * as Cold from "./pages/cold.js";
-import * as Calendar from "./pages/calendar.js";
-import * as Tasks from "./pages/tasks.js";
-import * as Analytics from "./pages/analytics.js";
+import * as Home from "./pages/home.js?v=20260619124933";
+import * as Frequencies from "./pages/frequencies.js?v=20260619124933";
+import * as FreqDetail from "./pages/freq.js?v=20260619124933";
+import * as Breathing from "./pages/breathing.js?v=20260619124933";
+import * as WimHof from "./pages/wimhof.js?v=20260619124933";
+import * as Pattern from "./pages/pattern.js?v=20260619124933";
+import * as Cold from "./pages/cold.js?v=20260619124933";
+import * as Calendar from "./pages/calendar.js?v=20260619124933";
+import * as Tasks from "./pages/tasks.js?v=20260619124933";
+import * as Analytics from "./pages/analytics.js?v=20260619124933";
 
 register("home",        { theme:"cosmic",  navKey:"home",        render: Home.render });
 register("frequencies", { theme:"freq",    navKey:"frequencies", render: Frequencies.render });
-register("wimhof",      { theme:"breath",  navKey:"wimhof",      render: WimHof.render });
+register("freq",        { theme:"freq",    navKey:"frequencies", render: FreqDetail.render });
+register("breathing",   { theme:"breath",  navKey:"breathing",   render: Breathing.render });
+register("wimhof",      { theme:"breath",  navKey:"breathing",   render: WimHof.render });
+register("pattern",     { theme:"breath",  navKey:"breathing",   render: Pattern.render });
 register("cold",        { theme:"cold",    navKey:"cold",        render: Cold.render });
 register("calendar",    { theme:"cal",     navKey:"calendar",    render: Calendar.render });
 register("analytics",   { theme:"cal",     navKey:"calendar",    render: Analytics.render });
@@ -23,7 +30,7 @@ register("tasks",       { theme:"warm",    navKey:"tasks",       render: Tasks.r
 const NAV = [
   { route:"home",        label:"Головна",  icon:"home" },
   { route:"frequencies", label:"Частоти",  icon:"freq" },
-  { route:"wimhof",      label:"Дихання",  icon:"breath" },
+  { route:"breathing",   label:"Дихання",  icon:"breath" },
   { route:"cold",        label:"Холод",    icon:"cold" },
   { route:"calendar",    label:"Календар", icon:"calendar" },
   { route:"tasks",       label:"Цілі",     icon:"tasks" },
@@ -50,6 +57,8 @@ function buildShell(){
   });
 
   app.append(topbar, view, nav);
+
+  buildAssistant(app);
 
   // visible "enable sound" button (iOS needs a gesture to allow audio)
   if(!isAudioUnlocked()){

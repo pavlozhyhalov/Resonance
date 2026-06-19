@@ -1,11 +1,12 @@
-import { el, spinner, fmtClock, todayStr } from "../ui.js";
-import { go } from "../router.js";
-import { ICON } from "../icons.js";
-import { Sessions, pointsBalance } from "../store.js";
+import { el, spinner, fmtClock, todayStr } from "../ui.js?v=20260619124933";
+import { go } from "../router.js?v=20260619124933";
+import { ICON } from "../icons.js?v=20260619124933";
+import { Sessions, pointsBalance } from "../store.js?v=20260619124933";
+import { ASSET_VER } from "../config.js?v=20260619124933";
 
 const TILES = [
   { route:"frequencies", title:"Музика по частотах", sub:"Бінаурал, Solfeggio, своя музика", icon:"freq",  cls:"t-freq" },
-  { route:"wimhof",      title:"Дихання Віма Хофа",  sub:"Раунди та затримки",            icon:"breath",cls:"t-breath" },
+  { route:"breathing",   title:"Дихальні практики",  sub:"Вім Хоф, 4-7-8, квадратне…",     icon:"breath",cls:"t-breath" },
   { route:"cold",        title:"Практика холоду",    sub:"Душ і крижані ванни",           icon:"cold",  cls:"t-cold" },
   { route:"calendar",    title:"Календар і аналіз",  sub:"Твоя активність у динаміці",    icon:"calendar",cls:"t-cal" },
   { route:"tasks",       title:"Завдання й винагороди", sub:"Бали за корисний час",       icon:"tasks", cls:"t-task" },
@@ -42,6 +43,7 @@ export async function render(root){
   });
 
   root.append(head, stats, grid);
+  root.append(el("div",{class:"app-ver", text:"версія "+ASSET_VER}));
 
   try{
     const since = new Date(); since.setDate(since.getDate()-120);

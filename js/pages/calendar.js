@@ -1,7 +1,7 @@
-import { el, clear, fmtClock, todayStr, MONTHS, confirmModal, toast } from "../ui.js";
-import { go } from "../router.js";
-import { ICON } from "../icons.js";
-import { Sessions } from "../store.js";
+import { el, clear, fmtClock, todayStr, MONTHS, confirmModal, toast } from "../ui.js?v=20260619124933";
+import { go } from "../router.js?v=20260619124933";
+import { ICON } from "../icons.js?v=20260619124933";
+import { Sessions } from "../store.js?v=20260619124933";
 
 const TYPE_META = {
   frequency:{ label:"Частоти", cls:"d-freq", glyph:"◎" },
