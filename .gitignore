@@ -1,0 +1,10 @@
+# Editor / tooling — do NOT upload these to GitHub Pages
+.claude/
+_verify/
+
+# OS junk
+Thumbs.db
+.DS_Store
+
+# verification harness (do not upload)
+__verify.html
