@@ -13,6 +13,14 @@
   --safe-b:env(safe-area-inset-bottom,0px);
 }
 
+/* dark baseline so any undefined theme still renders dark (never white) */
+:root{
+  --bg1:#1A1033; --bg2:#241646; --bg3:#2D1C57;
+  --surface:rgba(40,28,77,0.55); --surface-2:#281C4D;
+  --accent:#E3B873; --accent2:#9B7EDE; --accentInk:#170F2B;
+  --glow1:rgba(227,184,115,0.16); --glow2:rgba(155,126,222,0.14);
+}
+
 /* ---- theme tokens ---- */
 body[data-theme="cosmic"], body[data-theme="warm"]{
   --bg1:#1A1033; --bg2:#241646; --bg3:#2D1C57;
