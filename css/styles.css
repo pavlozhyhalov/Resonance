@@ -614,3 +614,28 @@ body[data-theme="cal"]{
 .thread-date{ font-size:11px; color:var(--ink-dim2); }
 .thread-act{ flex:none; width:38px; height:38px; border-radius:10px; background:transparent; color:var(--ink-dim2); font-size:15px; }
 .thread-act:active{ background:var(--surface-2); color:var(--accent); }
+
+/* exercises + books tiles */
+.t-ex .tile-glyph{color:#E8835A;} .t-ex{--tileglow:rgba(232,131,90,0.10);}
+.t-book .tile-glyph{color:#A78BFA;} .t-book{--tileglow:rgba(167,139,250,0.10);}
+
+/* hold timer (exercises) */
+.hold-timer{display:flex;flex-direction:column;align-items:center;gap:6px;margin:14px 0;}
+.cold-phase{font-size:14px;color:var(--ink-dim);}
+
+/* books page */
+.section-label2{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-dim2);font-weight:700;margin:18px 2px 10px;}
+.books-total{font-size:13px;color:var(--ink-dim);background:rgba(167,139,250,0.08);border:1px solid var(--line);border-radius:11px;padding:10px 13px;}
+.book-card{display:flex;align-items:center;gap:13px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-sm);padding:12px;margin-bottom:10px;flex-wrap:wrap;}
+.book-card.read{opacity:.82;}
+.book-spine{width:38px;height:38px;border-radius:9px;flex:none;display:grid;place-items:center;color:#A78BFA;background:rgba(167,139,250,0.12);}
+.book-spine svg{width:20px;height:20px;}
+.book-main{flex:1;min-width:120px;}
+.book-title{font-size:14.5px;font-weight:600;}
+.book-meta{font-size:12px;color:var(--ink-dim);margin-top:2px;}
+.book-min{font-size:11.5px;color:#A78BFA;margin-top:3px;font-family:var(--mono);}
+.book-actions{display:flex;align-items:center;gap:8px;}
+.btn.small{padding:7px 12px;font-size:12.5px;}
+.icon-btn{width:34px;height:34px;border-radius:9px;background:var(--surface-2);color:var(--ink-dim2);font-size:14px;display:grid;place-items:center;}
+.icon-btn:active{color:var(--accent);}
+.dot.d-ex{background:#E8835A;}
