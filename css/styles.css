@@ -568,6 +568,7 @@ body[data-theme="cal"]{
   transition:transform .15s, opacity .2s;
 }
 .assistant-fab:active{transform:scale(.92);}
+.assistant-fab svg{width:26px;height:26px;}
 .assistant-fab.hide{opacity:0;pointer-events:none;transform:scale(.6);}
 
 .assistant-panel{
@@ -764,3 +765,11 @@ body[data-theme="cal"]{
 .fld-label{font-size:12px;color:var(--ink-dim);font-weight:600;letter-spacing:.02em;}
 textarea.input{resize:vertical;min-height:60px;font-family:inherit;}
 select.input{appearance:none;-webkit-appearance:none;}
+
+/* wheel legend (maps colors to branches) */
+.wheel-legend{display:flex;flex-wrap:wrap;justify-content:center;gap:7px;margin-top:12px;}
+.wl-item{display:flex;align-items:center;gap:6px;background:var(--surface-2);border:1px solid var(--line);border-radius:99px;padding:5px 11px;font-size:12px;color:var(--ink);}
+.wl-item:active{border-color:var(--line-strong);}
+.wl-dot{width:9px;height:9px;border-radius:50%;flex:none;}
+.wl-name{font-weight:500;}
+.wl-lv{font-family:var(--mono);font-size:11px;color:var(--ink-dim);}
