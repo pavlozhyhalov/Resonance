@@ -40,16 +40,20 @@ body[data-theme="cold"]{
 
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
 html,body{margin:0;padding:0;height:100%;}
+html{background:var(--bg1);}
 body{
   font-family:var(--sans); color:var(--ink); min-height:100%;
+  background-color:var(--bg1);
+  -webkit-font-smoothing:antialiased;
+  transition:background-color .4s ease;
+}
+body::before{
+  content:""; position:fixed; inset:0; z-index:-1; pointer-events:none;
   background-color:var(--bg1);
   background-image:
     radial-gradient(circle at 50% -6%, var(--glow1), transparent 45%),
     radial-gradient(circle at 86% 12%, var(--glow2), transparent 40%),
     linear-gradient(180deg, var(--bg1), var(--bg2) 60%, var(--bg1));
-  background-attachment:fixed;
-  -webkit-font-smoothing:antialiased;
-  transition:background-color .4s ease;
 }
 button{font-family:inherit;color:inherit;cursor:pointer;border:none;background:none;}
 input,select{font-family:inherit;}
