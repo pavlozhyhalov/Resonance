@@ -316,6 +316,25 @@ input,select{font-family:inherit;}
 .round-chip{display:inline-flex;align-items:center;gap:5px;font-family:var(--mono);font-size:11px;color:var(--ink-dim);background:var(--surface-2);border-radius:7px;padding:2px 7px;}
 .round-chip b{color:var(--ink-dim2);font-weight:700;}
 
+/* ---- new home ---- */
+.home-state,.home-today,.home-goal{padding:16px;}
+.hs-grid{display:flex;gap:10px;}
+.hs-cell{flex:1;text-align:center;background:var(--surface-2);border-radius:12px;padding:12px 6px;}
+.hs-val{font-family:var(--mono);font-size:22px;font-weight:600;color:var(--ink);line-height:1.1;}
+.hs-lab{font-size:11px;color:var(--ink-dim2);margin-top:4px;}
+.ht-head{display:flex;align-items:center;gap:9px;}
+.ht-dot{width:11px;height:11px;border-radius:50%;background:var(--line-strong);flex:none;}
+.ht-dot.on{background:#5FD0C4;box-shadow:0 0 10px rgba(95,208,196,.5);}
+.ht-title{font-size:15px;font-weight:600;color:var(--ink);}
+.ht-sub{font-size:13px;color:var(--ink-dim);margin:7px 0 12px;}
+.btn.block{width:100%;display:block;}
+.hg-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px;}
+.hg-title{font-size:15px;font-weight:600;color:var(--ink);}
+.hg-cost{font-family:var(--mono);font-size:12px;color:var(--accent);flex:none;}
+.hg-bar{height:8px;border-radius:99px;background:rgba(255,255,255,0.07);overflow:hidden;margin:10px 0;}
+.hg-bar>i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:99px;}
+.hg-link{font-size:13px;color:var(--accent);font-weight:600;background:none;padding:2px 0;}
+
 /* ============================================================ TASKS */
 .points-pill{font-family:var(--mono);font-weight:700;color:var(--accentInk);
   background:linear-gradient(120deg,var(--accent),var(--accent2));padding:7px 14px;border-radius:999px;font-size:14px;}
