@@ -773,3 +773,13 @@ select.input{appearance:none;-webkit-appearance:none;}
 .wl-dot{width:9px;height:9px;border-radius:50%;flex:none;}
 .wl-name{font-weight:500;}
 .wl-lv{font-family:var(--mono);font-size:11px;color:var(--ink-dim);}
+
+/* base card (was missing — caused Розвиток/profile cards to collapse & overlap) */
+.card{
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:16px;
+  margin-bottom:14px;
+}
+.card.wheel-wrap{padding-top:18px;padding-bottom:18px;}
