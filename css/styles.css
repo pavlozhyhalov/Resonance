@@ -76,6 +76,8 @@ input,select{font-family:inherit;}
 }
 .brand{display:flex;align-items:center;gap:8px;font-weight:600;}
 .brand-mark{color:var(--accent);font-size:18px;}
+.brand-logo{width:26px;height:26px;display:block;object-fit:contain;flex:none;}
+.brand-logo.big{width:58px;height:58px;}
 .brand-name{font-family:var(--serif);letter-spacing:.02em;font-size:16px;}
 .signout{font-size:18px;color:var(--ink-dim2);width:36px;height:36px;border-radius:10px;}
 .signout:active{background:var(--surface);}
