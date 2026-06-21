@@ -385,6 +385,15 @@ input,select{font-family:inherit;}
 .read-title{font-family:var(--serif);font-size:23px;line-height:1.25;color:var(--ink);font-weight:600;}
 .read-body{margin-top:14px;}
 .read-text{font-size:15.5px;line-height:1.7;color:var(--ink-dim);margin:0;}
+.read-lead{font-size:16.5px;line-height:1.6;color:var(--ink);font-weight:500;margin:0 0 12px;}
+.read-text + .read-text{margin-top:11px;}
+.read-sub{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-dim2);font-weight:700;margin:16px 0 9px;}
+.read-points{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:6px;}
+.read-points li{font-size:14.5px;line-height:1.5;color:var(--ink-dim);}
+.read-sources{margin-top:12px;}
+.read-src{display:block;font-size:14px;color:var(--accent);padding:8px 0;border-bottom:1px solid var(--line);}
+.read-src:last-child{border-bottom:none;}
+.read-note{font-size:12px;color:var(--ink-dim2);margin:14px 2px 0;line-height:1.5;}
 .btn.ghost.block{width:100%;margin-top:14px;}
 
 /* ============================================================ TASKS */
