@@ -963,7 +963,8 @@ select.input{appearance:none;-webkit-appearance:none;}
 .wl-item:active{border-color:var(--line-strong);}
 .wl-dot{width:9px;height:9px;border-radius:50%;flex:none;}
 .wl-name{font-weight:500;}
-.wl-lv{font-family:var(--mono);font-size:11px;color:var(--ink-dim);}
+.wl-lv{font-family:var(--mono);font-size:11px;color:var(--ink-dim);display:inline-flex;align-items:baseline;gap:5px;}
+.wl-xp{font-size:10px;color:var(--ink-dim2);}
 
 /* base card (was missing — caused Розвиток/profile cards to collapse & overlap) */
 .card{
