@@ -402,6 +402,11 @@ input,select{font-family:inherit;}
 .intro-title{font-family:var(--serif);font-size:20px;font-weight:600;color:var(--ink);margin-bottom:8px;}
 .intro-text{font-size:14px;line-height:1.6;color:var(--ink-dim);margin:0 0 14px;}
 .intro-btn{width:auto;display:inline-block;padding:9px 16px;}
+.intro-card.aura{text-align:center;padding:24px 18px 22px;background:radial-gradient(circle at 50% -12%, var(--glow1), transparent 62%), var(--surface);}
+.intro-logo{width:48px;height:48px;margin:0 auto 12px;display:block;}
+.intro-card.aura .intro-title{font-family:var(--serif);font-size:clamp(18px,5.7vw,23px);white-space:nowrap;color:var(--ink);margin-bottom:9px;}
+.intro-card.aura .intro-text{font-size:13.5px;color:var(--ink-dim);max-width:262px;margin:0 auto 16px;line-height:1.5;}
+.btn.intro-btn-a{display:inline-block;width:auto;background:var(--accent);color:var(--accentInk);font-weight:600;padding:9px 22px;border-radius:999px;border:none;}
 .home-fact{margin-top:2px;}
 .assist-card{padding:16px;}
 .assist-row{display:flex;align-items:flex-start;gap:12px;margin-bottom:13px;}
