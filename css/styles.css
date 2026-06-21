@@ -401,6 +401,18 @@ input,select{font-family:inherit;}
 .intro-text{font-size:14px;line-height:1.6;color:var(--ink-dim);margin:0 0 14px;}
 .intro-btn{width:auto;display:inline-block;padding:9px 16px;}
 .home-fact{margin-top:2px;}
+.assist-card{padding:16px;}
+.assist-row{display:flex;align-items:flex-start;gap:12px;margin-bottom:13px;}
+.assist-ic{width:40px;height:40px;flex:none;border-radius:12px;background:var(--surface-2);display:grid;place-items:center;color:var(--accent2);}
+.assist-ic svg{width:21px;height:21px;}
+.assist-copy{min-width:0;}
+.assist-title{font-size:15px;font-weight:600;color:var(--ink);}
+.assist-text{font-size:13px;line-height:1.5;color:var(--ink-dim);margin:4px 0 0;}
+.hs-goal{margin-top:13px;padding-top:13px;border-top:1px solid var(--line);}
+.hs-goal .hg-top{display:flex;align-items:baseline;gap:8px;}
+.hg-glabel{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-dim2);font-weight:700;flex:none;}
+.hs-goal .hg-title{flex:1;font-size:14px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.hs-goal .hg-cost{flex:none;}
 
 /* ---- content library ---- */
 .ev-badge{font-size:10px;letter-spacing:.03em;text-transform:uppercase;padding:2px 7px;border-radius:6px;font-weight:700;flex:none;}
