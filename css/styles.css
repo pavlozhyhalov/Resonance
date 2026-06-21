@@ -318,10 +318,24 @@ input,select{font-family:inherit;}
 
 /* ---- new home ---- */
 .home-state,.home-today,.home-goal{padding:16px;}
-.hs-grid{display:flex;gap:10px;}
-.hs-cell{flex:1;text-align:center;background:var(--surface-2);border-radius:12px;padding:12px 6px;}
-.hs-val{font-family:var(--mono);font-size:22px;font-weight:600;color:var(--ink);line-height:1.1;}
-.hs-lab{font-size:11px;color:var(--ink-dim2);margin-top:4px;}
+.hs-main{display:flex;align-items:center;gap:14px;}
+.hs-level{flex:none;width:62px;height:62px;border-radius:16px;background:var(--surface-2);display:flex;flex-direction:column;align-items:center;justify-content:center;}
+.hs-lvl-num{font-family:var(--serif);font-size:28px;font-weight:600;color:var(--accent);line-height:1;}
+.hs-lvl-cap{font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-dim2);margin-top:2px;}
+.hs-titles{min-width:0;}
+.hs-rank{font-size:17px;font-weight:600;color:var(--ink);}
+.hs-class{font-size:13px;color:var(--ink-dim);margin-top:2px;}
+.hs-streak{margin-top:13px;padding-top:13px;border-top:1px solid var(--line);font-size:14px;color:var(--ink-dim);}
+.hs-streak b{font-family:var(--mono);color:var(--ink);font-size:16px;}
+.fact-more{font-size:13px;color:var(--accent);font-weight:600;margin-top:8px;}
+.cat-block{margin-bottom:18px;}
+.cat-head{display:flex;align-items:center;gap:8px;margin:0 2px 9px;}
+.cat-dot{width:9px;height:9px;border-radius:50%;flex:none;}
+.cat-name{font-size:13px;font-weight:700;letter-spacing:.02em;color:var(--ink);}
+.cat-item{display:flex;align-items:center;gap:10px;width:100%;text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:7px;transition:transform .1s;}
+.cat-item:active{transform:scale(.99);}
+.cat-item-title{flex:1;font-size:14px;color:var(--ink);line-height:1.35;}
+.cat-item-go{flex:none;color:var(--ink-dim2);font-size:16px;}
 .ht-head{display:flex;align-items:center;gap:9px;}
 .ht-dot{width:11px;height:11px;border-radius:50%;background:var(--line-strong);flex:none;}
 .ht-dot.on{background:#5FD0C4;box-shadow:0 0 10px rgba(95,208,196,.5);}
