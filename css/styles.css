@@ -396,6 +396,11 @@ input,select{font-family:inherit;}
 .hg-bar{height:8px;border-radius:99px;background:rgba(255,255,255,0.07);overflow:hidden;margin:10px 0;}
 .hg-bar>i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:99px;}
 .hg-link{font-size:13px;color:var(--accent);font-weight:600;background:none;padding:2px 0;}
+.intro-card{padding:18px 16px;}
+.intro-title{font-family:var(--serif);font-size:20px;font-weight:600;color:var(--ink);margin-bottom:8px;}
+.intro-text{font-size:14px;line-height:1.6;color:var(--ink-dim);margin:0 0 14px;}
+.intro-btn{width:auto;display:inline-block;padding:9px 16px;}
+.home-fact{margin-top:2px;}
 
 /* ---- content library ---- */
 .ev-badge{font-size:10px;letter-spacing:.03em;text-transform:uppercase;padding:2px 7px;border-radius:6px;font-weight:700;flex:none;}
