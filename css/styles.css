@@ -114,7 +114,7 @@ input,select{font-family:inherit;}
 
 /* ---- clear tap feedback (perimeter + fill) ---- */
 .drawer-item:active,.cat-item:active,.content-card:active,.fact-card:active,.lang-opt:active,.lang-cell:active,.bdet:active,.hg-link:active{background:var(--surface-2);box-shadow:inset 0 0 0 2px var(--accent);}
-.drawer-item.active{box-shadow:inset 3px 0 0 var(--accent);}
+.drawer-item.active{box-shadow:inset 0 0 0 1.5px var(--accent);}
 @media (prefers-reduced-motion:reduce){.view.fade-in>*,.drawer-root.open .drawer-list .drawer-item,.drawer-root.open .drawer-foot{animation:none!important;}}
 
 /* ---- bottom nav ---- */
