@@ -414,6 +414,21 @@ input,select{font-family:inherit;}
 .hs-goal .hg-title{flex:1;font-size:14px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 .hs-goal .hg-cost{flex:none;}
 
+/* ---- quick-access menu config (drag reorder) ---- */
+.navcfg-active{padding:7px;display:flex;flex-direction:column;gap:7px;}
+.navcfg-row{display:flex;align-items:center;gap:11px;padding:10px 10px;}
+.navcfg-active .navcfg-row{background:var(--surface-2);border-radius:10px;}
+.navcfg-row.dragging{opacity:.92;box-shadow:0 10px 26px rgba(0,0,0,.45);}
+.navcfg-avail .navcfg-row+.navcfg-row{border-top:1px solid var(--line);}
+.navcfg-handle{cursor:grab;color:var(--ink-dim2);font-size:19px;flex:none;width:20px;text-align:center;touch-action:none;}
+.navcfg-glyph{width:22px;height:22px;display:grid;place-items:center;color:var(--ink-dim);flex:none;}
+.navcfg-glyph svg{width:19px;height:19px;}
+.navcfg-row .ncfg-name{flex:1;font-size:14px;color:var(--ink);}
+.navcfg-del{width:30px;height:30px;border-radius:8px;color:var(--ink-dim2);font-size:13px;flex:none;background:none;}
+.navcfg-del:active{background:var(--surface);color:var(--accent2);}
+.navcfg-add{width:30px;height:30px;border-radius:8px;background:var(--surface);border:1px solid var(--line-strong);color:var(--accent);font-size:18px;flex:none;}
+.navcfg-add.off{color:var(--ink-dim2);border-color:var(--line);}
+
 /* ---- content library ---- */
 .ev-badge{font-size:10px;letter-spacing:.03em;text-transform:uppercase;padding:2px 7px;border-radius:6px;font-weight:700;flex:none;}
 .ev-good{background:rgba(95,208,196,.16);color:#5FD0C4;}
