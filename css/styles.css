@@ -417,7 +417,8 @@ input,select{font-family:inherit;}
 /* ---- quick-access menu config (drag reorder) ---- */
 .navcfg-active{padding:7px;display:flex;flex-direction:column;gap:7px;}
 .navcfg-row{display:flex;align-items:center;gap:11px;padding:10px 10px;}
-.navcfg-active .navcfg-row{background:var(--surface-2);border-radius:10px;}
+.navcfg-active .navcfg-row{background:var(--surface-2);border-radius:10px;cursor:grab;touch-action:none;}
+.navcfg-active .navcfg-row:active{cursor:grabbing;}
 .navcfg-row.dragging{opacity:.92;box-shadow:0 10px 26px rgba(0,0,0,.45);}
 .navcfg-avail .navcfg-row+.navcfg-row{border-top:1px solid var(--line);}
 .navcfg-handle{cursor:grab;color:var(--ink-dim2);font-size:19px;flex:none;width:20px;text-align:center;touch-action:none;}
