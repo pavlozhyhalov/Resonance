@@ -968,3 +968,8 @@ select.input{appearance:none;-webkit-appearance:none;}
   margin-bottom:14px;
 }
 .card.wheel-wrap{padding-top:18px;padding-bottom:18px;}
+
+.an-bar-seg{transition:opacity .15s ease;}
+.an-legend{display:flex;flex-wrap:wrap;gap:8px 14px;justify-content:center;margin-top:12px;}
+.an-leg{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--ink-dim);}
+.an-leg-dot{width:11px;height:11px;border-radius:3px;flex:none;}
