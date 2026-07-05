@@ -417,11 +417,15 @@ input,select{font-family:inherit;}
 /* ---- quick-access menu config (drag reorder) ---- */
 .navcfg-active{padding:7px;display:flex;flex-direction:column;gap:7px;}
 .navcfg-row{display:flex;align-items:center;gap:11px;padding:10px 10px;}
-.navcfg-active .navcfg-row{background:var(--surface-2);border-radius:10px;cursor:grab;touch-action:pan-y;transition:transform .13s ease,box-shadow .13s ease;}
+.navcfg-active .navcfg-row{background:var(--surface-2);border-radius:10px;cursor:grab;touch-action:pan-y;transition:transform .13s ease,box-shadow .13s ease;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;}
+@keyframes navJiggle{0%{transform:rotate(-.6deg)}50%{transform:rotate(.6deg)}100%{transform:rotate(-.6deg)}}
+.navcfg-active.reordering .navcfg-row:not(.dragging){animation:navJiggle .28s ease-in-out infinite;}
+.lang-select{width:100%;padding:12px 40px 12px 14px;border-radius:11px;background:var(--surface-2);color:var(--ink);border:1px solid var(--line-strong);font-size:15px;font-family:inherit;appearance:none;-webkit-appearance:none;cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2712%27 height=%278%27 viewBox=%270 0 12 8%27%3E%3Cpath d=%27M1 1l5 5 5-5%27 stroke=%27%238a8aa0%27 stroke-width=%272%27 fill=%27none%27 stroke-linecap=%27round%27/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;}
+.lang-select:focus{outline:none;border-color:var(--accent);}
 .navcfg-active .navcfg-row:active{cursor:grabbing;}
 .navcfg-row.dragging{opacity:.98;transform:scale(1.04);cursor:grabbing;position:relative;z-index:5;box-shadow:0 14px 32px rgba(0,0,0,.5),inset 0 0 0 1.5px var(--accent);}
 .navcfg-avail .navcfg-row+.navcfg-row{border-top:1px solid var(--line);}
-.navcfg-handle{cursor:grab;color:var(--ink-dim2);font-size:19px;flex:none;width:20px;text-align:center;touch-action:none;}
+.navcfg-handle{display:none;}
 .navcfg-glyph{width:22px;height:22px;display:grid;place-items:center;color:var(--ink-dim);flex:none;}
 .navcfg-glyph svg{width:19px;height:19px;}
 .navcfg-row .ncfg-name{flex:1;font-size:14px;color:var(--ink);}
