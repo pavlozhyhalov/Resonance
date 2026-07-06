@@ -70,8 +70,10 @@ input,select{font-family:inherit;}
 .topbar{
   position:sticky;top:0;z-index:40;height:var(--top-h);
   display:flex;align-items:center;justify-content:space-between;
-  padding:0 16px; backdrop-filter:blur(10px);
-  background:linear-gradient(180deg, rgba(0,0,0,0.25), transparent);
+  padding:0 16px; backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);
+  background:transparent;
+  -webkit-mask-image:linear-gradient(180deg,#000 62%,transparent);
+  mask-image:linear-gradient(180deg,#000 62%,transparent);
 }
 .brand{display:flex;align-items:center;gap:8px;font-weight:600;}
 .brand-mark{color:var(--accent);font-size:18px;}
