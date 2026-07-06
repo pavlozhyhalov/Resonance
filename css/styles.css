@@ -1026,3 +1026,4 @@ select.input{appearance:none;-webkit-appearance:none;}
 .ch-card .cc-title{margin-bottom:2px;}
 .ch-event{display:block;width:100%;text-align:left;margin-top:8px;background:var(--surface-2);border-radius:12px;padding:11px 12px;cursor:pointer;}
 .ch-ev-name{font-weight:600;font-size:14px;}
+.eyebrow{display:none;}
