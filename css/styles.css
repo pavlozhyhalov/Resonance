@@ -58,9 +58,7 @@ body{
 body::before{
   content:""; position:fixed; inset:0; z-index:-1; pointer-events:none;
   background:
-    radial-gradient(150% 85% at 50% -20%, var(--glow1) 0%, transparent 62%),
-    radial-gradient(120% 75% at 95% -8%, var(--glow2) 0%, transparent 58%),
-    linear-gradient(180deg, var(--bg3) 0%, var(--bg2) 42%, var(--bg1) 100%);
+    linear-gradient(180deg, var(--bg3) 0%, var(--bg2) 40%, var(--bg1) 78%, var(--bg1) 100%);
 }
 button{font-family:inherit;color:inherit;cursor:pointer;border:none;background:none;}
 input,select{font-family:inherit;}
