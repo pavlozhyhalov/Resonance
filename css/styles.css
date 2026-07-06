@@ -47,7 +47,7 @@ body[data-theme="cold"]{
 }
 
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
-html,body{margin:0;padding:0;height:100%;}
+html,body{margin:0;padding:0;height:100%;overscroll-behavior:none;}
 html{background:var(--bg1);}
 body{
   font-family:var(--sans); color:var(--ink); min-height:100%;
@@ -55,14 +55,12 @@ body{
   -webkit-font-smoothing:antialiased;
   transition:background-color .4s ease;
 }
-body::before{
-  content:""; position:fixed; inset:0; z-index:-1; pointer-events:none;
-  background:
-    linear-gradient(180deg, var(--bg3) 0%, var(--bg1) 100%);
-}
+/* background lives on #app so it spans the full scroll height (in-flow,
+   no position:fixed — iOS repaints fixed pseudo-elements on scroll,
+   which read as a repeating band). */
 button{font-family:inherit;color:inherit;cursor:pointer;border:none;background:none;}
 input,select{font-family:inherit;}
-#app{min-height:100vh;display:flex;flex-direction:column;}
+#app{min-height:100vh;display:flex;flex-direction:column;background:linear-gradient(180deg,var(--bg3) 0%,var(--bg1) 100%);}
 
 /* ---- topbar ---- */
 .topbar{
