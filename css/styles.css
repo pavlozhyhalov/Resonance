@@ -1029,6 +1029,11 @@ select.input{appearance:none;-webkit-appearance:none;}
 .lb-val{white-space:nowrap;}
 .mrow.tapable{width:100%;text-align:left;cursor:pointer;}
 .mrow-arrow{margin-left:auto;color:var(--ink-dim2);font-size:20px;padding-left:8px;}
+.news-row{display:flex;gap:10px;align-items:flex-start;padding:9px 0;border-bottom:1px solid var(--line);}
+.news-row:last-child{border-bottom:none;}
+.news-main{min-width:0;}
+.news-title{font-weight:600;}
+.news-sub{margin-top:2px;}
 .eyebrow{display:none;}
 /* ---- day rating ---- */
 .rate-slider-row{display:flex;align-items:center;gap:12px;margin-top:8px;}
