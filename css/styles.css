@@ -1023,6 +1023,12 @@ select.input{appearance:none;-webkit-appearance:none;}
 .ch-event{display:block;width:100%;text-align:left;margin-top:8px;background:var(--surface-2);border-radius:12px;padding:11px 12px;cursor:pointer;}
 .ch-ev-name{font-weight:600;font-size:14px;}
 .ch-how{line-height:1.45;padding:9px 11px;margin-top:8px;background:var(--surface-2);border-radius:10px;}
+.feed-act{margin-left:8px;}
+.lb-row{margin-top:10px;}
+.lb-name{font-weight:600;}
+.lb-val{white-space:nowrap;}
+.mrow.tapable{width:100%;text-align:left;cursor:pointer;}
+.mrow-arrow{margin-left:auto;color:var(--ink-dim2);font-size:20px;padding-left:8px;}
 .eyebrow{display:none;}
 /* ---- day rating ---- */
 .rate-slider-row{display:flex;align-items:center;gap:12px;margin-top:8px;}
