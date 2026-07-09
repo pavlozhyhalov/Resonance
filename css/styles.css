@@ -1034,6 +1034,12 @@ select.input{appearance:none;-webkit-appearance:none;}
 .news-main{min-width:0;}
 .news-title{font-weight:600;}
 .news-sub{margin-top:2px;}
+.drawer-sub{max-height:0;overflow:hidden;transition:max-height .28s ease;}
+.drawer-sub.open{max-height:340px;}
+.drawer-subitem{padding-left:34px;}
+.drawer-caret{margin-left:auto;font-size:11px;color:var(--ink-dim2);transition:transform .2s ease;}
+.drawer-group.open .drawer-caret{transform:rotate(180deg);}
+.note-more{color:var(--accent);white-space:nowrap;}
 .eyebrow{display:none;}
 /* ---- day rating ---- */
 .rate-slider-row{display:flex;align-items:center;gap:12px;margin-top:8px;}
