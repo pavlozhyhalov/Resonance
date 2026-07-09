@@ -1037,7 +1037,7 @@ select.input{appearance:none;-webkit-appearance:none;}
 .drawer-sub{max-height:0;overflow:hidden;transition:max-height .28s ease;}
 .drawer-sub.open{max-height:340px;}
 .drawer-subitem{padding-left:34px;}
-.drawer-caret{margin-left:auto;font-size:11px;color:var(--ink-dim2);transition:transform .2s ease;}
+.drawer-caret{margin-left:auto;font-size:17px;color:var(--accent);transition:transform .2s ease;}
 .drawer-group.open .drawer-caret{transform:rotate(180deg);}
 .note-more{color:var(--accent);white-space:nowrap;}
 .eyebrow{display:none;}
