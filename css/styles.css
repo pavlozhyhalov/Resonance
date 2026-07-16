@@ -1040,6 +1040,9 @@ select.input{appearance:none;-webkit-appearance:none;}
 .drawer-caret{margin-left:auto;font-size:17px;color:var(--accent);transition:transform .2s ease;}
 .drawer-group.open .drawer-caret{transform:rotate(180deg);}
 .note-more{color:var(--accent);white-space:nowrap;}
+.ch-status{font-size:11px;font-weight:700;padding:3px 9px;border-radius:20px;white-space:nowrap;flex:none;}
+.ch-status.on{background:rgba(78,157,92,0.22);color:#7BD08A;}
+.ch-status.off{background:var(--surface-2);color:var(--ink-dim2);}
 .eyebrow{display:none;}
 /* ---- day rating ---- */
 .rate-slider-row{display:flex;align-items:center;gap:12px;margin-top:8px;}
