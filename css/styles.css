@@ -630,7 +630,7 @@ body[data-theme="cal"]{
 }
 .an-grid{stroke:var(--line);stroke-width:1;}
 .an-ylabel{fill:var(--ink-dim2);font-size:9px;font-family:var(--mono);}
-.an-xlabel{fill:var(--ink-dim2);font-size:9px;font-family:var(--mono);text-anchor:middle;}
+.an-xlabel{fill:var(--ink-dim2);font-size:8px;font-family:var(--mono);text-anchor:middle;}
 .an-bar{transition:height .3s;}
 .an-bytype{margin-top:18px;}
 .bt-row{display:flex;align-items:center;gap:10px;margin-bottom:9px;}
