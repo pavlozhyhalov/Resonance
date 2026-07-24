@@ -14,7 +14,7 @@
   --card:oklch(99% 0.006 75); --surface:var(--card); --surface-2:oklch(95.5% 0.012 75);
   --border:oklch(88% 0.015 70); --line:var(--border); --line-strong:oklch(82% 0.02 70);
   --ink:oklch(22% 0.02 50); --ink-dim:oklch(48% 0.02 50); --ink-dim2:oklch(60% 0.02 55);
-  --accent:oklch(55% 0.1 150); --accent2:oklch(60% 0.1 70); --accentInk:oklch(99% 0.006 75);
+  --accent:oklch(55% 0.1 150); --accent2:var(--accent); --accentInk:oklch(99% 0.006 75);
   --accent-soft:oklch(92% 0.03 150);
   --nav-bg:oklch(98% 0.01 75 / 0.92);
   --glow1:transparent; --glow2:transparent;
@@ -28,7 +28,7 @@
   --bg:oklch(22% 0.02 50); --card:oklch(27% 0.02 50); --surface-2:oklch(31% 0.02 50);
   --border:oklch(35% 0.02 50); --line-strong:oklch(43% 0.02 50);
   --ink:oklch(94% 0.01 70); --ink-dim:oklch(74% 0.015 60); --ink-dim2:oklch(66% 0.018 58);
-  --accent:oklch(68% 0.11 150); --accent2:oklch(72% 0.1 70); --accentInk:oklch(20% 0.02 50);
+  --accent:oklch(68% 0.11 150); --accent2:var(--accent); --accentInk:oklch(20% 0.02 50);
   --accent-soft:oklch(38% 0.05 150);
   --nav-bg:oklch(24% 0.02 50 / 0.9);
   --c-freq:oklch(70% 0.1 90); --c-freq-soft:oklch(38% 0.05 90);
@@ -38,9 +38,9 @@
   --c-task:oklch(72% 0.1 70); --c-task-soft:oklch(38% 0.05 70);
 }
 /* per-practice accent hue; base palette stays per-mode */
-body[data-theme="breath"]{--accent:var(--c-breath);--accent-soft:var(--c-breath-soft);}
-body[data-theme="cold"]{--accent:var(--c-cold);--accent-soft:var(--c-cold-soft);}
-body[data-theme="cal"]{--accent:var(--c-cal);--accent-soft:var(--c-cal-soft);}
+body[data-theme="breath"]{--accent:var(--c-breath);--accent2:var(--c-breath);--accent-soft:var(--c-breath-soft);}
+body[data-theme="cold"]{--accent:var(--c-cold);--accent2:var(--c-cold);--accent-soft:var(--c-cold-soft);}
+body[data-theme="cal"]{--accent:var(--c-cal);--accent2:var(--c-cal);--accent-soft:var(--c-cal-soft);}
 
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
 html,body{margin:0;padding:0;height:100%;overscroll-behavior:none;}
@@ -526,7 +526,7 @@ input,select{font-family:inherit;}
    ============================================================ */
 
 /* ---- distinct per-tab themes ---- */
-body[data-theme="freq"]{--accent:var(--c-freq);--accent-soft:var(--c-freq-soft);}
+body[data-theme="freq"]{--accent:var(--c-freq);--accent2:var(--c-freq);--accent-soft:var(--c-freq-soft);}
 
 /* ---- icons ---- */
 .ic{width:24px;height:24px;display:block;}
