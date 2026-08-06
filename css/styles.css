@@ -1144,3 +1144,27 @@ select.input{appearance:none;-webkit-appearance:none;}
 .rate-table .rt-v.muted{font-weight:400;color:var(--ink-dim2);}
 .rate-table .rt-n{margin-top:3px;color:var(--ink-dim2);font-size:12px;line-height:1.35;max-width:180px;}
 #rs-print .rate-spline{stroke:#888;} #rs-print .rate-table th,#rs-print .rate-table td{border-color:#ddd;}
+/* ---- water intake (v105) ---- */
+.water-card{text-align:center;}
+.water-total-row{display:flex;align-items:baseline;justify-content:center;gap:8px;}
+.water-total{font-family:var(--serif);font-size:44px;font-weight:700;line-height:1;color:var(--accent);}
+.water-goal-lbl{font-size:14px;color:var(--ink-dim2);font-weight:600;}
+.water-bar{margin:14px 0 6px;height:12px;border-radius:20px;background:var(--surface-2);overflow:hidden;}
+.water-bar-fill{height:100%;border-radius:20px;background:linear-gradient(90deg,var(--accent-soft),var(--accent));transition:width .35s cubic-bezier(.22,1,.36,1);}
+.water-pct{font-size:12px;color:var(--ink-dim2);font-weight:600;}
+.water-presets{display:flex;gap:8px;flex-wrap:wrap;margin:4px 0 12px;}
+.water-chip{flex:1;min-width:64px;padding:10px 6px;border-radius:12px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font-weight:700;font-size:15px;cursor:pointer;transition:border-color .15s,background .15s;}
+.water-chip.on{border-color:var(--accent);background:var(--accent-soft);color:var(--accent);}
+.water-custom-row{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+.water-custom{width:96px;flex:none;text-align:center;font-weight:700;-moz-appearance:textfield;}
+.water-custom::-webkit-outer-spin-button,.water-custom::-webkit-inner-spin-button{-webkit-appearance:none;margin:0;}
+.water-drink{font-size:17px;padding:15px;}
+.water-actions{display:flex;gap:10px;margin-top:10px;justify-content:center;}
+.water-goal-row{display:flex;align-items:center;gap:10px;}
+.water-goal-input{width:96px;flex:none;text-align:center;font-weight:700;-moz-appearance:textfield;}
+.water-goal-input::-webkit-outer-spin-button,.water-goal-input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0;}
+/* calendar water indicators */
+.cal-water-badge{display:block;font-size:9px;line-height:1;margin-top:2px;color:var(--c-cold);font-weight:700;}
+.cal-water-row{display:flex;align-items:center;gap:8px;padding:10px 12px;margin:2px 0 12px;border-radius:var(--radius-sm);background:var(--surface);border:1px solid var(--line);font-weight:600;}
+.cw-drop{display:inline-flex;width:18px;height:18px;color:var(--c-cold);flex:none;}
+.cw-drop svg{width:18px;height:18px;}
