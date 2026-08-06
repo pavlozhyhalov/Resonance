@@ -23,6 +23,10 @@
   --c-cold:oklch(55% 0.09 190); --c-cold-soft:oklch(93% 0.02 190);
   --c-cal:oklch(52% 0.09 130); --c-cal-soft:oklch(93% 0.025 130);
   --c-task:oklch(60% 0.1 70); --c-task-soft:oklch(93% 0.03 70);
+  /* day-rating slots: morning=amber, noon=sage-teal, evening=dusk-violet */
+  --rate-morning:oklch(70% 0.125 70); --rate-morning-soft:oklch(93% 0.035 70);
+  --rate-noon:oklch(58% 0.1 165); --rate-noon-soft:oklch(93% 0.03 165);
+  --rate-evening:oklch(56% 0.11 300); --rate-evening-soft:oklch(93% 0.03 300);
 }
 :root[data-mode="dark"]{
   --bg:oklch(22% 0.02 50); --card:oklch(27% 0.02 50); --surface-2:oklch(31% 0.02 50);
@@ -36,6 +40,9 @@
   --c-cold:oklch(68% 0.09 190); --c-cold-soft:oklch(36% 0.05 190);
   --c-cal:oklch(62% 0.09 130); --c-cal-soft:oklch(34% 0.05 130);
   --c-task:oklch(72% 0.1 70); --c-task-soft:oklch(38% 0.05 70);
+  --rate-morning:oklch(78% 0.13 70); --rate-morning-soft:oklch(40% 0.06 70);
+  --rate-noon:oklch(72% 0.11 165); --rate-noon-soft:oklch(38% 0.05 165);
+  --rate-evening:oklch(72% 0.12 300); --rate-evening-soft:oklch(40% 0.06 300);
 }
 /* per-practice accent hue; base palette stays per-mode */
 body[data-theme="breath"]{--accent:var(--c-breath);--accent2:var(--c-breath);--accent-soft:var(--c-breath-soft);}
@@ -1089,3 +1096,51 @@ select.input{appearance:none;-webkit-appearance:none;}
 .note-date{font-weight:600;}
 .note-score{color:var(--accent);font-weight:600;}
 .note-excerpt{margin-top:4px;color:var(--ink-dim2);font-size:13px;}
+/* ---- day rating v104: three slots (morning/noon/evening) ---- */
+.rate-num{width:66px;flex:none;text-align:center;font-family:var(--serif);font-size:20px;font-weight:700;padding:6px 4px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--ink);-moz-appearance:textfield;}
+.rate-num::-webkit-outer-spin-button,.rate-num::-webkit-inner-spin-button{-webkit-appearance:none;margin:0;}
+.rate-slot{padding:14px 14px 16px;margin-bottom:12px;border-left:4px solid var(--line);}
+.rate-slot-head{display:flex;align-items:center;gap:9px;margin-bottom:12px;}
+.rate-slot-title{flex:1;font-weight:700;font-size:15px;}
+.rate-dot{width:11px;height:11px;border-radius:50%;flex:none;background:var(--accent);}
+.rate-slot.rm{border-left-color:var(--rate-morning);} .rate-slot.rm .rate-dot{background:var(--rate-morning);} .rate-slot.rm .rate-num{border-color:var(--rate-morning);color:var(--rate-morning);}
+.rate-slot.rn{border-left-color:var(--rate-noon);} .rate-slot.rn .rate-dot{background:var(--rate-noon);} .rate-slot.rn .rate-num{border-color:var(--rate-noon);color:var(--rate-noon);}
+.rate-slot.re{border-left-color:var(--rate-evening);} .rate-slot.re .rate-dot{background:var(--rate-evening);} .rate-slot.re .rate-num{border-color:var(--rate-evening);color:var(--rate-evening);}
+.rate-slider.rm{background:linear-gradient(90deg,var(--rate-morning-soft),var(--rate-morning));} .rate-slider.rm::-webkit-slider-thumb{border-color:var(--rate-morning);} .rate-slider.rm::-moz-range-thumb{border-color:var(--rate-morning);}
+.rate-slider.rn{background:linear-gradient(90deg,var(--rate-noon-soft),var(--rate-noon));} .rate-slider.rn::-webkit-slider-thumb{border-color:var(--rate-noon);} .rate-slider.rn::-moz-range-thumb{border-color:var(--rate-noon);}
+.rate-slider.re{background:linear-gradient(90deg,var(--rate-evening-soft),var(--rate-evening));} .rate-slider.re::-webkit-slider-thumb{border-color:var(--rate-evening);} .rate-slider.re::-moz-range-thumb{border-color:var(--rate-evening);}
+/* home block */
+.rate-home-chips{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;}
+.rate-home-btn{flex:none;}
+.rate-chip{flex:1;min-width:72px;display:flex;flex-direction:column;align-items:center;gap:2px;padding:9px 4px;border-radius:12px;background:var(--surface);border:1px solid var(--line);border-top:3px solid var(--accent);}
+.rate-chip.rm{border-top-color:var(--rate-morning);} .rate-chip.rn{border-top-color:var(--rate-noon);} .rate-chip.re{border-top-color:var(--rate-evening);}
+.rate-chip-l{font-size:11px;color:var(--ink-dim2);font-weight:600;}
+.rate-chip-v{font-family:var(--serif);font-size:24px;font-weight:700;line-height:1;color:var(--ink);}
+.rate-chip.rm .rate-chip-v{color:var(--rate-morning);} .rate-chip.rn .rate-chip-v{color:var(--rate-noon);} .rate-chip.re .rate-chip-v{color:var(--rate-evening);}
+/* calendar day-detail rating */
+.cal-rate-block{margin:2px 0 14px;}
+.cal-rate-row{display:flex;gap:7px;flex-wrap:wrap;}
+.cal-rate-pill{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:20px;background:var(--surface);border:1px solid var(--line);font-size:13px;}
+.cal-rate-pill .crp-l{font-style:normal;color:var(--ink-dim2);font-size:11px;}
+.cal-rate-pill .crp-v{font-style:normal;font-weight:700;}
+.cal-rate-pill.rm{border-color:var(--rate-morning);} .cal-rate-pill.rm .crp-v{color:var(--rate-morning);}
+.cal-rate-pill.rn{border-color:var(--rate-noon);} .cal-rate-pill.rn .crp-v{color:var(--rate-noon);}
+.cal-rate-pill.re{border-color:var(--rate-evening);} .cal-rate-pill.re .crp-v{color:var(--rate-evening);}
+/* chart legend, candles, spline */
+.rate-legend{display:flex;gap:16px;justify-content:center;margin:2px 0 6px;flex-wrap:wrap;}
+.rate-leg-it{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--ink-dim);}
+.rate-leg-dot{width:10px;height:10px;border-radius:3px;display:inline-block;}
+.rate-leg-t{font-style:normal;}
+.rate-candle{transition:opacity .15s ease;}
+.rate-spline{fill:none;stroke:var(--ink-dim);stroke-width:1.4;opacity:.55;stroke-linecap:round;stroke-linejoin:round;}
+/* ratings table */
+.rate-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin-top:4px;}
+.rate-table{width:100%;border-collapse:collapse;font-size:13px;}
+.rate-table th,.rate-table td{padding:7px 8px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line);}
+.rate-table th{font-size:11px;text-transform:uppercase;letter-spacing:.03em;color:var(--ink-dim2);font-weight:700;white-space:nowrap;}
+.rate-table th.rm{color:var(--rate-morning);} .rate-table th.rn{color:var(--rate-noon);} .rate-table th.re{color:var(--rate-evening);}
+.rate-table .rt-date{white-space:nowrap;}
+.rate-table .rt-v{font-weight:700;font-size:15px;}
+.rate-table .rt-v.muted{font-weight:400;color:var(--ink-dim2);}
+.rate-table .rt-n{margin-top:3px;color:var(--ink-dim2);font-size:12px;line-height:1.35;max-width:180px;}
+#rs-print .rate-spline{stroke:#888;} #rs-print .rate-table th,#rs-print .rate-table td{border-color:#ddd;}
