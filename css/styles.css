@@ -1220,7 +1220,3 @@ select.input{appearance:none;-webkit-appearance:none;}
 .week-v{font-family:var(--serif);font-size:19px;font-weight:700;line-height:1;color:var(--accent);}
 .week-l{font-size:10px;color:var(--ink-dim2);margin-top:4px;}
 
-/* ---- habit weekly trend ---- */
-.habit-trend{display:flex;align-items:flex-end;gap:4px;height:40px;margin-top:6px;}
-.habit-trend-bar{flex:1;height:100%;display:flex;align-items:flex-end;background:var(--surface-2);border:1px solid var(--line);border-radius:4px;overflow:hidden;}
-.habit-trend-fill{width:100%;background:#C25A5A;border-radius:4px 4px 0 0;}
