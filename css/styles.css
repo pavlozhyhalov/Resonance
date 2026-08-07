@@ -46,8 +46,8 @@
 }
 /* per-practice accent hue; base palette stays per-mode */
 body[data-theme="breath"]{--accent:var(--c-breath);--accent2:var(--c-breath);--accent-soft:var(--c-breath-soft);}
-body[data-theme="cold"]{--accent:var(--c-cold);--accent2:var(--c-cold);--accent-soft:var(--c-cold-soft);}
-body[data-theme="cal"]{--accent:var(--c-cal);--accent2:var(--c-cal);--accent-soft:var(--c-cal-soft);}
+body[data-theme="cold"]{--accent:var(--c-breath);--accent2:var(--c-breath);--accent-soft:var(--c-breath-soft);}
+body[data-theme="cal"]{--accent:var(--c-breath);--accent2:var(--c-breath);--accent-soft:var(--c-breath-soft);}
 
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
 html,body{margin:0;padding:0;height:100%;overscroll-behavior:none;}
@@ -150,7 +150,7 @@ input,select{font-family:inherit;}
 .btn.big{width:100%;padding:16px;font-size:16px;margin-top:10px;}
 .btn.small{padding:8px 12px;font-size:13px;}
 .btn[disabled]{opacity:.4;pointer-events:none;}
-.btn.cold.primary{background:linear-gradient(120deg,#7FD4F2,#C9E9F6);color:#04141b;}
+.btn.cold.primary{background:var(--accent);color:var(--accentInk);}
 
 /* ---- fields ---- */
 .field{display:flex;flex-direction:column;gap:7px;}
@@ -533,7 +533,7 @@ input,select{font-family:inherit;}
    ============================================================ */
 
 /* ---- distinct per-tab themes ---- */
-body[data-theme="freq"]{--accent:var(--c-freq);--accent2:var(--c-freq);--accent-soft:var(--c-freq-soft);}
+body[data-theme="freq"]{--accent:var(--c-breath);--accent2:var(--c-breath);--accent-soft:var(--c-breath-soft);}
 
 /* ---- icons ---- */
 .ic{width:24px;height:24px;display:block;}
