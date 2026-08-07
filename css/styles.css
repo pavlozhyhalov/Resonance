@@ -1168,3 +1168,10 @@ select.input{appearance:none;-webkit-appearance:none;}
 .cal-water-row{display:flex;align-items:center;gap:8px;padding:10px 12px;margin:2px 0 12px;border-radius:var(--radius-sm);background:var(--surface);border:1px solid var(--line);font-weight:600;}
 .cw-drop{display:inline-flex;width:18px;height:18px;color:var(--c-cold);flex:none;}
 .cw-drop svg{width:18px;height:18px;}
+
+/* ---- pull-to-refresh ---- */
+.ptr-ind{position:fixed;top:calc(env(safe-area-inset-top,0px) + 6px);left:50%;transform:translate(-50%,-48px);z-index:120;width:34px;height:34px;border-radius:50%;background:var(--card);border:1px solid var(--line);display:grid;place-items:center;box-shadow:0 6px 18px rgba(0,0,0,.15);opacity:0;transition:opacity .2s;pointer-events:none;}
+.ptr-ind.ptr-vis{opacity:1;}
+.ptr-spin{width:18px;height:18px;border-radius:50%;border:2.5px solid var(--line-strong);border-top-color:var(--accent);}
+.ptr-ind.ptr-load .ptr-spin{animation:ptrrot .7s linear infinite;}
+@keyframes ptrrot{to{transform:rotate(360deg);}}
