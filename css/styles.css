@@ -1143,6 +1143,12 @@ select.input{appearance:none;-webkit-appearance:none;}
 .rate-table .rt-v.muted{font-weight:400;color:var(--ink-dim2);}
 .rate-table .rt-n{margin-top:3px;color:var(--ink-dim2);font-size:12px;line-height:1.35;width:200px;max-width:200px;white-space:normal;}
 #rs-print .rate-spline{stroke:#888;} #rs-print .rate-table th,#rs-print .rate-table td{border-color:#ddd;}
+/* report table: fit + equal rating columns + wrapping */
+#rs-print .rate-table{table-layout:fixed;width:100%;min-width:0;}
+#rs-print .rate-table th,#rs-print .rate-table td{white-space:normal;overflow-wrap:anywhere;word-break:break-word;vertical-align:top;padding:4px 6px;}
+#rs-print .rate-table td:first-child,#rs-print .rate-table th:first-child{width:58px;}
+#rs-print .rate-table .rt-n{width:auto;max-width:none;}
+#rs-print .rp-table th,#rs-print .rp-table td{overflow-wrap:anywhere;word-break:break-word;}
 /* ---- water intake (v105) ---- */
 .water-card{text-align:center;}
 .water-total-row{display:flex;align-items:baseline;justify-content:center;gap:8px;}
