@@ -1168,3 +1168,28 @@ select.input{appearance:none;-webkit-appearance:none;}
 .cal-water-row{display:flex;align-items:center;gap:8px;padding:10px 12px;margin:2px 0 12px;border-radius:var(--radius-sm);background:var(--surface);border:1px solid var(--line);font-weight:600;}
 .cw-drop{display:inline-flex;width:18px;height:18px;color:var(--c-cold);flex:none;}
 .cw-drop svg{width:18px;height:18px;}
+
+/* ---- habits (bad-habit daily tracker) ---- */
+.habit-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:12px;}
+.habit-title{font-weight:700;font-size:16px;min-width:0;overflow:hidden;text-overflow:ellipsis;}
+.habit-tools{display:flex;gap:4px;flex:none;}
+.habit-mini{width:30px;height:30px;border-radius:8px;background:var(--surface-2);color:var(--ink-dim);border:1px solid var(--line);font-size:13px;}
+.habit-stats{display:flex;gap:8px;}
+.habit-stat{flex:1;text-align:center;background:var(--surface-2);border:1px solid var(--line);border-radius:12px;padding:9px 4px;}
+.habit-stat-v{font-family:var(--serif);font-size:22px;font-weight:700;line-height:1;color:var(--accent);}
+.habit-stat-l{font-size:11px;color:var(--ink-dim2);margin-top:4px;}
+.habit-toggle{display:flex;gap:8px;margin-top:12px;}
+.habit-toggle .btn{flex:1;}
+.habit-strip{display:flex;gap:3px;margin-top:12px;}
+.habit-cell{flex:1;height:9px;border-radius:3px;background:var(--surface-2);border:1px solid var(--line);}
+.habit-cell.clean{background:var(--accent);border-color:var(--accent);}
+.habit-cell.used{background:#C25A5A;border-color:#C25A5A;}
+.habit-strip-lbl{font-size:11px;color:var(--ink-dim2);margin-top:8px;}
+.habits-home-list{margin-top:2px;}
+.habit-home-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 0;border-top:1px solid var(--line);}
+.habit-home-row:first-child{border-top:none;}
+.habit-home-name{font-weight:600;font-size:14px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.habit-home-btns{display:flex;gap:6px;flex:none;}
+.hh-btn{min-width:46px;padding:7px 10px;border-radius:10px;background:var(--surface-2);border:1px solid var(--line);color:var(--ink-dim);font-weight:600;font-size:13px;}
+.hh-btn.on-no{background:var(--accent);border-color:var(--accent);color:var(--accentInk);}
+.hh-btn.on-yes{background:#C25A5A;border-color:#C25A5A;color:#fff;}
