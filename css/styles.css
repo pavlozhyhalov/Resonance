@@ -1113,8 +1113,7 @@ select.input{appearance:none;-webkit-appearance:none;}
 /* home block */
 .rate-home-chips{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;}
 .rate-home-btn{flex:none;}
-.rate-chip{flex:1;min-width:72px;display:flex;flex-direction:column;align-items:center;gap:2px;padding:9px 4px;border-radius:12px;background:var(--surface);border:1px solid var(--line);border-top:3px solid var(--accent);}
-.rate-chip.rm{border-top-color:var(--rate-morning);} .rate-chip.rn{border-top-color:var(--rate-noon);} .rate-chip.re{border-top-color:var(--rate-evening);}
+.rate-chip{flex:1;min-width:72px;display:flex;flex-direction:column;align-items:center;gap:2px;padding:9px 4px;border-radius:12px;background:var(--surface);border:1px solid var(--line);}
 .rate-chip-l{font-size:11px;color:var(--ink-dim2);font-weight:600;}
 .rate-chip-v{font-family:var(--serif);font-size:24px;font-weight:700;line-height:1;color:var(--ink);}
 .rate-chip.rm .rate-chip-v{color:var(--rate-morning);} .rate-chip.rn .rate-chip-v{color:var(--rate-noon);} .rate-chip.re .rate-chip-v{color:var(--rate-evening);}
