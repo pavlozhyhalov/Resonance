@@ -1099,7 +1099,8 @@ select.input{appearance:none;-webkit-appearance:none;}
 /* ---- day rating v104: three slots (morning/noon/evening) ---- */
 .rate-num{width:66px;flex:none;text-align:center;font-family:var(--serif);font-size:20px;font-weight:700;padding:6px 4px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--ink);-moz-appearance:textfield;}
 .rate-num::-webkit-outer-spin-button,.rate-num::-webkit-inner-spin-button{-webkit-appearance:none;margin:0;}
-.rate-slot{padding:14px 14px 16px;margin-bottom:12px;border-left:4px solid var(--line);}
+.rate-slot{background:transparent;border:0;border-left:4px solid var(--line);border-radius:0;box-shadow:none;padding:2px 2px 16px 14px;margin-bottom:10px;}
+.rate-slot>.rate-slider{width:100%;display:block;margin:2px 0 6px;}
 .rate-slot-head{display:flex;align-items:center;gap:9px;margin-bottom:12px;}
 .rate-slot-title{flex:1;font-weight:700;font-size:15px;}
 .rate-dot{width:11px;height:11px;border-radius:50%;flex:none;background:var(--accent);}
