@@ -1216,7 +1216,7 @@ select.input{appearance:none;-webkit-appearance:none;}
 
 /* ---- home weekly summary ---- */
 .week-grid{display:flex;gap:8px;}
-.week-tile{flex:1;min-width:0;text-align:center;background:var(--surface-2);border:1px solid var(--line);border-radius:12px;padding:9px 4px;}
+.week-tile{flex:1;min-width:0;text-align:center;background:var(--surface-2);border:1px solid var(--line);border-radius:12px;padding:9px 4px;cursor:pointer;}
 .week-v{font-family:var(--serif);font-size:19px;font-weight:700;line-height:1;color:var(--accent);}
 .week-l{font-size:10px;color:var(--ink-dim2);margin-top:4px;}
 
