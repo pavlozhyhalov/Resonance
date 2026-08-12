@@ -1,0 +1,25 @@
+# Cloudflare edge/browser cache rules.
+# HTML and the service worker must always revalidate so a new deploy shows up
+# immediately; assets requested with a ?v= query can be cached hard (a new
+# deploy bumps ?v=, which changes the URL and busts the cache).
+
+/
+  Cache-Control: no-cache
+/index.html
+  Cache-Control: no-cache
+/sw.js
+  Cache-Control: no-cache
+
+# Translations change without a version query — keep them fresh.
+/i18n/*
+  Cache-Control: no-cache
+
+# Versioned / immutable assets (always loaded with ?v=).
+/app.bundle.js
+  Cache-Control: public, max-age=31536000, immutable
+/css/*
+  Cache-Control: public, max-age=31536000, immutable
+/icons/*
+  Cache-Control: public, max-age=31536000, immutable
+/audio/*
+  Cache-Control: public, max-age=31536000, immutable
