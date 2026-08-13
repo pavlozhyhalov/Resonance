@@ -4,7 +4,7 @@
    refresh, with a cached fallback for offline. Versioned/immutable assets
    (?v=, media, fonts) stay cache-first. Bump VERSION on each deploy so this
    worker updates and old caches are purged. */
-const VERSION = "20260813093000";
+const VERSION = "20260813150000";
 const CACHE = "resonance-assets-" + VERSION;
 
 self.addEventListener("install", function () { self.skipWaiting(); });
@@ -55,6 +55,35 @@ self.addEventListener("fetch", function (e) {
           return res;
         });
       });
+    })
+  );
+});
+
+// --- Web push ---
+self.addEventListener("push", function (e) {
+  var d = {};
+  try { d = e.data ? e.data.json() : {}; } catch (_e) { d = { title: "Resonance", body: e.data ? e.data.text() : "" }; }
+  var title = d.title || "Resonance";
+  var opts = {
+    body: d.body || "",
+    icon: "icons/icon-192.png?v=" + VERSION,
+    badge: "icons/icon-192.png?v=" + VERSION,
+    tag: d.tag || "resonance",
+    data: { url: d.url || "/" }
+  };
+  e.waitUntil(self.registration.showNotification(title, opts));
+});
+
+self.addEventListener("notificationclick", function (e) {
+  e.notification.close();
+  var url = (e.notification.data && e.notification.data.url) || "/";
+  e.waitUntil(
+    self.clients.matchAll({ type: "window", includeUncontrolled: true }).then(function (list) {
+      for (var i = 0; i < list.length; i++) {
+        var c = list[i];
+        if ("focus" in c) { try { c.navigate(url); } catch (_e) {} return c.focus(); }
+      }
+      if (self.clients.openWindow) return self.clients.openWindow(url);
     })
   );
 });
