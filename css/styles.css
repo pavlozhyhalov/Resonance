@@ -449,6 +449,9 @@ input,select{font-family:inherit;}
 .gt-l{font-size:11.5px;text-align:center;line-height:1.25;}
 .goal-cfg .field-label{margin-top:13px;}
 .goal-cfg .input{margin-top:6px;}
+.goal-chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:6px;}
+.goal-chip{padding:7px 12px;border:1px solid var(--line);border-radius:99px;background:var(--surface-2);color:var(--ink-dim);font-size:13px;cursor:pointer;transition:border-color .15s ease,color .15s ease,background .15s ease;}
+.goal-chip.sel{border-color:var(--accent);color:var(--ink);background:var(--surface);}
 
 /* ---- quick-access menu config (drag reorder) ---- */
 .navcfg-active{padding:7px;display:flex;flex-direction:column;gap:7px;}
