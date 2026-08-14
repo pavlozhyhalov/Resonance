@@ -1235,3 +1235,10 @@ select.input{appearance:none;-webkit-appearance:none;}
 .stat-lbl{font-size:11px;color:var(--ink-dim);margin-top:5px;line-height:1.2;}
 .today-div{border:none;border-top:1px solid var(--line);margin:14px 0;}
 @media(max-width:480px){.stat-bar{grid-template-columns:1fr 1fr;}}
+/* Homepage stage 2 */
+.spark-row{display:flex;align-items:flex-end;gap:6px;height:52px;}
+.spark-bar{flex:1;background:var(--line);border-radius:4px;height:100%;display:flex;align-items:flex-end;overflow:hidden;}
+.spark-bar i{display:block;width:100%;background:var(--accent);border-radius:4px;}
+.spark-bar.empty{opacity:.5;}
+.habit-home-row{padding:6px 0;}
+.fact-title{font-size:16px;}
