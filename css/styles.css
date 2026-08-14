@@ -925,6 +925,7 @@ body[data-theme="freq"]{--accent:var(--c-breath);--accent2:var(--c-breath);--acc
 .drawer-close{width:36px;height:36px;border-radius:11px;color:var(--ink-dim);font-size:15px;background:none;}
 .drawer-close:active{background:var(--surface);}
 .drawer-list{display:flex;flex-direction:column;padding:2px 10px;gap:1px;}
+.drawer-div{height:1px;background:var(--line);margin:7px 12px;}
 .drawer-item{display:flex;align-items:center;gap:13px;padding:12px 12px;border-radius:12px;color:var(--ink);font-size:15px;text-align:left;width:100%;background:none;}
 .drawer-item:active{background:var(--surface);}
 .drawer-item.active{background:var(--surface);color:var(--accent);}
