@@ -1121,10 +1121,10 @@ select.input{appearance:none;-webkit-appearance:none;}
 .rate-home-chips{display:flex;margin-top:12px;border:1px solid var(--line);border-radius:14px;background:var(--surface);overflow:hidden;}
 .rate-home-chips.empty{border:none;background:none;}
 .rate-home-btn{flex:none;}
-.rate-chip{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:11px 4px;border-left:1px solid var(--line);}
+.rate-chip{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;padding:7px 4px;border-left:1px solid var(--line);}
 .rate-chip:first-child{border-left:none;}
-.rate-chip-l{font-size:11px;color:var(--ink-dim2);font-weight:600;}
-.rate-chip-v{font-family:var(--serif);font-size:24px;font-weight:700;line-height:1;color:var(--ink);}
+.rate-chip-l{font-size:10px;color:var(--ink-dim2);font-weight:600;}
+.rate-chip-v{font-family:var(--serif);font-size:19px;font-weight:700;line-height:1;color:var(--ink);}
 .rate-chip.rm .rate-chip-v{color:var(--rate-morning);} .rate-chip.rn .rate-chip-v{color:var(--rate-noon);} .rate-chip.re .rate-chip-v{color:var(--rate-evening);}
 /* calendar day-detail rating */
 .cal-rate-block{margin:2px 0 14px;}
@@ -1244,5 +1244,19 @@ select.input{appearance:none;-webkit-appearance:none;}
 .spark-bar i{display:block;width:100%;background:var(--accent);border-radius:4px;}
 .spark-bar.empty{opacity:.5;}
 .spark-val{font-size:11px;font-weight:600;color:var(--ink-dim2);line-height:1;}
+.spark-day{font-size:10px;color:var(--ink-dim2);line-height:1;text-transform:capitalize;}
+/* home rate-card buttons */
+.wr-btns{display:flex;gap:8px;margin-top:14px;}
+.wr-btns .btn{flex:1;padding-left:8px;padding-right:8px;}
+/* weekly analysis page */
+.wr-sum{text-align:center;margin:2px 0 16px;}
+.wr-sum-num{font-family:var(--serif);font-size:44px;font-weight:700;line-height:1;color:var(--ink);}
+.wr-sum-lbl{font-size:12px;color:var(--ink-dim2);margin-top:4px;}
+.wr-day{margin-bottom:10px;cursor:pointer;}
+.wr-day-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px;}
+.wr-day-date{font-weight:700;color:var(--ink);text-transform:capitalize;}
+.wr-day-avg{font-family:var(--serif);font-size:20px;font-weight:700;color:var(--accent);}
+.wr-note{font-size:13px;color:var(--ink-dim);line-height:1.4;margin-top:6px;}
+.wr-note b{color:var(--ink-dim2);font-weight:600;}
 .habit-home-row{padding:6px 0;}
 .fact-title{font-size:16px;}
