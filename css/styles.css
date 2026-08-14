@@ -1228,3 +1228,10 @@ select.input{appearance:none;-webkit-appearance:none;}
 .week-v{font-family:var(--serif);font-size:19px;font-weight:700;line-height:1;color:var(--accent);}
 .week-l{font-size:10px;color:var(--ink-dim2);margin-top:4px;}
 
+/* Homepage dashboard (redesign) */
+.stat-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px;}
+.stat-cell{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:12px 8px;text-align:center;display:block;width:100%;}
+.stat-num{font-size:24px;font-weight:700;color:var(--ink);line-height:1;}
+.stat-lbl{font-size:11px;color:var(--ink-dim);margin-top:5px;line-height:1.2;}
+.today-div{border:none;border-top:1px solid var(--line);margin:14px 0;}
+@media(max-width:480px){.stat-bar{grid-template-columns:1fr 1fr;}}
