@@ -397,6 +397,7 @@ input,select{font-family:inherit;}
 .ht-dot.on{background:#5FD0C4;box-shadow:0 0 10px rgba(95,208,196,.5);}
 .ht-title{font-size:15px;font-weight:600;color:var(--ink);}
 .ht-sub{font-size:13px;color:var(--ink-dim);margin:7px 0 12px;}
+.ht-hint{font-size:12px;color:var(--ink-dim2);font-weight:600;margin:10px 0 6px;}
 .btn.block{width:100%;display:block;}
 .hg-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px;}
 .hg-title{font-size:15px;font-weight:600;color:var(--ink);}
@@ -413,7 +414,7 @@ input,select{font-family:inherit;}
 .intro-card.aura .intro-title{font-family:var(--serif);font-size:clamp(18px,5.7vw,23px);white-space:nowrap;color:var(--ink);margin-bottom:9px;}
 .intro-card.aura .intro-text{font-size:13.5px;color:var(--ink-dim);max-width:262px;margin:0 auto 16px;line-height:1.5;}
 .btn.intro-btn-a{display:inline-block;width:auto;background:var(--accent);color:var(--accentInk);font-weight:600;padding:9px 22px;border-radius:999px;border:none;}
-.home-fact{margin-top:2px;}
+.home-fact{margin-top:0;}
 .assist-card{padding:16px;}
 .assist-row{display:flex;align-items:flex-start;gap:12px;margin-bottom:13px;}
 .assist-ic{width:40px;height:40px;flex:none;border-radius:12px;background:var(--surface-2);display:grid;place-items:center;color:var(--accent2);}
@@ -452,7 +453,7 @@ input,select{font-family:inherit;}
 .ev-good{background:rgba(95,208,196,.16);color:#5FD0C4;}
 .ev-mixed{background:rgba(224,162,75,.18);color:#E0A24B;}
 .ev-none{background:rgba(92,134,201,.16);color:var(--ink-dim);}
-.fact-card{display:block;width:100%;text-align:left;border-color:var(--line-strong);}
+.fact-card{display:block;width:100%;text-align:left;background:none;border:none;padding:0;border-radius:8px;}
 .fact-title{font-family:var(--serif);font-size:18px;font-weight:600;color:var(--ink);line-height:1.3;margin-bottom:8px;}
 .content-feed{display:flex;flex-direction:column;gap:10px;}
 .content-card{display:block;width:100%;text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:13px 14px;transition:transform .1s;}
