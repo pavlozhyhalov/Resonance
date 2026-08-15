@@ -36,6 +36,7 @@
   --rate-noon:oklch(58% 0.1 165); --rate-noon-soft:oklch(93% 0.03 165);
   --rate-evening:oklch(56% 0.11 300); --rate-evening-soft:oklch(93% 0.03 300);
   --rs-warn:oklch(50% 0.09 70); --rs-warn-soft:oklch(95% 0.03 70); --rs-warn-line:oklch(85% 0.05 70);
+  --rs-neutral:oklch(58% 0.012 60); --rs-neutral-soft:oklch(90% 0.008 60);
 }
 :root[data-mode="dark"]{
   --bg:oklch(22% 0.02 50); --card:oklch(27% 0.02 50); --surface-2:oklch(31% 0.02 50);
@@ -53,6 +54,7 @@
   --rate-noon:oklch(72% 0.11 165); --rate-noon-soft:oklch(38% 0.05 165);
   --rate-evening:oklch(72% 0.12 300); --rate-evening-soft:oklch(40% 0.06 300);
   --rs-warn:oklch(80% 0.1 70); --rs-warn-soft:oklch(32% 0.045 70); --rs-warn-line:oklch(45% 0.06 70);
+  --rs-neutral:oklch(56% 0.015 60); --rs-neutral-soft:oklch(40% 0.015 60);
 }
 /* per-practice accent hue; base palette stays per-mode */
 body[data-theme="breath"]{--accent:var(--c-breath);--accent2:var(--c-breath);--accent-soft:var(--c-breath-soft);}
@@ -1247,7 +1249,7 @@ select.input{appearance:none;-webkit-appearance:none;}
 .habit-strip{display:flex;gap:3px;margin-top:12px;}
 .habit-cell{flex:1;height:9px;border-radius:3px;background:var(--surface-2);border:1px solid var(--line);}
 .habit-cell.clean{background:var(--accent);border-color:var(--accent);}
-.habit-cell.used{background:#C25A5A;border-color:#C25A5A;}
+.habit-cell.used{background:var(--rs-neutral);border-color:var(--rs-neutral);}
 .habit-strip-lbl{font-size:11px;color:var(--ink-dim2);margin-top:8px;}
 .habits-home-list{margin-top:2px;}
 .habit-home-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 0;border-top:1px solid var(--line);}
@@ -1256,12 +1258,12 @@ select.input{appearance:none;-webkit-appearance:none;}
 .habit-home-btns{display:flex;gap:6px;flex:none;}
 .hh-btn{min-width:46px;padding:7px 10px;border-radius:10px;background:var(--surface-2);border:1px solid var(--line);color:var(--ink-dim);font-weight:600;font-size:13px;}
 .hh-btn.on-no{background:var(--accent);border-color:var(--accent);color:var(--accentInk);}
-.hh-btn.on-yes{background:#C25A5A;border-color:#C25A5A;color:#fff;}
+.hh-btn.on-yes{background:var(--rs-neutral);border-color:var(--rs-neutral);color:#fff;}
 
 /* ---- habit sectors on calendar cells ---- */
 .cal-habits{position:absolute;inset:0;z-index:0;pointer-events:none;}
 .cal-habits .chs{flex:1;}
-.cal-habits .chs.used{background:rgba(194,90,90,.30);}
+.cal-habits .chs.used{background:rgba(128,124,118,.30);}
 .cal-cell>.cal-day,.cal-cell>.cal-dots,.cal-cell>.cal-rate{position:relative;z-index:1;}
 .habit-since{margin-top:10px;font-size:12.5px;color:var(--ink-dim);}
 
