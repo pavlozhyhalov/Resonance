@@ -1363,3 +1363,6 @@ select.input{appearance:none;-webkit-appearance:none;}
 .auth-card{position:relative;}
 .auth-lang{position:absolute;top:12px;right:12px;z-index:6;}
 .auth-lang .lang-menu{right:0;left:auto;}
+
+/* assistant event badge (proactive reactions) */
+.asst-badge.evt{color:var(--accent);border-color:var(--accent);background:transparent;text-transform:none;letter-spacing:0;}
