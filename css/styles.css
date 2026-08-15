@@ -1366,3 +1366,23 @@ select.input{appearance:none;-webkit-appearance:none;}
 
 /* assistant event badge (proactive reactions) */
 .asst-badge.evt{color:var(--accent);border-color:var(--accent);background:transparent;text-transform:none;letter-spacing:0;}
+
+/* ---- assistant premium polish ---- */
+@keyframes rs-typing{0%,60%,100%{opacity:.25;transform:translateY(0)}30%{opacity:1;transform:translateY(-3px)}}
+@keyframes rs-reveal{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+@keyframes rs-amsg-in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@keyframes rs-fab-pulse{0%{box-shadow:0 8px 24px var(--glow1),0 0 0 0 rgba(76,141,106,.5)}70%{box-shadow:0 8px 24px var(--glow1),0 0 0 13px rgba(76,141,106,0)}100%{box-shadow:0 8px 24px var(--glow1),0 0 0 0 rgba(76,141,106,0)}}
+.amsg{animation:rs-amsg-in .28s ease both;}
+.amsg-bubble.typing{display:inline-flex;gap:4px;align-items:center;}
+.amsg-bubble.typing i{width:6px;height:6px;border-radius:50%;background:var(--ink-dim2);display:block;animation:rs-typing 1.2s infinite ease-in-out;}
+.amsg-bubble.typing i:nth-child(2){animation-delay:.15s;}
+.amsg-bubble.typing i:nth-child(3){animation-delay:.3s;}
+.asst-msg.asst-thinking{display:inline-flex;gap:5px;align-items:center;min-height:23px;}
+.asst-msg.asst-thinking i{width:7px;height:7px;border-radius:50%;background:var(--accent);opacity:.45;display:block;animation:rs-typing 1.2s infinite ease-in-out;}
+.asst-msg.asst-thinking i:nth-child(2){animation-delay:.15s;}
+.asst-msg.asst-thinking i:nth-child(3){animation-delay:.3s;}
+.asst-msg.rvl{animation:rs-reveal .35s ease both;}
+.asst-ava{background:linear-gradient(135deg,var(--accent),var(--accent2))!important;box-shadow:0 4px 14px var(--glow1),0 0 0 3px rgba(255,255,255,.05);}
+.asst-badge.evt{animation:rs-reveal .35s ease both;}
+.assistant-fab.has-evt{animation:rs-fab-pulse 2.4s ease-out infinite;}
+@media (prefers-reduced-motion:reduce){.amsg,.asst-msg.rvl,.asst-badge.evt{animation:none!important;}.amsg-bubble.typing i,.asst-msg.asst-thinking i,.assistant-fab.has-evt{animation:none!important;}}
