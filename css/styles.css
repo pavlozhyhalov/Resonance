@@ -1409,3 +1409,15 @@ select.input{appearance:none;-webkit-appearance:none;}
 .onb-hint-t{font-family:var(--serif);font-size:17px;color:var(--ink);margin:0 0 4px;}
 .onb-hint-d{font-size:13.5px;line-height:1.5;color:var(--ink-dim);margin:0;}
 .an-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:34px 18px;min-height:180px;}
+
+/* ---- celebration micro-moments ---- */
+@keyframes rs-cel-pop{0%{transform:scale(.5);opacity:0}60%{transform:scale(1.12)}100%{transform:scale(1);opacity:1}}
+.cel-ov{position:fixed;inset:0;z-index:9500;display:grid;place-items:center;padding:28px;background:rgba(0,0,0,.5);opacity:0;transition:opacity .25s ease;}
+.cel-ov.show{opacity:1;}
+.cel-card{background:var(--surface);border:1px solid var(--line-strong);border-radius:22px;padding:30px 24px 22px;max-width:340px;width:100%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.45);transform:scale(.9) translateY(8px);transition:transform .3s cubic-bezier(.2,.8,.3,1.25);}
+.cel-ov.show .cel-card{transform:none;}
+.cel-emoji{width:88px;height:88px;margin:0 auto 16px;border-radius:50%;display:grid;place-items:center;font-size:42px;background:var(--surface-2);box-shadow:0 0 0 1px var(--line),0 10px 34px var(--glow1);animation:rs-cel-pop .5s ease both;}
+.cel-emoji.big{font-family:var(--serif);font-weight:700;font-size:44px;color:var(--accent);}
+.cel-title{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 6px;}
+.cel-sub{font-size:14px;line-height:1.5;color:var(--ink-dim);margin:0;}
+@media (prefers-reduced-motion:reduce){.cel-emoji{animation:none!important;}.cel-card{transition:none!important;}}
