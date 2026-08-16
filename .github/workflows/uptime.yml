@@ -1,0 +1,38 @@
+# External uptime monitor — runs on GitHub's infrastructure, independent of
+# Cloudflare Pages and Supabase, so it can catch either of them going down.
+# On failure GitHub emails the repo owner (and can be extended to Telegram/Slack).
+name: Uptime
+
+on:
+  schedule:
+    - cron: "*/15 * * * *"   # every 15 minutes (GitHub's minimum practical cadence)
+  workflow_dispatch: {}
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Supabase liveness
+        run: |
+          # Liveness, not auth: only a 5xx or no-response means "down".
+          code=$(curl -s -o /dev/null -w "%{http_code}" --max-time 20 \
+            https://xnfkuflpsbroxzpltvqq.supabase.co/auth/v1/health || echo 000)
+          echo "Supabase auth health: HTTP $code"
+          if [ "$code" = "000" ] || [ "$code" -ge 500 ]; then
+            echo "::error::Supabase appears DOWN (HTTP $code)"; exit 1
+          fi
+
+      - name: Site liveness
+        env:
+          SITE_URL: ${{ vars.SITE_URL }}
+        run: |
+          if [ -z "$SITE_URL" ]; then
+            echo "SITE_URL repo variable not set — skipping site check."
+            echo "Set it under Settings → Secrets and variables → Actions → Variables."
+            exit 0
+          fi
+          code=$(curl -s -o /dev/null -w "%{http_code}" --max-time 20 "$SITE_URL" || echo 000)
+          echo "Site ($SITE_URL): HTTP $code"
+          if [ "$code" = "000" ] || [ "$code" -ge 500 ]; then
+            echo "::error::Site appears DOWN (HTTP $code)"; exit 1
+          fi
