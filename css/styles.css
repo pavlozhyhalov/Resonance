@@ -1199,7 +1199,8 @@ select.input{appearance:none;-webkit-appearance:none;}
 .rate-leg-dot{width:10px;height:10px;border-radius:3px;display:inline-block;}
 .rate-leg-t{font-style:normal;}
 .rate-candle{transition:opacity .15s ease;}
-.rate-spline{fill:none;stroke:var(--ink-dim);stroke-width:1.4;opacity:.55;stroke-linecap:round;stroke-linejoin:round;}
+.rate-spline{fill:none;stroke:var(--ink-dim);stroke-width:2;opacity:.9;stroke-linecap:round;stroke-linejoin:round;}
+.rate-spline-dot{fill:var(--ink-dim);stroke:var(--surface);stroke-width:2;}
 /* ratings table */
 .rate-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin-top:4px;}
 .rate-table{min-width:100%;border-collapse:collapse;font-size:13px;}
@@ -1210,7 +1211,7 @@ select.input{appearance:none;-webkit-appearance:none;}
 .rate-table .rt-v{font-weight:700;font-size:15px;}
 .rate-table .rt-v.muted{font-weight:400;color:var(--ink-dim2);}
 .rate-table .rt-n{margin-top:3px;color:var(--ink-dim2);font-size:12px;line-height:1.35;width:200px;max-width:200px;white-space:normal;}
-#rs-print .rate-spline{stroke:#888;} #rs-print .rate-table th,#rs-print .rate-table td{border-color:#ddd;}
+#rs-print .rate-spline{stroke:#888;} #rs-print .rate-spline-dot{fill:#888;stroke:#fff;} #rs-print .rate-table th,#rs-print .rate-table td{border-color:#ddd;}
 /* report table: fit + equal rating columns + wrapping */
 #rs-print .rate-table{table-layout:fixed;width:100%;min-width:0;}
 #rs-print .rate-table th,#rs-print .rate-table td{white-space:normal;overflow-wrap:anywhere;word-break:break-word;vertical-align:top;padding:4px 6px;}
