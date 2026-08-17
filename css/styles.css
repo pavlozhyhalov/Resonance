@@ -36,7 +36,7 @@
   --rate-noon:oklch(58% 0.1 165); --rate-noon-soft:oklch(93% 0.03 165);
   --rate-evening:oklch(56% 0.11 300); --rate-evening-soft:oklch(93% 0.03 300);
   --rs-warn:oklch(50% 0.09 70); --rs-warn-soft:oklch(95% 0.03 70); --rs-warn-line:oklch(85% 0.05 70);
-  --rs-neutral:oklch(58% 0.012 60); --rs-neutral-soft:oklch(90% 0.008 60);
+  --rs-neutral:oklch(42% 0.016 60); --rs-neutral-soft:oklch(90% 0.008 60);
 }
 :root[data-mode="dark"]{
   --bg:oklch(22% 0.02 50); --card:oklch(27% 0.02 50); --surface-2:oklch(31% 0.02 50);
@@ -54,7 +54,7 @@
   --rate-noon:oklch(72% 0.11 165); --rate-noon-soft:oklch(38% 0.05 165);
   --rate-evening:oklch(72% 0.12 300); --rate-evening-soft:oklch(40% 0.06 300);
   --rs-warn:oklch(80% 0.1 70); --rs-warn-soft:oklch(32% 0.045 70); --rs-warn-line:oklch(45% 0.06 70);
-  --rs-neutral:oklch(56% 0.015 60); --rs-neutral-soft:oklch(40% 0.015 60);
+  --rs-neutral:oklch(52% 0.014 60); --rs-neutral-soft:oklch(40% 0.015 60);
 }
 /* per-practice accent hue; base palette stays per-mode */
 body[data-theme="breath"]{--accent:var(--c-breath);--accent2:var(--c-breath);--accent-soft:var(--c-breath-soft);}
