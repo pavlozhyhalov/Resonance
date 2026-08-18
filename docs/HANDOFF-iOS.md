@@ -25,6 +25,19 @@ behavior. That's built into the steps below.
 
 I **cannot** device-test here (outbound web blocked) — you verify on device.
 
+## Quick-start phrase for a new dialog
+
+Tell a fresh session: *"Read CLAUDE.md and docs/HANDOFF-iOS.md, then do `<the next
+unblocked step>`."* Name the step that is **actually unblocked**.
+
+> ⚠️ **Step 3 (APNs) requires Step 0.5 answered first.** The push-eligibility
+> decision (who gets which pushes, free vs paid) defines the `apns_tokens`
+> schema — starting Step 3 without it risks designing the token table against
+> undefined business logic and reworking it after the monetization call. So do
+> **not** open a new dialog with *"do Step 3"* until you have a one-sentence
+> answer to Step 0.5. If 0.5 isn't decided yet, the correct opener is
+> *"…let's settle Step 0.5"* (that's a decision, not code).
+
 ## Already done toward the App Store (do NOT redo)
 
 - **GDPR**: in-app account deletion (`delete-account` v2 + audit), data export,
@@ -44,6 +57,23 @@ I **cannot** device-test here (outbound web blocked) — you verify on device.
   version-parity check (`scripts/release-check.sh`, also syncs the iOS bundle
   once a Capacitor project exists).
 - **App Privacy data map** — documented below.
+
+## Open items (status) — not done yet
+
+These were agreed earlier but are **not** complete; they're listed here so they
+don't get lost. Both need the owner (I can't reach prod or the Supabase dashboard
+from here).
+
+- **Live-prod smoke-test, all 4 languages — OPEN.** Final "done" on the shipped
+  web work is only confirmed by a manual pass on the live URL across uk/ru/en/pl
+  (registration, AI chat, disclaimers, GDPR UI, calendar, pull-to-refresh). I
+  cannot device-test (outbound web blocked); **owner runs this**. Until then,
+  treat client features as "coded & merged", not "verified on prod".
+- **Supabase backups / PITR — OPEN.** Not a launch blocker, but verify Point-in-
+  Time Recovery is enabled (Supabase → Database → Backups; PITR is a Pro-tier
+  add-on — Free tier has daily snapshots only), document a rough RPO/RTO, and
+  test a restore once on a throwaway project ("has a backup" ≠ "restore works").
+  Dashboard-only, so **owner does this**.
 
 ## Hard prerequisites (no way around these)
 
@@ -78,16 +108,25 @@ APNs token/eligibility table in Step 3, so decide it **before** that schema.
   build never drifts from Cloudflare.
 **Done when:** one command guarantees the web code in the iOS bundle matches prod.
 
-### Step 2 — Create the Capacitor iOS project  **[OWNER]** (needs Xcode)
+### Step 2 — Create the Capacitor iOS project  **[BOTH — CLAUDE preps, OWNER runs]**
 ```
 npm i @capacitor/core @capacitor/cli
 npx cap init Resonance app.resonance.mobile --web-dir=.
 npm i @capacitor/ios && npx cap add ios
 npx cap copy ios && npx cap open ios     # opens Xcode
 ```
+**Split (explicit, so it's not ambiguous next dialog):**
+- **[CLAUDE]** prepares the exact config — `appId`, `webDir`, the
+  `capacitor.config` contents, plugin list, and any web-side tweaks the wrapper
+  needs — and reviews the result.
+- **[OWNER]** runs these commands and everything in **Xcode** on the Mac. Xcode
+  and the CLI are macOS-dependent and cannot run in my environment, so the
+  actual execution is yours; I hand you ready-to-run config/commands.
 **Done when:** the project runs on a simulator/device showing the app.
 
 ### Step 3 — Native APNs + push-denial fallback  **[BOTH]**
+**Prerequisite: Step 0.5 is answered** — its decision defines the `apns_tokens`
+schema. Do not start this step without it.
 - **[CLAUDE]** Create an `apns_tokens` table (schema per Step 0.5) and teach
   `send-reminders` / `send-winback` to send **APNs** (HTTP/2 + JWT signed with
   the .p8) alongside web-push.
@@ -120,9 +159,10 @@ double-check the rejection risks below; submit; respond to reviewers.
 
 ### Step 7 — Post-release  **[BOTH]**
 Small web fixes can ship fast; **new big features must go through review** — not
-around it. Watch APNs key expiry, the 99 USD/yr renewal, certificates. Adding
-crash reporting/analytics later flips the **Diagnostics** privacy category to
-"collected" — update the label then.
+around it. Watch APNs key expiry, the 99 USD/yr renewal, certificates, and the
+Supabase backup/PITR check (see Open items). Adding crash reporting/analytics
+later flips the **Diagnostics** privacy category to "collected" — update the
+label then.
 
 ## App Privacy data map (all 6 Apple categories) — verified vs Supabase schema
 
@@ -146,7 +186,7 @@ crash reporting/analytics later flips the **Diagnostics** privacy category to
 | Privacy label mismatch | Map above must match reality, incl. Gemini |
 | No reviewer access | Reader mode (no Gemini) or a test account |
 | 4.8 Sign in with Apple | Only if you add Google/social login; email-only today → N/A |
-| IAP / payments (Step 3 monetization) | Digital subscriptions must use Apple IAP (30% cut) — an Etap-3 owner decision |
+| IAP / payments | Digital subscriptions must use Apple IAP (30% cut) — an owner decision (Step 0.5 push-eligibility / Etap-3 monetization) |
 
 ## The concrete tasks I (Claude) will pick up in a new dialog
 
