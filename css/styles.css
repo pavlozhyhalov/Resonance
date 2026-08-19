@@ -1146,6 +1146,16 @@ select.input{appearance:none;-webkit-appearance:none;}
 .drawer-subitem2{padding-left:52px;}
 .drawer-caret{margin-left:auto;font-size:17px;color:var(--accent);transition:transform .2s ease;}
 .drawer-group.open .drawer-caret{transform:rotate(180deg);}
+/* custom exercises + manual time logging */
+.tile.has-del{position:relative;}
+.tile-del{position:absolute;top:6px;right:8px;width:28px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:9px;color:var(--ink-dim);font-size:20px;line-height:1;}
+.tile-del:active{background:var(--surface-2);}
+.ex-add-btn{margin-top:14px;}
+.ex-log-card{margin-top:14px;display:flex;flex-direction:column;gap:10px;}
+.ex-min-chips{display:flex;flex-wrap:wrap;gap:8px;}
+.ex-min-chip{padding:8px 12px;border-radius:12px;background:var(--surface-2);color:var(--ink);font-size:14px;}
+.ex-min-chip:active{box-shadow:inset 0 0 0 2px var(--accent);}
+.ex-min-input{width:100%;}
 .note-more{color:var(--accent);white-space:nowrap;}
 .ch-status{font-size:11px;font-weight:700;padding:3px 9px;border-radius:20px;white-space:nowrap;flex:none;}
 .ch-status.on{background:rgba(78,157,92,0.22);color:#7BD08A;}

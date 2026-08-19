@@ -74,6 +74,19 @@ from here).
   add-on — Free tier has daily snapshots only), document a rough RPO/RTO, and
   test a restore once on a throwaway project ("has a backup" ≠ "restore works").
   Dashboard-only, so **owner does this**.
+- **Live start/finish timer for cardio & strength — DEFERRED TO THE APP.** A web
+  page can't run a foreground timer while the phone is in a pocket mid-run (iOS
+  suspends the tab's JS), so the "почати / закінчити" flow was unreliable for
+  moving activities. **Web behaviour now:** cardio & strength log time manually,
+  like books — pick the activity, enter minutes, save (still `type:"exercise"`,
+  so it feeds the same time currency and "Вправи" skill). Static holds keep the
+  live timer (screen is in hand, so it works). **In the native app:** wire a real
+  background-capable timer (or Live Activity / background task) for cardio/strength
+  so start/finish works while running, then swap those screens back to the timer
+  path — the group wiring in `hi`/`__rsExManual` already branches on
+  `r.group==="static"`, so this is a targeted change. Custom user-added exercises
+  are stored client-side (`localStorage rs_ex_custom`); consider syncing them via
+  Supabase `settings` when the app lands so they follow the user across devices.
 
 ## Hard prerequisites (no way around these)
 
