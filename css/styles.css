@@ -733,7 +733,7 @@ body[data-theme="freq"]{--accent:var(--c-breath);--accent2:var(--c-breath);--acc
 .music-chips{display:flex;flex-wrap:wrap;gap:8px;}
 .music-chip{display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border-radius:22px;background:var(--surface);border:1px solid var(--line-strong);color:var(--ink);text-decoration:none;font-size:13px;font-weight:600;transition:background .15s ease,transform .1s ease;}
 .music-chip:active{transform:scale(.96);background:var(--surface-2);}
-.music-ico{flex:none;width:24px;height:24px;display:flex;align-items:center;justify-content:center;}
+.music-ico{flex:none;width:24px;height:24px;display:flex;align-items:center;justify-content:center;color:var(--ink-dim);}
 .music-ico .ic{width:22px;height:22px;display:block;}
 .music-name{white-space:nowrap;}
 .music-chips.compact{gap:4px;flex:0 0 auto;}
