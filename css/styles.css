@@ -120,7 +120,8 @@ input,select{font-family:inherit;}
 /* drawer: content rides in with the panel as one sheet, no per-item stagger */
 
 /* ---- clear tap feedback (perimeter + fill) ---- */
-.drawer-item:active,.cat-item:active,.content-card:active,.fact-card:active,.lang-opt:active,.lang-cell:active,.bdet:active,.hg-link:active{background:var(--surface-2);box-shadow:inset 0 0 0 2px var(--accent);}
+.drawer-item:active,.cat-item:active,.content-card:active,.fact-card:active,.lang-opt:active,.lang-cell:active,.bdet:active,.hg-link:active{background:var(--surface-2);}
+.drawer-item:active,.cat-item:active,.lang-opt:active,.lang-cell:active,.bdet:active,.hg-link:active{box-shadow:inset 0 0 0 2px var(--accent);}
 .drawer-item.active{box-shadow:inset 0 0 0 1.5px var(--accent);}
 @media (prefers-reduced-motion:reduce){.view.fade-in>*,.drawer-root.open .drawer-list .drawer-item,.drawer-root.open .drawer-foot{animation:none!important;}}
 
