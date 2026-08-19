@@ -731,15 +731,16 @@ body[data-theme="freq"]{--accent:var(--c-breath);--accent2:var(--c-breath);--acc
 .music-links{margin:14px 0 4px;}
 .music-cap{font-size:12px;color:var(--ink-dim2);font-weight:600;margin:0 0 8px;}
 .music-chips{display:flex;flex-wrap:wrap;gap:8px;}
-.music-chip{display:inline-flex;align-items:center;gap:7px;padding:5px 13px 5px 5px;border-radius:22px;background:var(--surface);border:1px solid var(--line-strong);color:var(--ink);text-decoration:none;font-size:13px;font-weight:600;transition:background .15s ease,transform .1s ease;}
+.music-chip{display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border-radius:22px;background:var(--surface);border:1px solid var(--line-strong);color:var(--ink);text-decoration:none;font-size:13px;font-weight:600;transition:background .15s ease,transform .1s ease;}
 .music-chip:active{transform:scale(.96);background:var(--surface-2);}
-.music-ico{flex:none;width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;}
-.music-ico .ic{width:16px;height:16px;display:block;}
+.music-ico{flex:none;width:24px;height:24px;display:flex;align-items:center;justify-content:center;}
+.music-ico .ic{width:22px;height:22px;display:block;}
 .music-name{white-space:nowrap;}
-.music-chips.compact{gap:6px;flex:0 0 auto;}
-.music-chip.compact{padding:0;border:none;background:none;border-radius:50%;}
+.music-chips.compact{gap:4px;flex:0 0 auto;}
+.music-chip.compact{padding:0;border:none;background:none;border-radius:12px;}
 .music-chip.compact:active{transform:scale(.9);background:none;}
-.music-chip.compact .music-ico{width:30px;height:30px;}
+.music-chip.compact .music-ico{width:36px;height:36px;}
+.music-chip.compact .music-ico .ic{width:23px;height:23px;}
 .music-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:9px 0;border-top:1px solid var(--line);}
 .music-row:first-child{border-top:none;}
 .music-row-l{font-size:13px;font-weight:600;color:var(--ink);flex:1 1 110px;min-width:110px;}
