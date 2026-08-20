@@ -1273,7 +1273,8 @@ select.input{appearance:none;-webkit-appearance:none;}
 .habit-stat-v{font-family:var(--serif);font-size:22px;font-weight:700;line-height:1;color:var(--accent);}
 .habit-stat-l{font-size:11px;color:var(--ink-dim2);margin-top:4px;}
 .habit-toggle{display:flex;gap:8px;margin-top:12px;}
-.habit-toggle .btn{flex:1 1 0;min-width:0;padding:0 12px;font-size:14px;line-height:1;height:46px;}
+.habit-toggle .btn{flex:1 1 0;min-width:0;height:46px;padding:0 12px;font-size:14px;line-height:1;display:flex;align-items:center;justify-content:center;}
+.habit-toggle .btn.ghost.block,.habit-toggle .btn.block{margin-top:0;}
 .habit-strip{display:flex;gap:3px;margin-top:12px;}
 .habit-cell{flex:1;height:9px;border-radius:3px;background:var(--surface-2);border:1px solid var(--line);}
 .habit-cell.clean{background:var(--accent);border-color:var(--accent);}
