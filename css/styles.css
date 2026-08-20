@@ -1315,6 +1315,28 @@ select.input{appearance:none;-webkit-appearance:none;}
 .slip-step:active{background:var(--surface);}
 .slip-step.plus{background:var(--rs-slip-soft);border-color:var(--rs-slip);}
 .slip-count{min-width:26px;text-align:center;font-weight:700;font-size:17px;color:var(--ink);}
+/* compact habit card v2 */
+.habit-meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:10px;font-size:12.5px;color:var(--ink-dim);}
+.habit-badge{color:var(--accent);font-weight:700;}
+.habit-meta-dim{color:var(--ink-dim2);}
+.habit-actions{display:flex;align-items:center;gap:10px;margin-top:14px;}
+.hb-relapse{flex:1;min-width:0;height:40px;border-radius:11px;border:1px solid var(--line-strong);background:transparent;color:var(--ink-dim);font-weight:600;font-size:14px;display:flex;align-items:center;justify-content:center;}
+.hb-relapse.on{background:var(--rs-neutral);border-color:var(--rs-neutral);color:#fff;}
+.hb-relapse:active{background:var(--surface-2);}
+.hb-slip{display:flex;align-items:center;gap:6px;flex:none;}
+.hb-slip-l{font-size:12.5px;color:var(--ink-dim);margin-right:2px;}
+.slip-step{width:34px;height:34px;border-radius:9px;border:1px solid var(--line-strong);background:var(--surface-2);color:var(--ink);font-size:18px;line-height:1;display:flex;align-items:center;justify-content:center;padding:0;}
+.slip-step:active{background:var(--surface);}
+.slip-step.plus{background:var(--rs-slip-soft);border-color:var(--rs-slip);}
+.slip-count{min-width:20px;text-align:center;font-weight:700;font-size:15px;color:var(--ink);}
+.habit-meta2{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:12px;font-size:12.5px;color:var(--ink-dim);}
+.habit-meta2-l{display:flex;align-items:center;gap:8px;}
+.habit-lim-in{width:42px;height:28px;text-align:center;border-radius:8px;border:1px solid var(--line-strong);background:var(--surface-2);color:var(--ink);font-size:13.5px;font-weight:600;padding:0;-webkit-appearance:none;appearance:none;}
+.habit-meta2-r{color:var(--ink-dim);}
+.habit-meta2-r.warn{color:var(--rs-slip);font-weight:700;}
+.habit-strip-wrap{margin-top:14px;}
+.habit-strip-wrap .habit-strip{margin-top:0;}
+.habit-strip-wrap .habit-strip-lbl{margin-top:6px;}
 .habit-ms{display:flex;align-items:center;gap:8px;margin-top:10px;flex-wrap:wrap;}
 .habit-ms-badge{font-weight:700;font-size:13px;color:var(--accent);}
 .habit-ms-next{font-size:12px;color:var(--ink-dim2);}
