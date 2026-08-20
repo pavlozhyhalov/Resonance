@@ -1273,7 +1273,7 @@ select.input{appearance:none;-webkit-appearance:none;}
 .habit-stat-v{font-family:var(--serif);font-size:22px;font-weight:700;line-height:1;color:var(--accent);}
 .habit-stat-l{font-size:11px;color:var(--ink-dim2);margin-top:4px;}
 .habit-toggle{display:flex;gap:8px;margin-top:12px;}
-.habit-toggle .btn{flex:1 1 0;min-width:0;padding:11px 10px;font-size:14px;}
+.habit-toggle .btn{flex:1 1 0;min-width:0;padding:0 12px;font-size:14px;line-height:1;height:46px;}
 .habit-strip{display:flex;gap:3px;margin-top:12px;}
 .habit-cell{flex:1;height:9px;border-radius:3px;background:var(--surface-2);border:1px solid var(--line);}
 .habit-cell.clean{background:var(--accent);border-color:var(--accent);}
@@ -1284,7 +1284,7 @@ select.input{appearance:none;-webkit-appearance:none;}
 .habit-home-row:first-child{border-top:none;}
 .habit-home-name{font-weight:600;font-size:14px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 .habit-home-btns{display:flex;gap:6px;flex:none;}
-.hh-btn{min-width:46px;padding:7px 10px;border-radius:10px;background:var(--surface-2);border:1px solid var(--line);color:var(--ink-dim);font-weight:600;font-size:13px;}
+.hh-btn{min-width:46px;padding:7px 10px;border-radius:10px;background:var(--surface-2);border:1px solid var(--line);color:var(--ink-dim);font-weight:600;font-size:13px;line-height:1.2;}
 .hh-btn.on-no{background:var(--accent);border-color:var(--accent);color:var(--accentInk);}
 .hh-btn.on-yes{background:var(--rs-neutral);border-color:var(--rs-neutral);color:#fff;}
 
