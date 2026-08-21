@@ -1,0 +1,113 @@
+name: DB backup to R2
+
+# Daily logical backup of the Supabase Postgres database, uploaded to a
+# Cloudflare R2 bucket. Safe to keep in the repo before it is configured:
+# if the required secrets are missing, the job exits green and does nothing.
+#
+# Required repository secrets (Settings → Secrets and variables → Actions):
+#   SUPABASE_DB_URL        Supabase connection string, Supavisor session mode,
+#                          port 5432 (Dashboard → Project → Database →
+#                          Connection string → "Connection pooling", 5432).
+#   R2_ACCOUNT_ID          Cloudflare account id.
+#   R2_ACCESS_KEY_ID       R2 API token (S3) — access key.
+#   R2_SECRET_ACCESS_KEY   R2 API token (S3) — secret key.
+#   R2_BUCKET_NAME         e.g. resonance-db-backups
+# Optional (failure alert):
+#   TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID
+
+on:
+  schedule:
+    - cron: "0 0 * * *"      # every day at 00:00 UTC
+  workflow_dispatch: {}       # allow manual runs
+
+concurrency:
+  group: db-backup
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      RETENTION_DAYS: "14"
+      SUPABASE_DB_URL: ${{ secrets.SUPABASE_DB_URL }}
+      R2_ACCOUNT_ID: ${{ secrets.R2_ACCOUNT_ID }}
+      R2_BUCKET_NAME: ${{ secrets.R2_BUCKET_NAME }}
+      AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+      AWS_DEFAULT_REGION: auto
+    steps:
+      - name: Check configuration
+        id: cfg
+        run: |
+          if [ -z "${SUPABASE_DB_URL:-}" ] || [ -z "${R2_ACCOUNT_ID:-}" ] || [ -z "${R2_BUCKET_NAME:-}" ] || [ -z "${AWS_ACCESS_KEY_ID:-}" ] || [ -z "${AWS_SECRET_ACCESS_KEY:-}" ]; then
+            echo "configured=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::Backup secrets are not set yet — skipping. Add them in Settings → Secrets and variables → Actions."
+          else
+            echo "configured=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Install PostgreSQL 17 client
+        if: steps.cfg.outputs.configured == 'true'
+        run: |
+          set -euo pipefail
+          sudo sh -c 'echo "deb https://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
+          curl -fsSL https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/pgdg.gpg
+          sudo apt-get update
+          sudo apt-get install -y postgresql-client-17
+
+      - name: Dump and compress
+        if: steps.cfg.outputs.configured == 'true'
+        run: |
+          set -euo pipefail
+          FILE="backup-$(date -u +%F).sql.gz"
+          echo "FILE=$FILE" >> "$GITHUB_ENV"
+          # --no-owner/--no-privileges keep the dump portable for restores.
+          pg_dump "$SUPABASE_DB_URL" --no-owner --no-privileges \
+            | gzip -9 > "$FILE"
+          BYTES=$(stat -c%s "$FILE")
+          echo "Backup $FILE — $BYTES bytes"
+          # Guard against a truncated/empty dump.
+          if [ "$BYTES" -lt 1024 ]; then
+            echo "::error::Backup file suspiciously small ($BYTES bytes)"; exit 1
+          fi
+
+      - name: Upload to R2
+        if: steps.cfg.outputs.configured == 'true'
+        run: |
+          set -euo pipefail
+          ENDPOINT="https://${R2_ACCOUNT_ID}.r2.cloudflarestorage.com"
+          aws s3 cp "$FILE" "s3://${R2_BUCKET_NAME}/${FILE}" --endpoint-url "$ENDPOINT"
+          echo "Uploaded s3://${R2_BUCKET_NAME}/${FILE}"
+
+      - name: Prune backups older than retention
+        if: steps.cfg.outputs.configured == 'true'
+        run: |
+          set -euo pipefail
+          ENDPOINT="https://${R2_ACCOUNT_ID}.r2.cloudflarestorage.com"
+          CUTOFF=$(date -u -d "${RETENTION_DAYS} days ago" +%s)
+          aws s3api list-objects-v2 --bucket "$R2_BUCKET_NAME" --endpoint-url "$ENDPOINT" \
+            --query 'Contents[].[Key,LastModified]' --output text 2>/dev/null | while read -r KEY LM; do
+            [ -z "${KEY:-}" ] && continue
+            case "$KEY" in backup-*.sql.gz) ;; *) continue ;; esac
+            TS=$(date -u -d "$LM" +%s)
+            if [ "$TS" -lt "$CUTOFF" ]; then
+              echo "Pruning old backup: $KEY"
+              aws s3 rm "s3://${R2_BUCKET_NAME}/${KEY}" --endpoint-url "$ENDPOINT"
+            fi
+          done
+
+      - name: Notify Telegram on failure
+        if: failure() && steps.cfg.outputs.configured == 'true'
+        env:
+          TG_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TG_CHAT: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          if [ -n "${TG_TOKEN:-}" ] && [ -n "${TG_CHAT:-}" ]; then
+            curl -fsS -X POST "https://api.telegram.org/bot${TG_TOKEN}/sendMessage" \
+              -d chat_id="${TG_CHAT}" \
+              -d text="❌ Resonance DB backup failed — run ${GITHUB_RUN_ID} (${GITHUB_REPOSITORY})" >/dev/null || true
+          fi
