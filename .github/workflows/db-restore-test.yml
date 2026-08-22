@@ -1,0 +1,103 @@
+name: DB restore test
+
+# Safe restore drill: downloads the latest backup from R2 and restores it into
+# a throwaway Postgres 17 service container, then prints row counts so you can
+# confirm the dump is actually restorable. PRODUCTION IS NEVER TOUCHED.
+# Manual only (Actions -> DB restore test -> Run workflow).
+
+on:
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  restore-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    services:
+      pg:
+        image: postgres:17
+        env:
+          POSTGRES_PASSWORD: testpass
+          POSTGRES_DB: restore_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd="pg_isready -U postgres"
+          --health-interval=5s --health-timeout=5s --health-retries=15
+    env:
+      R2_ACCOUNT_ID: ${{ secrets.R2_ACCOUNT_ID }}
+      R2_BUCKET_NAME: ${{ secrets.R2_BUCKET_NAME }}
+      AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+      AWS_DEFAULT_REGION: auto
+      DBURL: postgresql://postgres:testpass@localhost:5432/restore_test
+    steps:
+      - name: Check configuration
+        id: cfg
+        run: |
+          if [ -z "${R2_ACCOUNT_ID:-}" ] || [ -z "${R2_BUCKET_NAME:-}" ] || [ -z "${AWS_ACCESS_KEY_ID:-}" ] || [ -z "${AWS_SECRET_ACCESS_KEY:-}" ]; then
+            echo "configured=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::R2 secrets are not set — skipping restore test."
+          else
+            echo "configured=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Install PostgreSQL 17 client
+        if: steps.cfg.outputs.configured == 'true'
+        run: |
+          set -euo pipefail
+          sudo sh -c 'echo "deb https://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
+          curl -fsSL https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/pgdg.gpg
+          sudo apt-get update
+          sudo apt-get install -y postgresql-client-17
+
+      - name: Download latest backup from R2
+        if: steps.cfg.outputs.configured == 'true'
+        run: |
+          set -euo pipefail
+          ENDPOINT="https://${R2_ACCOUNT_ID}.r2.cloudflarestorage.com"
+          LATEST=$(aws s3 ls "s3://${R2_BUCKET_NAME}/" --endpoint-url "$ENDPOINT" \
+            | awk '{print $4}' | grep -E '^backup-.*\.sql\.gz$' | sort | tail -1)
+          if [ -z "$LATEST" ]; then echo "::error::No backup found in R2"; exit 1; fi
+          echo "Latest backup: $LATEST"
+          echo "LATEST=$LATEST" >> "$GITHUB_ENV"
+          aws s3 cp "s3://${R2_BUCKET_NAME}/${LATEST}" ./dump.sql.gz --endpoint-url "$ENDPOINT"
+          gunzip dump.sql.gz
+          echo "Uncompressed size: $(stat -c%s dump.sql) bytes"
+
+      - name: Restore into throwaway Postgres
+        if: steps.cfg.outputs.configured == 'true'
+        run: |
+          set -uo pipefail
+          PSQL=/usr/lib/postgresql/17/bin/psql
+          # ON_ERROR_STOP=0: a full Supabase dump references managed roles,
+          # the auth/storage schemas and extensions that don't exist in a
+          # vanilla Postgres image — those statements error and are skipped.
+          # The application data (public schema) restores regardless.
+          "$PSQL" "$DBURL" -v ON_ERROR_STOP=0 -q -f dump.sql > restore.log 2>&1 || true
+          ERRORS=$(grep -c 'ERROR:' restore.log || true)
+          echo "Statements that errored (expected for roles/extensions/auth): $ERRORS"
+          echo "----- last 15 error lines (context) -----"
+          grep 'ERROR:' restore.log | tail -15 || true
+
+      - name: Verify restored data (row counts)
+        if: steps.cfg.outputs.configured == 'true'
+        run: |
+          set -uo pipefail
+          PSQL=/usr/lib/postgresql/17/bin/psql
+          cnt() { "$PSQL" "$DBURL" -At -c "select count(*) from public.$1" 2>/dev/null || echo "MISSING"; }
+          TABLES=$("$PSQL" "$DBURL" -At -c "select count(*) from information_schema.tables where table_schema='public' and table_type='BASE TABLE'" 2>/dev/null || echo 0)
+          echo "=== RESTORE VERIFICATION (backup: ${LATEST:-?}) ==="
+          echo "public_tables=$TABLES"
+          for t in profiles sessions habits habit_days goals day_ratings books; do
+            echo "$t=$(cnt "$t")"
+          done
+          echo "=== END ==="
+          # Fail the drill only if core data clearly did not restore.
+          S=$(cnt sessions); H=$(cnt habit_days)
+          if [ "$S" = "MISSING" ] || [ "$S" = "0" ] || [ "$H" = "MISSING" ] || [ "$H" = "0" ]; then
+            echo "::error::Core tables empty/missing after restore — backup NOT valid"; exit 1
+          fi
+          echo "Restore drill OK — core application data is present."
