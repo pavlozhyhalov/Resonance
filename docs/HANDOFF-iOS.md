@@ -55,8 +55,10 @@ unblocked step>`."* Name the step that is **actually unblocked**.
   PWAs / iOS webviews — this works everywhere).
 - **Ops**: external uptime monitor (`.github/workflows/uptime.yml`), release
   version-parity check (`scripts/release-check.sh`, also syncs the iOS bundle
-  once a Capacitor project exists).
-- **App Privacy data map** — documented below.
+  once a Capacitor project exists); **daily DB backup to Cloudflare R2 with a
+  passing restore test** (`docs/BACKUP.md`); **Umami analytics** live (cookieless,
+  demo excluded).
+- **App Privacy data map** — documented below (reconciled with Umami).
 
 ## Open items (status) — not done yet
 
@@ -69,11 +71,13 @@ from here).
   (registration, AI chat, disclaimers, GDPR UI, calendar, pull-to-refresh). I
   cannot device-test (outbound web blocked); **owner runs this**. Until then,
   treat client features as "coded & merged", not "verified on prod".
-- **Supabase backups / PITR — OPEN.** Not a launch blocker, but verify Point-in-
-  Time Recovery is enabled (Supabase → Database → Backups; PITR is a Pro-tier
-  add-on — Free tier has daily snapshots only), document a rough RPO/RTO, and
-  test a restore once on a throwaway project ("has a backup" ≠ "restore works").
-  Dashboard-only, so **owner does this**.
+- **Supabase backups — DONE (2026-08-22).** Not via paid PITR — instead a free
+  own-backup pipeline: GitHub Actions → daily `pg_dump` → gzip → Cloudflare R2
+  (`resonance-db-backups`, 14-day retention, Telegram alerts). The automated
+  **restore test** (`db-restore-test.yml`) passed on 2026-08-22 — all 25 tables
+  restored and reconciled against prod ("restore works", not just "has a backup").
+  Docs: `docs/BACKUP.md`. (PITR remains an optional ~92€/mo add-on, intentionally
+  not used.)
 - **Live start/finish timer for cardio & strength — DEFERRED TO THE APP.** A web
   page can't run a foreground timer while the phone is in a pocket mid-run (iOS
   suspends the tab's JS), so the "почати / закінчити" flow was unreliable for
@@ -111,6 +115,15 @@ Not full pricing — just answer: **who gets which pushes** (e.g. free users get
 habit reminders; AI win-back push is paid-only?). This decides the shape of the
 APNs token/eligibility table in Step 3, so decide it **before** that schema.
 **Done when:** a written answer on whether free/paid notification logic differs.
+
+> **Access model now decided** (see `../Resonance_povnyy_kontekst.md` §4): 14-day
+> full access → hard block of *new* progress (AI off, new practices not recorded),
+> history stays visible. That yields three notification states — **trial-active**
+> (notify like paid), **trial-ending** (soft T-3/T-1/T-0), **trial-expired**
+> (gentle "unlock your progress", not habit-specific). Draft copy for all three,
+> 4 langs, is in **`docs/NOTIFICATIONS-COPY.md`** — awaiting owner sign-off, then it
+> feeds the Step 3 copy. Still owner-open: the exact **send cadence** for the
+> expired state and whether a subscription-status field lands with IAP.
 
 ### Step 1 — Web prep + bundle-sync process  **[CLAUDE, mostly done]**
 - Safe-area, webview touch polish, custom pull-to-refresh — **done**.
@@ -158,6 +171,11 @@ denied push still see an in-app reminder.
 category **Health & Fitness**, privacy URL (`/privacy`), support URL, age
 rating, export-compliance (HTTPS → usually "exempt"), and the **App Privacy**
 label filled per the map below.
+**Drafted (owner-editable now):** localized name / subtitle / keywords / promo /
+description (4 langs) + a 6-screenshot plan are in **`docs/APP-STORE-LISTING.md`**.
+The **App Privacy** answers, including the Umami reconciliation, are in the map
+below. Remaining is owner-only (entering it in App Store Connect, capturing the
+screenshots on a Mac/simulator in demo mode).
 **Done when:** the App Store Connect listing is complete and privacy matches reality.
 
 ### Step 5 — Build, sign, upload  **[OWNER]**
@@ -185,10 +203,37 @@ label then.
 | Health & Fitness | practices, day ratings, habits, water | Collected · Linked · App Functionality (sensitive — must declare) |
 | User Content | day notes, assistant chat, books | Collected · Linked · App Functionality (chat text → Gemini) |
 | Identifiers | user ID | Collected · Linked · App Functionality |
-| Usage Data | activity / sessions | Collected · Linked · App Functionality |
+| Usage Data | activity / sessions (app) **+ page views (Umami)** | Collected · **two purposes: App Functionality (linked, from Supabase) and Analytics (NOT linked, from Umami)** |
 | Diagnostics | — | Not Collected (no crash/analytics yet) |
 
 **Tracking (across apps/sites): none.**
+
+### Umami reconciliation (done — settles Open-item #4 / screenshot item 4)
+
+The site embeds **Umami** (cookieless, anonymous, EU) and the Capacitor webview
+loads that same site, so Umami runs **inside the app** and must be reflected in the
+label. Conclusion after review — **no new category is needed**, only a purpose is
+added:
+
+- **What Umami collects:** page views / product interaction, referrer, browser, OS,
+  device type, and **country only** (derived from IP for the count; the IP itself is
+  **not stored**). No cookies, no stable cross-session device ID, no user identity.
+- **How it maps:** it is **Usage Data → Product Interaction**, added with the purpose
+  **Analytics**, marked **NOT linked to the user's identity** and **NOT used for
+  tracking**. So on the App Privacy form, Usage Data is declared with **both**
+  purposes — *App Functionality* (the app's own linked activity from Supabase) and
+  *Analytics* (Umami's anonymous stream).
+- **What Umami does NOT trigger:**
+  - **Identifiers** — cookieless, no persistent device/user ID → not added.
+  - **Location** — country-level from IP for a count is not Apple "Coarse Location"
+    (city-level); IP is not stored → not added.
+  - **Diagnostics** — Umami is not crash/performance telemetry → stays Not Collected.
+  - **Tracking** — no cross-app/site linking, no data broker, no ad networks →
+    the overall **Tracking = none** answer is unchanged.
+- **Net effect on the form vs. the old map:** exactly one change — Usage Data gains the
+  **Analytics** purpose and an explicit **not-linked** anonymous sub-stream. Everything
+  else stands. Re-confirm on the day of submission that no crash/analytics SDK was
+  added in the meantime (that would flip **Diagnostics** to Collected).
 
 ## Common rejection reasons → how they're covered
 
