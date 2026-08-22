@@ -3,7 +3,10 @@
 > This file is auto-loaded into every Claude Code session. It exists so a **fresh
 > conversation is immediately in context**: what Resonance is, how it's built, the
 > conventions, and where we're headed (an iPhone App Store app).
-> For the App Store work specifically, read **`docs/HANDOFF-iOS.md`**.
+> **For the full picture — every feature, decision already made, and how to take a
+> ТЗ without breaking anything — read `Resonance_povnyy_kontekst.md` (the master
+> onboarding doc).** For the App Store work specifically, read
+> **`docs/HANDOFF-iOS.md`**.
 
 ## What Resonance is (idea & focus)
 
