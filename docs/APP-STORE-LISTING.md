@@ -59,7 +59,7 @@
 
 - **uk:** `дихання,холод,загартування,медитація,спокій,трекер звичок,серія,мотивація,вправи,сон,антистрес` (94)
 - **ru:** `дыхание,холод,закаливание,медитация,спокойствие,трекер,серия,мотивация,упражнения,сон,антистресс` (96)
-- **en:** `breathing,cold,breathwork,meditation,calm,tracker,streak,motivation,workout,mindfulness,gamified` (96)
+- **en:** `breathing,cold,breathwork,meditation,calm,tracker,streak,motivation,workout,sleep,mindfulness` (93)
 - **pl:** `oddech,zimno,morsowanie,medytacja,spokój,nawyki,seria,motywacja,ćwiczenia,sen,uważność,rozwój` (93)
 
 > Усі рядки ≤100 **символів** (не байтів — кирилиця це 2 байти, тому рахувати саме
@@ -68,12 +68,11 @@
 > ніж могли б бути. Є вільний запас — за бажання можна додати ще 1 термін на мову.
 >
 > **Правки 2026-08-23:** en — `wim hof` замінено на `breathwork` (загальний
-> високоінтентний термін замість імені персони); щоб лишитись ≤100, прибрано
-> `sleep` (застосунок не трекає сон; пиляр «спокій/calm» релевантніший) → 96
-> символів. **Пробіли всередині фраз:** `трекер звичок` (uk) має внутрішній пробіл —
-> це **не порушує** ліміт (94) і не ламає парсинг Apple (кома — єдиний розділювач;
-> Apple усе одно індексує «трекер» і «звичок» окремо), тож лишено без змін.
-> Опційно можна замінити на `трекер,звички`, щоб звільнити 1 символ — на розсуд власника.
+> високоінтентний термін замість імені персони). Повний рядок із `gamified` =
+> 102 символи (перевищення), тож прибрано останнє слово `gamified` → **93 символи**
+> (`sleep` збережено). **Пробіли всередині фраз:** `трекер звичок` (uk) має
+> внутрішній пробіл — це не порушує ліміт (94) і не ламає парсинг Apple (кома —
+> єдиний розділювач), тож лишено без змін.
 
 ## Promotional Text (≤170, можна міняти без релізу)
 
@@ -93,15 +92,16 @@
 ## Опис (Description, ≤4000) — uk (база)
 
 ```
-Resonance перетворює реальні корисні звички на гру. Дихальні практики, холод,
-статичні й силові вправи, читання — усе це стає досвідом, рівнями й серіями
-твого персонажа. Прокачуй себе так само захопливо, як героя в RPG.
+Знаєш це відчуття: почав нову звичку з ентузіазмом — і за тиждень про неї
+забув? Resonance тримає тебе в грі. Замість списку провалів — персонаж,
+який росте з кожною практикою.
 
 ЩО ВСЕРЕДИНІ
 • Практики: дихання (Вім Хоф, квадратне 4-4-4-4, 4-7-8, когерентне), холодний
-  душ і крижана ванна, статичні утримання, антистрес, музика по частотах.
+  душ і крижана ванна, статичні утримання, антистрес, звукові частоти для
+  розслаблення.
 • Вправи: статичні, кардіо й силові — з обліком часу й прогресом.
-• Звички: чисто · оступ · зрив. Випадковий оступ не обнуляє серію одразу —
+• Звички: чисто · оступ · зрив. Один випадковий збій не обнуляє серію одразу —
   лише коли назбирається до твого ліміту.
 • Цілі з автопрогресом і дедлайнами.
 • Система розвитку: рівні від найдовшої серії, гілки навичок, звання, клас
@@ -110,90 +110,92 @@ Resonance перетворює реальні корисні звички на �
 • AI-наставник — персональна AI-персона, що підказує вчасно.
 
 ПРИВАТНІСТЬ
-Дані зберігаються в ЄС, кожен бачить лише своє. Видалення акаунта й вивантаження
-своїх даних — прямо в застосунку. Без реклами й продажу даних.
+Дані зберігаються в ЄС, кожен бачить лише своє. Видалення акаунта й
+вивантаження своїх даних — прямо в застосунку. Без реклами й продажу даних.
 
 МОВИ
 Українська, російська, англійська, польська — усе, включно з підказками AI.
 
-Спробуй 14 днів повного доступу й побудуй свою першу серію.
+Спробуй 14 днів повного доступу — і подивись, яким стане твій перший рівень.
 ```
 
 ### Опис — ru
 
 ```
-Resonance превращает реальные полезные привычки в игру. Дыхательные практики,
-холод, статические и силовые упражнения, чтение — всё это становится опытом,
-уровнями и сериями твоего персонажа. Прокачивай себя так же увлекательно, как
-героя в RPG.
+Знакомое чувство: начал новую привычку с воодушевлением — и через неделю
+забыл о ней? Resonance держит тебя в игре. Вместо списка провалов —
+персонаж, который растёт с каждой практикой.
 
 ЧТО ВНУТРИ
 • Практики: дыхание (Вим Хоф, квадратное 4-4-4-4, 4-7-8, когерентное), холодный
-  душ и ледяная ванна, статические удержания, антистресс, музыка по частотам.
+  душ и ледяная ванна, статические удержания, антистресс, звуковые частоты
+  для расслабления.
 • Упражнения: статические, кардио и силовые — с учётом времени и прогрессом.
-• Привычки: чисто · оступ · срыв. Случайный оступ не обнуляет серию сразу —
+• Привычки: чисто · оступ · срыв. Один случайный сбой не обнуляет серию сразу —
   только когда наберётся до твоего лимита.
 • Цели с автопрогрессом и дедлайнами.
-• Система развития: уровни от самой длинной серии, ветки навыков, звания, класс
-  персонажа из баланса Тело/Разум.
+• Система развития: уровни от самой длинной серии, ветки навыков, звания,
+  класс персонажа из баланса Тело/Разум.
 • Оценка дня (утро/день/вечер) и график настроения.
 • AI-наставник — персональная AI-персона, подсказывает вовремя.
 
 ПРИВАТНОСТЬ
-Данные хранятся в ЕС, каждый видит только своё. Удаление аккаунта и выгрузка
-своих данных — прямо в приложении. Без рекламы и продажи данных.
+Данные хранятся в ЕС, каждый видит только своё. Удаление аккаунта и
+выгрузка своих данных — прямо в приложении. Без рекламы и продажи данных.
 
 ЯЗЫКИ
 Украинский, русский, английский, польский — всё, включая подсказки AI.
 
-Попробуй 14 дней полного доступа и построй свою первую серию.
+Попробуй 14 дней полного доступа — и посмотри, каким станет твой первый
+уровень.
 ```
 
 ### Опис — en
 
 ```
-Resonance turns real-life healthy habits into a game. Breathing practices, cold
-exposure, static and strength exercises, reading — all become experience, levels
-and streaks for your character. Level yourself up as engagingly as an RPG hero.
+Know that feeling — you start a new habit with excitement, and a week later
+it's gone? Resonance keeps you in the game. Instead of a list of failures,
+you get a character that grows with every practice.
 
 WHAT'S INSIDE
-• Practices: breathing (Wim Hof, box 4-4-4-4, 4-7-8, coherent), cold shower and
-  ice bath, static holds, anti-stress, frequency music.
+• Practices: breathing (Wim Hof, box 4-4-4-4, 4-7-8, coherent), cold shower
+  and ice bath, static holds, anti-stress, frequency-based relaxation sounds.
 • Exercises: static, cardio and strength — with time tracking and progress.
 • Habits: clean · slip · relapse. A random slip won't reset your streak right
   away — only once it reaches your limit.
 • Goals with auto-progress and deadlines.
-• Progression system: levels from your longest streak, skill branches, titles, a
-  character class from your Body/Mind balance.
+• Progression system: levels from your longest streak, skill branches, titles,
+  a character class from your Body/Mind balance.
 • Day ratings (morning/noon/evening) and a mood chart.
 • AI mentor — a personal AI persona that nudges you at the right moment.
 
 PRIVACY
-Data is stored in the EU, everyone sees only their own. Account deletion and
-export of your data — right inside the app. No ads, no data selling.
+Data is stored in the EU, everyone sees only their own. Account deletion
+and export of your data — right inside the app. No ads, no data selling.
 
 LANGUAGES
 Ukrainian, Russian, English, Polish — everything, including AI hints.
 
-Try 14 days of full access and build your first streak.
+Try 14 days of full access — and see what your first level looks like.
 ```
 
 ### Опис — pl
 
 ```
-Resonance zamienia prawdziwe zdrowe nawyki w grę. Praktyki oddechowe, zimno,
-ćwiczenia statyczne i siłowe, czytanie — wszystko staje się doświadczeniem,
-poziomami i seriami twojej postaci. Rozwijaj siebie tak wciągająco jak bohatera RPG.
+Znasz to uczucie? Zaczynasz nowy nawyk z entuzjazmem, a po tygodniu o nim
+zapominasz. Resonance trzyma cię w grze. Zamiast listy porażek — postać,
+która rośnie z każdą praktyką.
 
 CO W ŚRODKU
-• Praktyki: oddech (Wim Hof, kwadratowy 4-4-4-4, 4-7-8, koherentny), zimny
-  prysznic i lodowa kąpiel, statyczne utrzymania, antystres, muzyka częstotliwości.
+• Praktyki: oddech (Wim Hof, oddech pudełkowy 4-4-4-4, 4-7-8, koherentny),
+  zimny prysznic i lodowa kąpiel, izometryczne utrzymania pozycji, antystres,
+  muzyka oparta na częstotliwościach.
 • Ćwiczenia: statyczne, cardio i siłowe — z pomiarem czasu i postępem.
 • Nawyki: czysto · potknięcie · wpadka. Przypadkowe potknięcie nie zeruje serii
-  od razu — dopiero gdy uzbiera się do twojego limitu.
+  od razu — dopiero gdy nazbiera się do twojego limitu.
 • Cele z autopostępem i terminami.
-• System rozwoju: poziomy z najdłuższej serii, gałęzie umiejętności, tytuły, klasa
-  postaci z balansu Ciało/Umysł.
+• System rozwoju: poziomy z najdłuższej serii, gałęzie umiejętności, tytuły,
+  klasa postaci z balansu Ciało/Umysł.
 • Ocena dnia (rano/południe/wieczór) i wykres nastroju.
 • Mentor AI — osobista persona AI, która podpowiada we właściwym momencie.
 
@@ -204,7 +206,7 @@ swoich danych — wprost w aplikacji. Bez reklam i sprzedaży danych.
 JĘZYKI
 Ukraiński, rosyjski, angielski, polski — wszystko, łącznie z podpowiedziami AI.
 
-Wypróbuj 14 dni pełnego dostępu i zbuduj swoją pierwszą serię.
+Wypróbuj 14 dni pełnego dostępu — i zobacz, jaki będzie twój pierwszy poziom.
 ```
 
 ---
