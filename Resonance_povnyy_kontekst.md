@@ -313,9 +313,12 @@ Privacy і ризики реджекту — **`docs/HANDOFF-iOS.md`**.
 - **Нові мови (Частина B):** es (нейтральна, «tú»), fr (Франція, «tu»), de (Deutschland,
   «du», ß не ss, іменники з великої). Порядок: **спершу повністю закрити Частину A**,
   потім B (нові мови перекладаються з uk-джерела, тож джерело має бути чистим).
-- **Глосарій es/fr/de (орієнтир):** чисто=limpio/propre/sauber; оступ=desliz/écart/
-  Ausrutscher; зрив=recaída/rechute/Rückfall; серія=racha/série/Serie; рівень=nivel/
-  niveau/Level; клас=clase/classe/Klasse; наставник=mentor/mentor/Mentor.
+- **Глосарій es/fr/de (ЗАФІКСОВАНО 2026-08-23):** чисто=limpio/propre/sauber;
+  оступ=desliz/**écart**/Ausrutscher; зрив=recaída/rechute/Rückfall; серія=racha/série/
+  **Serie**; рівень=nivel/niveau/**Level**; клас=clase/classe/Klasse; наставник=mentor/
+  mentor/Mentor. (DE: Serie+Level — вибір власника делеговано; FR: écart.)
+- **P1.5 РІШЕННЯ:** ru «оступ» → «осечка» (перекладено, не спільний термін). Застосовано
+  в бандлі (__rsT) + App Store RU опис. uk лишається «оступ».
 - **Обсяг B:** новий `i18n/{es,fr,de}.json`, колонки es/fr/de у `patterns.json`,
   розширити **89 `__rsT`-блоків** до 7 мов, +3 пункти в перемикачі, перевірити
   мовну частину AI-промпту.
