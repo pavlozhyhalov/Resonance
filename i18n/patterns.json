@@ -125,8 +125,8 @@
 {
 "p": "^Доказовість: «(.+)»\\. Матеріал загальноосвітній, не медична порада\\.$",
 "ru": "Доказательность: «$1». Материал общеобразовательный, не медицинский совет.",
-"en": "Evidence: «$1». Educational material, not medical advice.",
-"pl": "Dowody: «$1». Materiał ogólnoedukacyjny, nie porada medyczna.",
+"en": "Evidence: \"$1\". Educational material, not medical advice.",
+"pl": "Dowody: „$1\". Materiał ogólnoedukacyjny, nie porada medyczna.",
 "tr": [
 1
 ]
@@ -308,14 +308,14 @@
 {
 "p": "^Крок (\\d+)/(\\d+)$",
 "ru": "Шаг $1/$2",
-"en": "Krok? $1/$2",
+"en": "Step $1/$2",
 "pl": "Krok $1/$2"
 },
 {
 "p": "^Видалити розмову «(.+)»\\?$",
 "ru": "Удалить чат «$1»?",
-"en": "Delete chat «$1»?",
-"pl": "Usunąć czat «$1»?",
+"en": "Delete chat \"$1\"?",
+"pl": "Usunąć czat „$1\"?",
 "tr": [
 1
 ]
@@ -323,8 +323,8 @@
 {
 "p": "^Видалити «(.+)»\\?$",
 "ru": "Удалить «$1»?",
-"en": "Delete «$1»?",
-"pl": "Usunąć «$1»?",
+"en": "Delete \"$1\"?",
+"pl": "Usunąć „$1\"?",
 "tr": [
 1
 ]
@@ -332,8 +332,8 @@
 {
 "p": "^Повільно повторюй подумки: «(.+)» Відчуй це у тілі\\.$",
 "ru": "Медленно повторяй про себя: «$1» Почувствуй это в теле.",
-"en": "Slowly repeat to yourself: «$1» Feel it in your body.",
-"pl": "Powoli powtarzaj w myślach: «$1» Poczuj to w ciele.",
+"en": "Slowly repeat to yourself: \"$1\" Feel it in your body.",
+"pl": "Powoli powtarzaj w myślach: „$1\" Poczuj to w ciele.",
 "tr": [
 1
 ]

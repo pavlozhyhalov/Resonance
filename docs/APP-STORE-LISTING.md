@@ -191,7 +191,7 @@ CO W ŚRODKU
   zimny prysznic i lodowa kąpiel, izometryczne utrzymania pozycji, antystres,
   muzyka oparta na częstotliwościach.
 • Ćwiczenia: statyczne, cardio i siłowe — z pomiarem czasu i postępem.
-• Nawyki: czysto · potknięcie · porażka. Przypadkowe potknięcie nie zeruje serii
+• Nawyki: czysto · potknięcie · nawrót. Przypadkowe potknięcie nie zeruje serii
   od razu — dopiero gdy nazbiera się do twojego limitu.
 • Cele z automatycznym postępem i terminami.
 • System rozwoju: poziomy z najdłuższej serii, gałęzie umiejętności, tytuły,
