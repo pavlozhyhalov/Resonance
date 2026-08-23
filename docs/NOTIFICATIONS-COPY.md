@@ -39,10 +39,10 @@
 
 | Мова | Title | Body |
 |---|---|---|
-| uk | Час практики | Ти сьогодні ще не практикував. Кілька хвилин — і день зараховано. |
-| ru | Время практики | Ты сегодня ещё не практиковал. Пара минут — и день засчитан. |
+| uk | Час практики | Сьогодні ще без практики. Кілька хвилин — і день зараховано. |
+| ru | Время практики | Сегодня ещё не было практики. Пара минут — и день засчитан. |
 | en | Time to practice | You haven’t practiced today yet. A few minutes and the day counts. |
-| pl | Czas na praktykę | Dziś jeszcze nie ćwiczyłeś. Kilka minut i dzień się liczy. |
+| pl | Czas na praktykę | Dziś jeszcze bez ćwiczeń. Kilka minut i dzień się liczy. |
 
 ### A2. Серія під загрозою (пізній вечір, день ще не закритий)
 
@@ -81,10 +81,10 @@
 
 | Мова | Title | Body |
 |---|---|---|
-| uk | Завтра завершується тріал | Усе, що ти зібрав, лишиться з тобою. Щоб рухатись далі — обери підписку. |
-| ru | Завтра заканчивается триал | Всё, что ты собрал, останется с тобой. Чтобы двигаться дальше — оформи подписку. |
+| uk | Завтра завершується тріал | Усе накопичене лишиться з тобою. Щоб рухатись далі — обери підписку. |
+| ru | Завтра заканчивается триал | Всё накопленное останется с тобой. Чтобы двигаться дальше — оформи подписку. |
 | en | Your trial ends tomorrow | Everything you’ve built stays yours. To keep going, pick a plan. |
-| pl | Jutro kończy się okres próbny | Wszystko, co zebrałeś, zostaje z tobą. Aby iść dalej — wybierz plan. |
+| pl | Jutro kończy się okres próbny | Cały dotychczasowy dorobek zostaje z tobą. Aby iść dalej — wybierz plan. |
 
 ### B3. День закінчення (T-0)
 
@@ -113,7 +113,7 @@
 | en | Your progress is paused | Level {level}, a {streak}-day streak — all still here. Unlock to continue. |
 | pl | Twój postęp jest wstrzymany | Poziom {level}, seria {streak} dni — wszystko na miejscu. Odblokuj, by kontynuować. |
 
-*Без плейсхолдерів:* uk «Твій прогрес на паузі / Усе, що ти зібрав, на місці. Розблокуй, щоб продовжити.»
+*Без плейсхолдерів:* uk «Твій прогрес на паузі / Усе накопичене на місці. Розблокуй, щоб продовжити.»
 
 ### C2. Нагадування-повернення (день 3–7)
 
@@ -122,14 +122,14 @@
 | uk | Персонаж чекає на тебе | Твоя історія нікуди не зникла. Один крок — і продовжуєш з того ж місця. |
 | ru | Персонаж ждёт тебя | Твоя история никуда не делась. Один шаг — и продолжаешь с того же места. |
 | en | Your character is waiting | Your history is right where you left it. One step and you’re back. |
-| pl | Twoja postać czeka | Twoja historia jest tam, gdzie ją zostawiłeś. Jeden krok i wracasz. |
+| pl | Twoja postać czeka | Twoja historia czeka dokładnie tam, gdzie ją zostawiono. Jeden krok i wracasz. |
 
 ### C3. AI-помічник як гачок (день 7–14)
 
 | Мова | Title | Body |
 |---|---|---|
-| uk | Помічник знову з тобою | З підпискою повертається AI-наставник — і весь твій прогрес оживає. |
-| ru | Помощник снова с тобой | С подпиской возвращается AI-наставник — и весь твой прогресс оживает. |
+| uk | Наставник знову з тобою | З підпискою повертається AI-наставник — і весь твій прогрес оживає. |
+| ru | Наставник снова с тобой | С подпиской возвращается AI-наставник — и весь твой прогресс оживает. |
 | en | Your mentor is one tap away | A subscription brings your AI mentor back — and your progress comes alive. |
 | pl | Twój mentor o krok od ciebie | Subskrypcja przywraca mentora AI — a twój postęp znów żyje. |
 
@@ -137,10 +137,10 @@
 
 | Мова | Title | Body |
 |---|---|---|
-| uk | Памʼятаєш свою серію {streak}? | Вона досі збережена. Повернись — і почни звідти, де зупинився. |
-| ru | Помнишь свою серию {streak}? | Она до сих пор сохранена. Вернись — и начни оттуда, где остановился. |
+| uk | Памʼятаєш свою серію {streak}? | Вона досі збережена. Повернись і продовжуй з того самого місця. |
+| ru | Помнишь свою серию {streak}? | Она до сих пор сохранена. Вернись и продолжи с того же места. |
 | en | Remember your {streak}-day streak? | It’s still saved. Come back and pick up where you stopped. |
-| pl | Pamiętasz swoją serię {streak}? | Wciąż jest zapisana. Wróć i zacznij tam, gdzie skończyłeś. |
+| pl | Pamiętasz swoją serię {streak}? | Wciąż jest zapisana. Wróć i kontynuuj od tego samego miejsca. |
 
 *Без плейсхолдерів:* uk «Твоя історія на тебе чекає» · ru «Твоя история тебя ждёт» · en «Your history is waiting» · pl «Twoja historia czeka».
 
@@ -160,12 +160,12 @@
 >
 > Привіт{, name}!
 >
-> Твої 14 днів повного доступу завершилися. Але все, що ти зібрав за цей час —
+> Твої 14 днів повного доступу завершилися. Але все накопичене за цей час —
 > рівень {level}, серія {streak} днів, увесь календар практик — **лишається з тобою**
 > і нікуди не зникає.
 >
 > Щоб знову записувати нові практики, тримати серію й повернути AI-наставника —
-> обери підписку. Це один крок, і ти продовжуєш рівно з того місця, де зупинився.
+> обери підписку. Це один крок, і ти продовжуєш рівно з того самого місця.
 >
 > [ **Розблокувати прогрес** ]
 >
@@ -177,12 +177,12 @@
 >
 > Привет{, name}!
 >
-> Твои 14 дней полного доступа завершились. Но всё, что ты собрал за это время —
+> Твои 14 дней полного доступа завершились. Но всё накопленное за это время —
 > уровень {level}, серия {streak} дней, весь календарь практик — **остаётся с тобой**
 > и никуда не исчезает.
 >
 > Чтобы снова записывать новые практики, держать серию и вернуть AI-наставника —
-> оформи подписку. Это один шаг, и ты продолжаешь ровно с того места, где остановился.
+> оформи подписку. Это один шаг, и ты продолжаешь ровно с того же места.
 >
 > [ **Разблокировать прогресс** ]
 >
@@ -211,12 +211,12 @@
 >
 > Cześć{, name}!
 >
-> Twoje 14 dni pełnego dostępu dobiegło końca. Ale wszystko, co zebrałeś w tym
+> Twoje 14 dni pełnego dostępu dobiegło końca. Ale wszystko zgromadzone w tym
 > czasie — poziom {level}, seria {streak} dni, cały kalendarz praktyk — **zostaje
 > z tobą** i nigdzie nie znika.
 >
 > Aby znów zapisywać nowe praktyki, trzymać serię i przywrócić mentora AI —
-> wybierz plan. To jeden krok, i kontynuujesz dokładnie tam, gdzie skończyłeś.
+> wybierz plan. To jeden krok, i kontynuujesz dokładnie od tego samego miejsca.
 >
 > [ **Odblokuj postęp** ]
 >

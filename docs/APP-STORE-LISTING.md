@@ -36,10 +36,10 @@
 
 | Мова | Варіант (символів) |
 |---|---|
-| uk | `Resonance: розвиток себе` (24) |
-| ru | `Resonance: развитие себя` (24) |
+| uk | `Resonance: саморозвиток` (23) |
+| ru | `Resonance: саморазвитие` (23) |
 | en | `Resonance: Self Growth` (22) |
-| pl | `Resonance: rozwój siebie` (24) |
+| pl | `Resonance: rozwój osobisty` (26) |
 
 *Запасний, максимально короткий:* просто `Resonance` (9) — якщо власник захоче чистий бренд.
 
@@ -49,7 +49,7 @@
 |---|---|
 | uk | `Звички як гра з рівнями` (23) |
 | ru | `Привычки как игра с уровнями` (28) |
-| en | `Habits as an RPG you level` (26) |
+| en | `Habits as an RPG you level up` (29) |
 | pl | `Nawyki jak gra z poziomami` (26) |
 
 ## Keywords (≤100, через кому без пробілів)
@@ -81,11 +81,11 @@
 | uk | Прокачуй себе, як персонажа: дихання, холод, звички й вправи стають рівнями, серіями та званнями. Твій прогрес — у грі. |
 | ru | Прокачивай себя, как персонажа: дыхание, холод, привычки и упражнения становятся уровнями, сериями и званиями. Твой прогресс — в игре. |
 | en | Level yourself up like a character: breathing, cold, habits and workouts turn into levels, streaks and titles. Your progress, gamified. |
-| pl | Rozwijaj siebie jak postać: oddech, zimno, nawyki i ćwiczenia stają się poziomami, seriami i tytułami. Twój postęp w formie gry. |
+| pl | Rozwijaj się jak postać: oddech, zimno, nawyki i ćwiczenia stają się poziomami, seriami i tytułami. Twój postęp w formie gry. |
 
-> **Довжина (перевірено 2026-08-23, ліміт 170):** uk 119 · ru 134 · en 135 · pl 128.
-> Усі в межах — скорочення не потрібне (раніша позначка «ru близько до межі»
-> не підтвердилась: 134 ≤ 170).
+> **Довжина (перевірено 2026-08-23, ліміт 170):** uk 119 · ru 134 · en 135 · pl 125
+> (pl оновлено після «Rozwijaj siebie» → «Rozwijaj się»). Усі в межах — скорочення
+> не потрібне.
 
 ---
 
@@ -101,11 +101,11 @@
   душ і крижана ванна, статичні утримання, антистрес, звукові частоти для
   розслаблення.
 • Вправи: статичні, кардіо й силові — з обліком часу й прогресом.
-• Звички: чисто · оступ · зрив. Один випадковий збій не обнуляє серію одразу —
+• Звички: чисто · оступ · зрив. Один випадковий оступ не обнуляє серію одразу —
   лише коли назбирається до твого ліміту.
 • Цілі з автопрогресом і дедлайнами.
 • Система розвитку: рівні від найдовшої серії, гілки навичок, звання, клас
-  персонажа з балансу Тіло/Розум.
+  персонажа за балансом Тіло/Розум.
 • Оцінка дня (ранок/обід/вечір) і графік настрою.
 • AI-наставник — персональна AI-персона, що підказує вчасно.
 
@@ -131,12 +131,12 @@
   душ и ледяная ванна, статические удержания, антистресс, звуковые частоты
   для расслабления.
 • Упражнения: статические, кардио и силовые — с учётом времени и прогрессом.
-• Привычки: чисто · оступ · срыв. Один случайный сбой не обнуляет серию сразу —
+• Привычки: чисто · оступ · срыв. Один случайный оступ не обнуляет серию сразу —
   только когда наберётся до твоего лимита.
 • Цели с автопрогрессом и дедлайнами.
 • Система развития: уровни от самой длинной серии, ветки навыков, звания,
-  класс персонажа из баланса Тело/Разум.
-• Оценка дня (утро/день/вечер) и график настроения.
+  класс персонажа по балансу Тело/Разум.
+• Оценка дня (утро/полдень/вечер) и график настроения.
 • AI-наставник — персональная AI-персона, подсказывает вовремя.
 
 ПРИВАТНОСТЬ
@@ -165,12 +165,12 @@ WHAT'S INSIDE
   away — only once it reaches your limit.
 • Goals with auto-progress and deadlines.
 • Progression system: levels from your longest streak, skill branches, titles,
-  a character class from your Body/Mind balance.
+  a character class based on your Body/Mind balance.
 • Day ratings (morning/noon/evening) and a mood chart.
 • AI mentor — a personal AI persona that nudges you at the right moment.
 
 PRIVACY
-Data is stored in the EU, everyone sees only their own. Account deletion
+Data is stored in the EU, everyone sees only their own data. Account deletion
 and export of your data — right inside the app. No ads, no data selling.
 
 LANGUAGES
@@ -187,15 +187,15 @@ zapominasz. Resonance trzyma cię w grze. Zamiast listy porażek — postać,
 która rośnie z każdą praktyką.
 
 CO W ŚRODKU
-• Praktyki: oddech (Wim Hof, oddech pudełkowy 4-4-4-4, 4-7-8, koherentny),
+• Praktyki: techniki oddechowe (Wim Hof, oddech pudełkowy 4-4-4-4, 4-7-8, koherentny),
   zimny prysznic i lodowa kąpiel, izometryczne utrzymania pozycji, antystres,
   muzyka oparta na częstotliwościach.
 • Ćwiczenia: statyczne, cardio i siłowe — z pomiarem czasu i postępem.
-• Nawyki: czysto · potknięcie · wpadka. Przypadkowe potknięcie nie zeruje serii
+• Nawyki: czysto · potknięcie · porażka. Przypadkowe potknięcie nie zeruje serii
   od razu — dopiero gdy nazbiera się do twojego limitu.
-• Cele z autopostępem i terminami.
+• Cele z automatycznym postępem i terminami.
 • System rozwoju: poziomy z najdłuższej serii, gałęzie umiejętności, tytuły,
-  klasa postaci z balansu Ciało/Umysł.
+  klasa postaci na podstawie balansu Ciało/Umysł.
 • Ocena dnia (rano/południe/wieczór) i wykres nastroju.
 • Mentor AI — osobista persona AI, która podpowiada we właściwym momencie.
 
