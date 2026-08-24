@@ -32,7 +32,7 @@ progression. Main pillars:
 - **Reader/demo mode**: unregistered visitors explore with mocked data, fully
   isolated from the backend (security-critical — see below).
 
-**Languages**: uk (default) + ru / en / pl — everything is localized.
+**Languages**: uk (default) + ru / en / pl / es / fr / de — everything is localized.
 **Design**: warm, **flat** (no glows/shadows-as-decoration), oklch palette,
 light + dark themes, rounded cards (`--radius:16px`).
 
@@ -42,7 +42,7 @@ light + dark themes, rounded cards (`--radius:16px`).
   - `app.bundle.js` — the whole app, **minified onto a few very long lines**.
   - `index.html`, `sw.js` (service worker; network-first for navigations so new
     deploys propagate), `css/styles.css`, `manifest.webmanifest`.
-  - `i18n/{en,ru,pl}.json` + `patterns.json` (uk is the in-code base language).
+  - `i18n/{en,ru,pl,es,fr,de}.json` + `patterns.json` (uk is the in-code base language).
   - `icons/`, `audio/`, `fonts/`.
 - **Hosting**: Cloudflare Pages, **auto-deploys from `main`**.
 - **Backend**: Supabase — project id **`xnfkuflpsbroxzpltvqq`**, region
@@ -84,7 +84,7 @@ assistant_usage, assistant_events, account_deletions, app_config`.
 - **Helpers**: element `o(tag,attrs,...children)`; SVG `mr('<path .../>')`;
   modal `$e(node)`→`{close}`; confirm `ve(text,{okText,danger})`; toast
   `$(text,type)`; date `X(date)`→`YYYY-MM-DD`; language `__rsGetLang()`.
-- **Localization of NEW UI**: use `__rsT({uk,ru,en,pl})` — it picks the language
+- **Localization of NEW UI**: use `__rsT({uk,ru,en,pl,es,fr,de})` — it picks the language
   itself, so it's always correct regardless of the i18n dicts. (Runtime
   translation of base-uk strings also exists via `__rsTr`/`__rsObserve`.)
 - **Assistant persona**: `window.__rsAsst` = `{name, tone}`.
@@ -97,7 +97,7 @@ assistant_usage, assistant_events, account_deletions, app_config`.
    `Ht="…"` in `app.bundle.js`, `VERSION = "…"` in `sw.js`, `?v=…` in
    `index.html`. They must match. Verify with **`bash scripts/release-check.sh`**.
    (Format: `YYYYMMDD` + 6 digits, monotonically increasing.)
-3. New user-facing text must be localized (uk/ru/en/pl) via `__rsT`.
+3. New user-facing text must be localized (uk/ru/en/pl/es/fr/de) via `__rsT`.
 4. Edge-function / DB changes go through the **Supabase MCP** (apply_migration,
    deploy_edge_function). They are **not** in the repo.
 5. Deploy flow: Cloudflare serves `main`. Work on the session's assigned branch,
