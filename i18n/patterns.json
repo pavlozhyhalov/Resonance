@@ -1,450 +1,636 @@
 [
-{
-"p": "^(\\d+) сесій · (.+)$",
-"ru": "$1 сессий · $2",
-"en": "$1 sessions · $2",
-"pl": "$1 sesji · $2"
-},
-{
-"p": "^(\\d+) сесій$",
-"ru": "$1 сессий",
-"en": "$1 sessions",
-"pl": "$1 sesji"
-},
-{
-"p": "^(\\d+) хв$",
-"ru": "$1 мин",
-"en": "$1 min",
-"pl": "$1 min"
-},
-{
-"p": "^(\\d+) днів$",
-"ru": "$1 дней",
-"en": "$1 days",
-"pl": "$1 dni"
-},
-{
-"p": "^(\\d+) год читання$",
-"ru": "$1 ч чтения",
-"en": "$1 h reading",
-"pl": "$1 h czytania"
-},
-{
-"p": "^(\\d+) год$",
-"ru": "$1 ч",
-"en": "$1 h",
-"pl": "$1 h"
-},
-{
-"p": "^(\\d+) очок розвитку$",
-"ru": "$1 очков развития",
-"en": "$1 growth points",
-"pl": "$1 pkt rozwoju"
-},
-{
-"p": "^часу читання · (\\d+) прочитано$",
-"ru": "времени чтения · $1 прочитано",
-"en": "reading time · $1 finished",
-"pl": "czasu czytania · $1 przeczytane"
-},
-{
-"p": "^Прочитані · (\\d+)$",
-"ru": "Прочитанные · $1",
-"en": "Finished · $1",
-"pl": "Przeczytane · $1"
-},
-{
-"p": "^Тіло · (\\d+)$",
-"ru": "Тело · $1",
-"en": "Body · $1",
-"pl": "Ciało · $1"
-},
-{
-"p": "^Ментальність · (\\d+)$",
-"ru": "Ментальность · $1",
-"en": "Mental · $1",
-"pl": "Umysł · $1"
-},
-{
-"p": "^Дихання · (\\d+) р\\.$",
-"ru": "Дыхание · $1 р.",
-"en": "Breathing · $1 rounds",
-"pl": "Oddech · $1 rund"
-},
-{
-"p": "^Р(\\d+)$",
-"ru": "Р$1",
-"en": "R$1",
-"pl": "R$1"
-},
-{
-"p": "^ще (\\d+) балів$",
-"ru": "ещё $1 баллов",
-"en": "$1 points to go",
-"pl": "jeszcze $1 pkt"
-},
-{
-"p": "^ще (\\d+) дн до наступного рівня$",
-"ru": "ещё $1 дн до следующего уровня",
-"en": "$1 d to next level",
-"pl": "jeszcze $1 dni do następnego poziomu"
-},
-{
-"p": "^Серія (\\d+) дн · рекорд (\\d+) дн · активних днів (\\d+)\\. Підсилює весь XP\\.$",
-"ru": "Серия $1 дн · рекорд $2 дн · активных дней $3. Усиливает весь XP.",
-"en": "Streak $1 d · record $2 d · active days $3. Boosts all XP.",
-"pl": "Seria $1 dni · rekord $2 dni · aktywnych dni $3. Wzmacnia całe XP."
-},
-{
-"p": "^Меню швидкого доступу · (\\d+)/(\\d+)$",
-"ru": "Меню быстрого доступа · $1/$2",
-"en": "Quick-access menu · $1/$2",
-"pl": "Menu szybkiego dostępu · $1/$2"
-},
-{
-"p": "^Максимум (\\d+)$",
-"ru": "Максимум $1",
-"en": "Max $1",
-"pl": "Maksimum $1"
-},
-{
-"p": "^≈ (.+) практики$",
-"ru": "≈ $1 практики",
-"en": "≈ $1 of practice",
-"pl": "≈ $1 praktyki"
-},
-{
-"p": "^Живиться від: (.+)$",
-"ru": "Питается от: $1",
-"en": "Fed by: $1",
-"pl": "Zasilane przez: $1",
-"tr": [
-1
-]
-},
-{
-"p": "^Доказовість: «(.+)»\\. Матеріал загальноосвітній, не медична порада\\.$",
-"ru": "Доказательность: «$1». Материал общеобразовательный, не медицинский совет.",
-"en": "Evidence: \"$1\". Educational material, not medical advice.",
-"pl": "Dowody: „$1\". Materiał ogólnoedukacyjny, nie porada medyczna.",
-"tr": [
-1
-]
-},
-{
-"p": "^Рівень (\\d+) · (.+)$",
-"ru": "Уровень $1 · $2",
-"en": "Level $1 · $2",
-"pl": "Poziom $1 · $2",
-"tr": [
-2
-]
-},
-{
-"p": "^Клас: (.+)$",
-"ru": "Класс: $1",
-"en": "Class: $1",
-"pl": "Klasa: $1",
-"tr": [
-1
-]
-},
-{
-"p": "^(.+) · ванна$",
-"ru": "$1 · ванна",
-"en": "$1 · bath",
-"pl": "$1 · kąpiel",
-"tr": [
-1
-]
-},
-{
-"p": "^(.+) · душ$",
-"ru": "$1 · душ",
-"en": "$1 · shower",
-"pl": "$1 · prysznic",
-"tr": [
-1
-]
-},
-{
-"p": "^версія (.+)$",
-"ru": "версия $1",
-"en": "version $1",
-"pl": "wersja $1"
-},
-{
-"p": "^рів (\\d+)$",
-"ru": "ур $1",
-"en": "L$1",
-"pl": "poz $1"
-},
-{
-"p": "^р\\.(\\d+)$",
-"ru": "ур.$1",
-"en": "L$1",
-"pl": "poz.$1"
-},
-{
-"p": "^(.+) завершено$",
-"ru": "$1 завершено",
-"en": "$1 complete",
-"pl": "$1 zakończono",
-"tr": [
-1
-]
-},
-{
-"p": "^днів до (\\d+) рівня$",
-"ru": "дней до $1 уровня",
-"en": "days to level $1",
-"pl": "dni do poziomu $1"
-},
-{
-"p": "^(.+): (\\d+) дн без зривів$",
-"ru": "$1: $2 дн без срывов",
-"en": "$1: $2 days clean",
-"pl": "$1: $2 dni bez wpadek",
-"tr": [
-1
-]
-},
-{
-"p": "^(.+): (\\d+) сесій$",
-"ru": "$1: $2 сессий",
-"en": "$1: $2 sessions",
-"pl": "$1: $2 sesji",
-"tr": [
-1
-]
-},
-{
-"p": "^(.+): (\\d+) хв практики$",
-"ru": "$1: $2 мин практики",
-"en": "$1: $2 min of practice",
-"pl": "$1: $2 min praktyki",
-"tr": [
-1
-]
-},
-{
-"p": "^(\\d+) дн практики поспіль$",
-"ru": "$1 дн практики подряд",
-"en": "$1 days of practice in a row",
-"pl": "$1 dni praktyki z rzędu"
-},
-{
-"p": "^Прочитати (\\d+) книг$",
-"ru": "Прочитать $1 книг",
-"en": "Read $1 books",
-"pl": "Przeczytać $1 książek"
-},
-{
-"p": "^Досягти (\\d+) рівня$",
-"ru": "Достичь $1 уровня",
-"en": "Reach level $1",
-"pl": "Osiągnąć poziom $1"
-},
-{
-"p": "^(\\d+) / (\\d+) (.+) · (\\d+)%$",
-"ru": "$1 / $2 $3 · $4%",
-"en": "$1 / $2 $3 · $4%",
-"pl": "$1 / $2 $3 · $4%",
-"tr": [
-3
-]
-},
-{
-"p": "^(\\d+)/(\\d+) (.+)$",
-"ru": "$1/$2 $3",
-"en": "$1/$2 $3",
-"pl": "$1/$2 $3",
-"tr": [
-3
-]
-},
-{
-"p": "^Ще (\\d+) ›$",
-"ru": "Ещё $1 ›",
-"en": "$1 more ›",
-"pl": "Jeszcze $1 ›"
-},
-{
-"p": "^ще (\\d+) ›$",
-"ru": "ещё $1 ›",
-"en": "$1 more ›",
-"pl": "jeszcze $1 ›"
-},
-{
-"p": "^Перенеси увагу на (.+)$",
-"ru": "Перенеси внимание на $1",
-"en": "Move your attention to $1",
-"pl": "Przenieś uwagę na $1",
-"tr": [
-1
-]
-},
-{
-"p": "^Твій клас: (.+)$",
-"ru": "Твой класс: $1",
-"en": "Your class: $1",
-"pl": "Twoja klasa: $1",
-"tr": [
-1
-]
-},
-{
-"p": "^Крок (\\d+)$",
-"ru": "Шаг $1",
-"en": "Step $1",
-"pl": "Krok $1"
-},
-{
-"p": "^Крок (\\d+) / (\\d+)$",
-"ru": "Шаг $1 / $2",
-"en": "Step $1 / $2",
-"pl": "Krok $1 / $2"
-},
-{
-"p": "^Крок (\\d+)/(\\d+)$",
-"ru": "Шаг $1/$2",
-"en": "Step $1/$2",
-"pl": "Krok $1/$2"
-},
-{
-"p": "^Видалити розмову «(.+)»\\?$",
-"ru": "Удалить чат «$1»?",
-"en": "Delete chat \"$1\"?",
-"pl": "Usunąć czat „$1\"?",
-"tr": [
-1
-]
-},
-{
-"p": "^Видалити «(.+)»\\?$",
-"ru": "Удалить «$1»?",
-"en": "Delete \"$1\"?",
-"pl": "Usunąć „$1\"?",
-"tr": [
-1
-]
-},
-{
-"p": "^Повільно повторюй подумки: «(.+)» Відчуй це у тілі\\.$",
-"ru": "Медленно повторяй про себя: «$1» Почувствуй это в теле.",
-"en": "Slowly repeat to yourself: \"$1\" Feel it in your body.",
-"pl": "Powoli powtarzaj w myślach: „$1\" Poczuj to w ciele.",
-"tr": [
-1
-]
-},
-{
-"p": "^Всього: (.+) л · Днів з водою: (\\d+)$",
-"ru": "Всего: $1 л · Дней с водой: $2",
-"en": "Total: $1 L · Days with water: $2",
-"pl": "Łącznie: $1 l · Dni z wodą: $2",
-"tr": [
-1
-]
-},
-{
-"p": "^Зараз: найдовша серія — (\\d+) дн, це (\\d+) рівень\\. До (\\d+) рівня — ще (\\d+) дн поспіль\\.$",
-"ru": "Сейчас: самая длинная серия — $1 дн, это $2 уровень. До $3 уровня — ещё $4 дн подряд.",
-"en": "Now: longest streak — $1 d, that's level $2. To level $3 — $4 more days in a row.",
-"pl": "Teraz: najdłuższa seria — $1 dni, to poziom $2. Do poziomu $3 — jeszcze $4 dni z rzędu."
-},
-{
-"p": "^Зараз: найдовша серія — (\\d+) дн, це (\\d+) рівень\\.$",
-"ru": "Сейчас: самая длинная серия — $1 дн, это $2 уровень.",
-"en": "Now: longest streak — $1 d, that's level $2.",
-"pl": "Teraz: najdłuższa seria — $1 dni, to poziom $2."
-},
-{
-"p": "^Твій результат: (\\d+)/(\\d+) дн$",
-"ru": "Твой результат: $1/$2 дн",
-"en": "Your result: $1/$2 days",
-"pl": "Twój wynik: $1/$2 dni"
-},
-{
-"p": "^Хвилин практики: (\\d+) · Сесій: (\\d+)$",
-"ru": "Минут практики: $1 · Сессий: $2",
-"en": "Minutes of practice: $1 · Sessions: $2",
-"pl": "Minut praktyki: $1 · Sesji: $2"
-},
-{
-"p": "^Середня оцінка: (.+) · Оцінених днів: (\\d+)$",
-"ru": "Средняя оценка: $1 · Оценённых дней: $2",
-"en": "Average rating: $1 · Rated days: $2",
-"pl": "Średnia ocena: $1 · Ocenionych dni: $2",
-"tr": [
-1
-]
-},
-{
-"p": "^Період: (.+) – (.+)$",
-"ru": "Период: $1 – $2",
-"en": "Period: $1 – $2",
-"pl": "Okres: $1 – $2",
-"tr": [
-1,
-2
-]
-},
-{
-"p": "^Спільнота · (.+)$",
-"ru": "Сообщество · $1",
-"en": "Community · $1",
-"pl": "Społeczność · $1",
-"tr": [
-1
-]
-},
-{
-"p": "^Відмітити: (.+)$",
-"ru": "Отметить: $1",
-"en": "Mark: $1",
-"pl": "Zaznacz: $1",
-"tr": [
-1
-]
-},
-{
-"p": "^Записано: (.+) • (\\d+) хв$",
-"ru": "Записано: $1 • $2 мин",
-"en": "Logged: $1 • $2 min",
-"pl": "Zapisano: $1 • $2 min",
-"tr": [
-1
-]
-},
-{
-"p": "^Обміняти на «(.+)» за (\\d+) балів\\?$",
-"ru": "Обменять на «$1» за $2 баллов?",
-"en": "Exchange for \"$1\" for $2 points?",
-"pl": "Wymienić na „$1” za $2 pkt?",
-"tr": [
-1
-]
-},
-{
-"p": "^Раунд (\\d+)$",
-"ru": "Раунд $1",
-"en": "Round $1",
-"pl": "Runda $1"
-},
-{
-"p": "^Час читання «(.+)»$",
-"ru": "Время чтения «$1»",
-"en": "Reading time \"$1\"",
-"pl": "Czas czytania „$1”",
-"tr": [
-1
-]
-},
-{
-"p": "^\\+(\\d+) хв у Знання$",
-"ru": "+$1 мин в Знание",
-"en": "+$1 min to Knowledge",
-"pl": "+$1 min do Wiedzy"
-}
+ {
+  "p": "^(\\d+) сесій · (.+)$",
+  "ru": "$1 сессий · $2",
+  "en": "$1 sessions · $2",
+  "pl": "$1 sesji · $2",
+  "es": "$1 sesiones · $2",
+  "fr": "$1 séances · $2",
+  "de": "$1 Sitzungen · $2"
+ },
+ {
+  "p": "^(\\d+) сесій$",
+  "ru": "$1 сессий",
+  "en": "$1 sessions",
+  "pl": "$1 sesji",
+  "es": "$1 sesiones",
+  "fr": "$1 séances",
+  "de": "$1 Sitzungen"
+ },
+ {
+  "p": "^(\\d+) хв$",
+  "ru": "$1 мин",
+  "en": "$1 min",
+  "pl": "$1 min",
+  "es": "$1 min",
+  "fr": "$1 min",
+  "de": "$1 Min"
+ },
+ {
+  "p": "^(\\d+) днів$",
+  "ru": "$1 дней",
+  "en": "$1 days",
+  "pl": "$1 dni",
+  "es": "$1 días",
+  "fr": "$1 jours",
+  "de": "$1 Tage"
+ },
+ {
+  "p": "^(\\d+) год читання$",
+  "ru": "$1 ч чтения",
+  "en": "$1 h reading",
+  "pl": "$1 h czytania",
+  "es": "$1 h de lectura",
+  "fr": "$1 h de lecture",
+  "de": "$1 Std Lesen"
+ },
+ {
+  "p": "^(\\d+) год$",
+  "ru": "$1 ч",
+  "en": "$1 h",
+  "pl": "$1 h",
+  "es": "$1 h",
+  "fr": "$1 h",
+  "de": "$1 Std"
+ },
+ {
+  "p": "^(\\d+) очок розвитку$",
+  "ru": "$1 очков развития",
+  "en": "$1 growth points",
+  "pl": "$1 pkt rozwoju",
+  "es": "$1 puntos de desarrollo",
+  "fr": "$1 points de développement",
+  "de": "$1 Entwicklungspunkte"
+ },
+ {
+  "p": "^часу читання · (\\d+) прочитано$",
+  "ru": "времени чтения · $1 прочитано",
+  "en": "reading time · $1 finished",
+  "pl": "czasu czytania · $1 przeczytane",
+  "es": "tiempo de lectura · $1 leídos",
+  "fr": "temps de lecture · $1 lus",
+  "de": "Lesezeit · $1 gelesen"
+ },
+ {
+  "p": "^Прочитані · (\\d+)$",
+  "ru": "Прочитанные · $1",
+  "en": "Finished · $1",
+  "pl": "Przeczytane · $1",
+  "es": "Leídos · $1",
+  "fr": "Lus · $1",
+  "de": "Gelesen · $1"
+ },
+ {
+  "p": "^Тіло · (\\d+)$",
+  "ru": "Тело · $1",
+  "en": "Body · $1",
+  "pl": "Ciało · $1",
+  "es": "Cuerpo · $1",
+  "fr": "Corps · $1",
+  "de": "Körper · $1"
+ },
+ {
+  "p": "^Ментальність · (\\d+)$",
+  "ru": "Ментальность · $1",
+  "en": "Mental · $1",
+  "pl": "Umysł · $1",
+  "es": "Mente · $1",
+  "fr": "Mental · $1",
+  "de": "Geist · $1"
+ },
+ {
+  "p": "^Дихання · (\\d+) р\\.$",
+  "ru": "Дыхание · $1 р.",
+  "en": "Breathing · $1 rounds",
+  "pl": "Oddech · $1 rund",
+  "es": "Respiración · $1 rondas",
+  "fr": "Respiration · $1 tours",
+  "de": "Atmung · $1 Runden"
+ },
+ {
+  "p": "^Р(\\d+)$",
+  "ru": "Р$1",
+  "en": "R$1",
+  "pl": "R$1",
+  "es": "R$1",
+  "fr": "R$1",
+  "de": "R$1"
+ },
+ {
+  "p": "^ще (\\d+) балів$",
+  "ru": "ещё $1 баллов",
+  "en": "$1 points to go",
+  "pl": "jeszcze $1 pkt",
+  "es": "faltan $1 puntos",
+  "fr": "encore $1 points",
+  "de": "noch $1 Punkte"
+ },
+ {
+  "p": "^ще (\\d+) дн до наступного рівня$",
+  "ru": "ещё $1 дн до следующего уровня",
+  "en": "$1 d to next level",
+  "pl": "jeszcze $1 dni do następnego poziomu",
+  "es": "$1 d para el próximo nivel",
+  "fr": "$1 j jusqu'au niveau suivant",
+  "de": "$1 T bis zum nächsten Level"
+ },
+ {
+  "p": "^Серія (\\d+) дн · рекорд (\\d+) дн · активних днів (\\d+)\\. Підсилює весь XP\\.$",
+  "ru": "Серия $1 дн · рекорд $2 дн · активных дней $3. Усиливает весь XP.",
+  "en": "Streak $1 d · record $2 d · active days $3. Boosts all XP.",
+  "pl": "Seria $1 dni · rekord $2 dni · aktywnych dni $3. Wzmacnia całe XP.",
+  "es": "Racha $1 d · récord $2 d · días activos $3. Potencia todo el XP.",
+  "fr": "Série $1 j · record $2 j · jours actifs $3. Booste tout l'XP.",
+  "de": "Serie $1 T · Rekord $2 T · aktive Tage $3. Verstärkt alle XP."
+ },
+ {
+  "p": "^Меню швидкого доступу · (\\d+)/(\\d+)$",
+  "ru": "Меню быстрого доступа · $1/$2",
+  "en": "Quick-access menu · $1/$2",
+  "pl": "Menu szybkiego dostępu · $1/$2",
+  "es": "Menú de acceso rápido · $1/$2",
+  "fr": "Menu d'accès rapide · $1/$2",
+  "de": "Schnellzugriffsmenü · $1/$2"
+ },
+ {
+  "p": "^Максимум (\\d+)$",
+  "ru": "Максимум $1",
+  "en": "Max $1",
+  "pl": "Maksimum $1",
+  "es": "Máximo $1",
+  "fr": "Maximum $1",
+  "de": "Maximum $1"
+ },
+ {
+  "p": "^≈ (.+) практики$",
+  "ru": "≈ $1 практики",
+  "en": "≈ $1 of practice",
+  "pl": "≈ $1 praktyki",
+  "es": "≈ $1 de práctica",
+  "fr": "≈ $1 de pratique",
+  "de": "≈ $1 Praxis"
+ },
+ {
+  "p": "^Живиться від: (.+)$",
+  "ru": "Питается от: $1",
+  "en": "Fed by: $1",
+  "pl": "Zasilane przez: $1",
+  "tr": [
+   1
+  ],
+  "es": "Se nutre de: $1",
+  "fr": "Alimenté par : $1",
+  "de": "Gespeist von: $1"
+ },
+ {
+  "p": "^Доказовість: «(.+)»\\. Матеріал загальноосвітній, не медична порада\\.$",
+  "ru": "Доказательность: «$1». Материал общеобразовательный, не медицинский совет.",
+  "en": "Evidence: \"$1\". Educational material, not medical advice.",
+  "pl": "Dowody: „$1\". Materiał ogólnoedukacyjny, nie porada medyczna.",
+  "tr": [
+   1
+  ],
+  "es": "Evidencia: «$1». Material educativo, no es consejo médico.",
+  "fr": "Preuves : « $1 ». Contenu éducatif, pas un avis médical.",
+  "de": "Evidenz: „$1“. Bildungsmaterial, keine medizinische Beratung."
+ },
+ {
+  "p": "^Рівень (\\d+) · (.+)$",
+  "ru": "Уровень $1 · $2",
+  "en": "Level $1 · $2",
+  "pl": "Poziom $1 · $2",
+  "tr": [
+   2
+  ],
+  "es": "Nivel $1 · $2",
+  "fr": "Niveau $1 · $2",
+  "de": "Level $1 · $2"
+ },
+ {
+  "p": "^Клас: (.+)$",
+  "ru": "Класс: $1",
+  "en": "Class: $1",
+  "pl": "Klasa: $1",
+  "tr": [
+   1
+  ],
+  "es": "Clase: $1",
+  "fr": "Classe : $1",
+  "de": "Klasse: $1"
+ },
+ {
+  "p": "^(.+) · ванна$",
+  "ru": "$1 · ванна",
+  "en": "$1 · bath",
+  "pl": "$1 · kąpiel",
+  "tr": [
+   1
+  ],
+  "es": "$1 · baño",
+  "fr": "$1 · bain",
+  "de": "$1 · Bad"
+ },
+ {
+  "p": "^(.+) · душ$",
+  "ru": "$1 · душ",
+  "en": "$1 · shower",
+  "pl": "$1 · prysznic",
+  "tr": [
+   1
+  ],
+  "es": "$1 · ducha",
+  "fr": "$1 · douche",
+  "de": "$1 · Dusche"
+ },
+ {
+  "p": "^версія (.+)$",
+  "ru": "версия $1",
+  "en": "version $1",
+  "pl": "wersja $1",
+  "es": "versión $1",
+  "fr": "version $1",
+  "de": "Version $1"
+ },
+ {
+  "p": "^рів (\\d+)$",
+  "ru": "ур $1",
+  "en": "L$1",
+  "pl": "poz $1",
+  "es": "Niv$1",
+  "fr": "Niv$1",
+  "de": "Lvl$1"
+ },
+ {
+  "p": "^р\\.(\\d+)$",
+  "ru": "ур.$1",
+  "en": "L$1",
+  "pl": "poz.$1",
+  "es": "Niv$1",
+  "fr": "Niv$1",
+  "de": "Lvl$1"
+ },
+ {
+  "p": "^(.+) завершено$",
+  "ru": "$1 завершено",
+  "en": "$1 complete",
+  "pl": "$1 zakończono",
+  "tr": [
+   1
+  ],
+  "es": "$1 completado",
+  "fr": "$1 terminé",
+  "de": "$1 abgeschlossen"
+ },
+ {
+  "p": "^днів до (\\d+) рівня$",
+  "ru": "дней до $1 уровня",
+  "en": "days to level $1",
+  "pl": "dni do poziomu $1",
+  "es": "días para el nivel $1",
+  "fr": "jours jusqu'au niveau $1",
+  "de": "Tage bis Level $1"
+ },
+ {
+  "p": "^(.+): (\\d+) дн без зривів$",
+  "ru": "$1: $2 дн без срывов",
+  "en": "$1: $2 days clean",
+  "pl": "$1: $2 dni bez wpadek",
+  "tr": [
+   1
+  ],
+  "es": "$1: $2 días sin recaídas",
+  "fr": "$1 : $2 jours sans rechute",
+  "de": "$1: $2 Tage sauber"
+ },
+ {
+  "p": "^(.+): (\\d+) сесій$",
+  "ru": "$1: $2 сессий",
+  "en": "$1: $2 sessions",
+  "pl": "$1: $2 sesji",
+  "tr": [
+   1
+  ],
+  "es": "$1: $2 sesiones",
+  "fr": "$1 : $2 séances",
+  "de": "$1: $2 Sitzungen"
+ },
+ {
+  "p": "^(.+): (\\d+) хв практики$",
+  "ru": "$1: $2 мин практики",
+  "en": "$1: $2 min of practice",
+  "pl": "$1: $2 min praktyki",
+  "tr": [
+   1
+  ],
+  "es": "$1: $2 min de práctica",
+  "fr": "$1 : $2 min de pratique",
+  "de": "$1: $2 Min Praxis"
+ },
+ {
+  "p": "^(\\d+) дн практики поспіль$",
+  "ru": "$1 дн практики подряд",
+  "en": "$1 days of practice in a row",
+  "pl": "$1 dni praktyki z rzędu",
+  "es": "$1 días de práctica seguidos",
+  "fr": "$1 jours de pratique d'affilée",
+  "de": "$1 Tage Praxis am Stück"
+ },
+ {
+  "p": "^Прочитати (\\d+) книг$",
+  "ru": "Прочитать $1 книг",
+  "en": "Read $1 books",
+  "pl": "Przeczytać $1 książek",
+  "es": "Leer $1 libros",
+  "fr": "Lire $1 livres",
+  "de": "$1 Bücher lesen"
+ },
+ {
+  "p": "^Досягти (\\d+) рівня$",
+  "ru": "Достичь $1 уровня",
+  "en": "Reach level $1",
+  "pl": "Osiągnąć poziom $1",
+  "es": "Alcanzar el nivel $1",
+  "fr": "Atteindre le niveau $1",
+  "de": "Level $1 erreichen"
+ },
+ {
+  "p": "^(\\d+) / (\\d+) (.+) · (\\d+)%$",
+  "ru": "$1 / $2 $3 · $4%",
+  "en": "$1 / $2 $3 · $4%",
+  "pl": "$1 / $2 $3 · $4%",
+  "tr": [
+   3
+  ],
+  "es": "$1 / $2 $3 · $4%",
+  "fr": "$1 / $2 $3 · $4 %",
+  "de": "$1 / $2 $3 · $4 %"
+ },
+ {
+  "p": "^(\\d+)/(\\d+) (.+)$",
+  "ru": "$1/$2 $3",
+  "en": "$1/$2 $3",
+  "pl": "$1/$2 $3",
+  "tr": [
+   3
+  ],
+  "es": "$1/$2 $3",
+  "fr": "$1/$2 $3",
+  "de": "$1/$2 $3"
+ },
+ {
+  "p": "^Ще (\\d+) ›$",
+  "ru": "Ещё $1 ›",
+  "en": "$1 more ›",
+  "pl": "Jeszcze $1 ›",
+  "es": "$1 más ›",
+  "fr": "$1 de plus ›",
+  "de": "$1 weitere ›"
+ },
+ {
+  "p": "^ще (\\d+) ›$",
+  "ru": "ещё $1 ›",
+  "en": "$1 more ›",
+  "pl": "jeszcze $1 ›",
+  "es": "$1 más ›",
+  "fr": "$1 de plus ›",
+  "de": "$1 weitere ›"
+ },
+ {
+  "p": "^Перенеси увагу на (.+)$",
+  "ru": "Перенеси внимание на $1",
+  "en": "Move your attention to $1",
+  "pl": "Przenieś uwagę na $1",
+  "tr": [
+   1
+  ],
+  "es": "Lleva la atención a $1",
+  "fr": "Porte ton attention sur $1",
+  "de": "Richte deine Aufmerksamkeit auf $1"
+ },
+ {
+  "p": "^Твій клас: (.+)$",
+  "ru": "Твой класс: $1",
+  "en": "Your class: $1",
+  "pl": "Twoja klasa: $1",
+  "tr": [
+   1
+  ],
+  "es": "Tu clase: $1",
+  "fr": "Ta classe : $1",
+  "de": "Deine Klasse: $1"
+ },
+ {
+  "p": "^Крок (\\d+)$",
+  "ru": "Шаг $1",
+  "en": "Step $1",
+  "pl": "Krok $1",
+  "es": "Paso $1",
+  "fr": "Étape $1",
+  "de": "Schritt $1"
+ },
+ {
+  "p": "^Крок (\\d+) / (\\d+)$",
+  "ru": "Шаг $1 / $2",
+  "en": "Step $1 / $2",
+  "pl": "Krok $1 / $2",
+  "es": "Paso $1 / $2",
+  "fr": "Étape $1 / $2",
+  "de": "Schritt $1 / $2"
+ },
+ {
+  "p": "^Крок (\\d+)/(\\d+)$",
+  "ru": "Шаг $1/$2",
+  "en": "Step $1/$2",
+  "pl": "Krok $1/$2",
+  "es": "Paso $1/$2",
+  "fr": "Étape $1/$2",
+  "de": "Schritt $1/$2"
+ },
+ {
+  "p": "^Видалити розмову «(.+)»\\?$",
+  "ru": "Удалить чат «$1»?",
+  "en": "Delete chat \"$1\"?",
+  "pl": "Usunąć czat „$1\"?",
+  "tr": [
+   1
+  ],
+  "es": "¿Eliminar la conversación «$1»?",
+  "fr": "Supprimer la conversation « $1 » ?",
+  "de": "Chat „$1“ löschen?"
+ },
+ {
+  "p": "^Видалити «(.+)»\\?$",
+  "ru": "Удалить «$1»?",
+  "en": "Delete \"$1\"?",
+  "pl": "Usunąć „$1\"?",
+  "tr": [
+   1
+  ],
+  "es": "¿Eliminar «$1»?",
+  "fr": "Supprimer « $1 » ?",
+  "de": "„$1“ löschen?"
+ },
+ {
+  "p": "^Повільно повторюй подумки: «(.+)» Відчуй це у тілі\\.$",
+  "ru": "Медленно повторяй про себя: «$1» Почувствуй это в теле.",
+  "en": "Slowly repeat to yourself: \"$1\" Feel it in your body.",
+  "pl": "Powoli powtarzaj w myślach: „$1\" Poczuj to w ciele.",
+  "tr": [
+   1
+  ],
+  "es": "Repite despacio para ti: «$1» Siéntelo en tu cuerpo.",
+  "fr": "Répète lentement pour toi : « $1 » Sens-le dans ton corps.",
+  "de": "Wiederhole langsam für dich: „$1“ Spüre es in deinem Körper."
+ },
+ {
+  "p": "^Всього: (.+) л · Днів з водою: (\\d+)$",
+  "ru": "Всего: $1 л · Дней с водой: $2",
+  "en": "Total: $1 L · Days with water: $2",
+  "pl": "Łącznie: $1 l · Dni z wodą: $2",
+  "tr": [
+   1
+  ],
+  "es": "Total: $1 l · Días con agua: $2",
+  "fr": "Total : $1 l · Jours avec eau : $2",
+  "de": "Gesamt: $1 l · Tage mit Wasser: $2"
+ },
+ {
+  "p": "^Зараз: найдовша серія — (\\d+) дн, це (\\d+) рівень\\. До (\\d+) рівня — ще (\\d+) дн поспіль\\.$",
+  "ru": "Сейчас: самая длинная серия — $1 дн, это $2 уровень. До $3 уровня — ещё $4 дн подряд.",
+  "en": "Now: longest streak — $1 d, that's level $2. To level $3 — $4 more days in a row.",
+  "pl": "Teraz: najdłuższa seria — $1 dni, to poziom $2. Do poziomu $3 — jeszcze $4 dni z rzędu.",
+  "es": "Ahora: racha más larga — $1 d, es el nivel $2. Para el nivel $3 — $4 días más seguidos.",
+  "fr": "Maintenant : plus longue série — $1 j, c'est le niveau $2. Pour le niveau $3 — encore $4 jours d'affilée.",
+  "de": "Jetzt: längste Serie — $1 T, das ist Level $2. Bis Level $3 — noch $4 Tage am Stück."
+ },
+ {
+  "p": "^Зараз: найдовша серія — (\\d+) дн, це (\\d+) рівень\\.$",
+  "ru": "Сейчас: самая длинная серия — $1 дн, это $2 уровень.",
+  "en": "Now: longest streak — $1 d, that's level $2.",
+  "pl": "Teraz: najdłuższa seria — $1 dni, to poziom $2.",
+  "es": "Ahora: racha más larga — $1 d, es el nivel $2.",
+  "fr": "Maintenant : plus longue série — $1 j, c'est le niveau $2.",
+  "de": "Jetzt: längste Serie — $1 T, das ist Level $2."
+ },
+ {
+  "p": "^Твій результат: (\\d+)/(\\d+) дн$",
+  "ru": "Твой результат: $1/$2 дн",
+  "en": "Your result: $1/$2 days",
+  "pl": "Twój wynik: $1/$2 dni",
+  "es": "Tu resultado: $1/$2 días",
+  "fr": "Ton résultat : $1/$2 jours",
+  "de": "Dein Ergebnis: $1/$2 Tage"
+ },
+ {
+  "p": "^Хвилин практики: (\\d+) · Сесій: (\\d+)$",
+  "ru": "Минут практики: $1 · Сессий: $2",
+  "en": "Minutes of practice: $1 · Sessions: $2",
+  "pl": "Minut praktyki: $1 · Sesji: $2",
+  "es": "Minutos de práctica: $1 · Sesiones: $2",
+  "fr": "Minutes de pratique : $1 · Séances : $2",
+  "de": "Praxisminuten: $1 · Sitzungen: $2"
+ },
+ {
+  "p": "^Середня оцінка: (.+) · Оцінених днів: (\\d+)$",
+  "ru": "Средняя оценка: $1 · Оценённых дней: $2",
+  "en": "Average rating: $1 · Rated days: $2",
+  "pl": "Średnia ocena: $1 · Ocenionych dni: $2",
+  "tr": [
+   1
+  ],
+  "es": "Valoración media: $1 · Días valorados: $2",
+  "fr": "Note moyenne : $1 · Jours notés : $2",
+  "de": "Durchschnittsbewertung: $1 · Bewertete Tage: $2"
+ },
+ {
+  "p": "^Період: (.+) – (.+)$",
+  "ru": "Период: $1 – $2",
+  "en": "Period: $1 – $2",
+  "pl": "Okres: $1 – $2",
+  "tr": [
+   1,
+   2
+  ],
+  "es": "Período: $1 – $2",
+  "fr": "Période : $1 – $2",
+  "de": "Zeitraum: $1 – $2"
+ },
+ {
+  "p": "^Спільнота · (.+)$",
+  "ru": "Сообщество · $1",
+  "en": "Community · $1",
+  "pl": "Społeczność · $1",
+  "tr": [
+   1
+  ],
+  "es": "Comunidad · $1",
+  "fr": "Communauté · $1",
+  "de": "Gemeinschaft · $1"
+ },
+ {
+  "p": "^Відмітити: (.+)$",
+  "ru": "Отметить: $1",
+  "en": "Mark: $1",
+  "pl": "Zaznacz: $1",
+  "tr": [
+   1
+  ],
+  "es": "Marcar: $1",
+  "fr": "Marquer : $1",
+  "de": "Markieren: $1"
+ },
+ {
+  "p": "^Записано: (.+) • (\\d+) хв$",
+  "ru": "Записано: $1 • $2 мин",
+  "en": "Logged: $1 • $2 min",
+  "pl": "Zapisano: $1 • $2 min",
+  "tr": [
+   1
+  ],
+  "es": "Registrado: $1 • $2 min",
+  "fr": "Enregistré : $1 • $2 min",
+  "de": "Erfasst: $1 • $2 Min"
+ },
+ {
+  "p": "^Обміняти на «(.+)» за (\\d+) балів\\?$",
+  "ru": "Обменять на «$1» за $2 баллов?",
+  "en": "Exchange for \"$1\" for $2 points?",
+  "pl": "Wymienić na „$1” za $2 pkt?",
+  "tr": [
+   1
+  ],
+  "es": "¿Canjear por «$1» por $2 puntos?",
+  "fr": "Échanger contre « $1 » pour $2 points ?",
+  "de": "Gegen „$1“ für $2 Punkte eintauschen?"
+ },
+ {
+  "p": "^Раунд (\\d+)$",
+  "ru": "Раунд $1",
+  "en": "Round $1",
+  "pl": "Runda $1",
+  "es": "Ronda $1",
+  "fr": "Tour $1",
+  "de": "Runde $1"
+ },
+ {
+  "p": "^Час читання «(.+)»$",
+  "ru": "Время чтения «$1»",
+  "en": "Reading time \"$1\"",
+  "pl": "Czas czytania „$1”",
+  "tr": [
+   1
+  ],
+  "es": "Tiempo de lectura «$1»",
+  "fr": "Temps de lecture « $1 »",
+  "de": "Lesezeit „$1“"
+ },
+ {
+  "p": "^\\+(\\d+) хв у Знання$",
+  "ru": "+$1 мин в Знание",
+  "en": "+$1 min to Knowledge",
+  "pl": "+$1 min do Wiedzy",
+  "es": "+$1 min a Conocimiento",
+  "fr": "+$1 min à Savoir",
+  "de": "+$1 Min zu Wissen"
+ }
 ]
