@@ -4,7 +4,7 @@
    refresh, with a cached fallback for offline. Versioned/immutable assets
    (?v=, media, fonts) stay cache-first. Bump VERSION on each deploy so this
    worker updates and old caches are purged. */
-const VERSION = "20260825000001";
+const VERSION = "20260825000002";
 const CACHE = "resonance-assets-" + VERSION;
 
 self.addEventListener("install", function () { self.skipWaiting(); });

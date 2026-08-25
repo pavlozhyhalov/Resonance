@@ -195,16 +195,16 @@
   "de": "Evidenz: „$1“. Bildungsmaterial, keine medizinische Beratung."
  },
  {
-  "p": "^Рівень (\\d+) · (.+)$",
-  "ru": "Уровень $1 · $2",
-  "en": "Level $1 · $2",
-  "pl": "Poziom $1 · $2",
+  "p": "^Рівень (\\d+) · (.+?)( I{1,3})?$",
+  "ru": "Уровень $1 · $2$3",
+  "en": "Level $1 · $2$3",
+  "pl": "Poziom $1 · $2$3",
   "tr": [
    2
   ],
-  "es": "Nivel $1 · $2",
-  "fr": "Niveau $1 · $2",
-  "de": "Level $1 · $2"
+  "es": "Nivel $1 · $2$3",
+  "fr": "Niveau $1 · $2$3",
+  "de": "Level $1 · $2$3"
  },
  {
   "p": "^Клас: (.+)$",
@@ -632,5 +632,125 @@
   "es": "+$1 min a Conocimiento",
   "fr": "+$1 min à Savoir",
   "de": "+$1 Min zu Wissen"
+ },
+ {
+  "p": "^(\\d+) год (\\d+) хв$",
+  "ru": "$1 ч $2 мин",
+  "en": "$1 h $2 min",
+  "pl": "$1 h $2 min",
+  "es": "$1 h $2 min",
+  "fr": "$1 h $2 min",
+  "de": "$1 Std $2 Min"
+ },
+ {
+  "p": "^(\\d+) год (\\d+) хв читання$",
+  "ru": "$1 ч $2 мин чтения",
+  "en": "$1 h $2 min reading",
+  "pl": "$1 h $2 min czytania",
+  "es": "$1 h $2 min de lectura",
+  "fr": "$1 h $2 min de lecture",
+  "de": "$1 Std $2 Min Lesen"
+ },
+ {
+  "p": "^(\\d+) хв читання$",
+  "ru": "$1 мин чтения",
+  "en": "$1 min reading",
+  "pl": "$1 min czytania",
+  "es": "$1 min de lectura",
+  "fr": "$1 min de lecture",
+  "de": "$1 Min Lesen"
+ },
+ {
+  "p": "^([\\d.,]+) л$",
+  "ru": "$1 л",
+  "en": "$1 l",
+  "pl": "$1 l",
+  "es": "$1 l",
+  "fr": "$1 l",
+  "de": "$1 l"
+ },
+ {
+  "p": "^/ ([\\d.,]+) л$",
+  "ru": "/ $1 л",
+  "en": "/ $1 l",
+  "pl": "/ $1 l",
+  "es": "/ $1 l",
+  "fr": "/ $1 l",
+  "de": "/ $1 l"
+ },
+ {
+  "p": "^\\+([\\d.,]+) л$",
+  "ru": "+$1 л",
+  "en": "+$1 l",
+  "pl": "+$1 l",
+  "es": "+$1 l",
+  "fr": "+$1 l",
+  "de": "+$1 l"
+ },
+ {
+  "p": "^рів (\\d+)[–-](\\d+)$",
+  "ru": "ур $1–$2",
+  "en": "L $1–$2",
+  "pl": "poz $1–$2",
+  "es": "Niv $1–$2",
+  "fr": "Niv $1–$2",
+  "de": "Lvl $1–$2"
+ },
+ {
+  "p": "^Рівень (\\d+)$",
+  "ru": "Уровень $1",
+  "en": "Level $1",
+  "pl": "Poziom $1",
+  "es": "Nivel $1",
+  "fr": "Niveau $1",
+  "de": "Level $1"
+ },
+ {
+  "p": "^(\\d+) дн поспіль$",
+  "ru": "$1 дн подряд",
+  "en": "$1 days in a row",
+  "pl": "$1 dni z rzędu",
+  "es": "$1 días seguidos",
+  "fr": "$1 jours d'affilée",
+  "de": "$1 Tage am Stück"
+ },
+ {
+  "p": "^старт$",
+  "ru": "старт",
+  "en": "start",
+  "pl": "start",
+  "es": "inicio",
+  "fr": "début",
+  "de": "Start"
+ },
+ {
+  "p": "^(\\d+) XP · ще (\\d+) до рівня (\\d+)$",
+  "ru": "$1 XP · ещё $2 до уровня $3",
+  "en": "$1 XP · $2 more to level $3",
+  "pl": "$1 XP · jeszcze $2 do poziomu $3",
+  "es": "$1 XP · faltan $2 para el nivel $3",
+  "fr": "$1 XP · encore $2 avant le niveau $3",
+  "de": "$1 XP · noch $2 bis Level $3"
+ },
+ {
+  "p": "^(\\d+)д$",
+  "ru": "$1д",
+  "en": "$1d",
+  "pl": "$1d",
+  "es": "$1d",
+  "fr": "$1j",
+  "de": "$1T"
+ },
+ {
+  "p": "^(Холод|Вправи|Дихання|Частоти|Вода): (.+)$",
+  "ru": "$1: $2",
+  "en": "$1: $2",
+  "pl": "$1: $2",
+  "tr": [
+   1
+  ],
+  "es": "$1: $2",
+  "fr": "$1: $2",
+  "de": "$1: $2"
  }
 ]
