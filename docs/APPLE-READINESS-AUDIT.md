@@ -70,12 +70,11 @@ How audio really works in the shipped app:
 **Actions:**
 - `amb-*` (5 files) — deleted (earlier commit).
 - Dead `.file` audio map removed from `app.bundle.js`.
-- `tone-*` (10) + `bin-*` (6) — unused local files, pending deletion (the build
-  sandbox blocked the file removal; owner to delete or grant permission).
+- `tone-*` (10) + `bin-*` (6) — unused local files, **deleted**.
 
-Net: **no third-party-licensed audio ships in the app** once the tone/bin files
-are removed — the only bundled audio is the three synthesized cue beeps. The B6
-copyright question for App Review is effectively closed.
+Net: **no third-party-licensed audio ships in the app** — the only bundled
+audio is the three synthesized cue beeps (`cue-in/out/gong`). The B6 copyright
+question for App Review is closed.
 
 ---
 
@@ -123,7 +122,7 @@ end to end. (Best-effort, wrapped in try/catch; never blocks the UI.)
 | B1 audit | ✅ this document |
 | B4 login methods | ✅ email/password only → **no Sign in with Apple needed** |
 | B5 IAP present? | ✅ none; monetization is an unmade product decision |
-| B6 audio origin | ✅ only 3 synth cue beeps play locally; freqs via external links; `amb-*` deleted, `tone-*`/`bin-*` pending delete |
+| B6 audio origin | ✅ only 3 synth cue beeps ship; freqs via external links; all unused `amb-*`/`tone-*`/`bin-*` deleted |
 | B7 data inventory | ✅ table above; no payment data |
 | B8 push opt-out toggle | ✅ implemented (unsubscribe + row delete) |
 | B10 paywall text | n/a — no paywall exists |
