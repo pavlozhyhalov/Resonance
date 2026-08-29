@@ -326,5 +326,6 @@ _Build 20260825000009. Не чіпав `__rsSafety` і Gemini-розкриття
 it is **not built** — no paywall/entitlement code or DB field exists yet. So B2
 (reviewer premium account) and B9 (StoreKit) stay blocked on **building the
 paywall**, not on a decision. The audio-licensing question (B6) is moot (unused
-files deleted). What remains repo-side: Section-A text drafts to insert (B3, the
-AI-chat consent/disclaimer, a Support URL page), and the paywall build.
+files deleted). All Section-A texts (AI-chat consent, AI label, safety
+disclaimers, the Support page) are already inserted. **The only repo-side work
+that remains is the paywall build.**
