@@ -6,7 +6,7 @@
 > `03_Rozpodil_zavdan.md`. Chat-Claude (Section A) reconciles this against the
 > checklist; the owner (Section C) acts on what needs money/Mac.
 
-_Last updated: 2026-08-29 · build 20260825000009 · +ТЗ part 2 & 3 (AI consent+label, push priming, /support, review notes)_
+_Last updated: 2026-08-29 · build 20260825000010 · +ТЗ part 2–4 (AI consent server-side, push priming reverts toggle, /support, review notes)_
 
 ---
 
@@ -240,9 +240,11 @@ _Build 20260825000009. Не чіпав `__rsSafety` і Gemini-розкриття
 - **Текст (7 мов):** «Перед початком розмови» + узгоджене з політикою
   формулювання про Google Gemini + «Наставник — це AI, а не заміна лікаря чи
   психолога.» Кнопка «Зрозуміло, почати».
-- **Примітка:** прапорець per-device (localStorage), не в `profiles`. Якщо
-  потрібна крос-девайс згода — треба колонка `profiles.ai_consent_at` +
-  міграція; поки не робив (localStorage відповідає ТЗ як допустимий варіант).
+- **Оновлено (ТЗ ч.4):** згода тепер **на сервері** — колонка
+  `profiles.ai_consent_at` (timestamptz, nullable; міграція застосована в прод).
+  При «Зрозуміло, почати» пишеться час згоди; gate читає з `profiles`, а
+  `localStorage` лишився лише кешем (щоб не робити зайвий запит). Прив'язано до
+  акаунта, з часовою міткою.
 
 ### Завдання 2 — постійна AI-мітка в чаті ✅ ВСТАВЛЕНО
 - **Що:** постійний підпис угорі чату (`.assistant-ailabel`, перший елемент
@@ -256,13 +258,13 @@ _Build 20260825000009. Не чіпав `__rsSafety` і Gemini-розкриття
   виконана). Файл: `app.bundle.js`.
 - **Текст (7 мов):** «Не втратити серію» + пояснення; кнопки «Увімкнути
   нагадування» / «Не зараз».
-- **Відхилення від ТЗ (свідоме):** при «Не зараз» **тумблер лишається
-  увімкненим** (не скидається на OFF). Причина: компонент-тумблер `ri()` тримає
-  свій стан у замиканні, чистий revert без ризику десинхронізації неможливий.
-  Наслідок нешкідливий — тумблер означає «нагадування (push або лист)», тож стан
-  «увімкнено без push-дозволу» = працюють email-нагадування. Системний запит при
-  «Не зараз» усе одно не викликається. Якщо треба точний revert до OFF — це
-  окрема невелика правка компонента `ri()`.
+- **Оновлено (ТЗ ч.4):** при «Не зараз» **тумблер тепер скидається на OFF**.
+  Компонент `ri()` розширено підтримкою veto: якщо колбек повертає `false`
+  (або `Promise<false>`), перемикач вертається у попередній стан. Колбек
+  нагадувань чекає на `__rsEnablePush()` і при відмові від priming робить
+  revert + нічого не зберігає — дія юзера й стан UI більше не розходяться, і
+  email-нагадування не йдуть. (Зміна `ri()` зворотно сумісна: інші тумблери
+  повертають `undefined` → комітяться як раніше.)
 
 ### Завдання 4 — сторінка /support ✅ СТВОРЕНО
 - **Що:** новий маршрут `#/support` (`__rsSupportRender`, дзеркало `/privacy`) +
@@ -316,7 +318,7 @@ _Build 20260825000009. Не чіпав `__rsSafety` і Gemini-розкриття
 | §13 support URL | ✅ `/support` page created, 7 langs + settings link (ТЗ3-4) |
 | review notes | ✅ `docs/APP-REVIEW-NOTES.md` created (2 placeholders) (ТЗ3-6) |
 | B10 paywall text | n/a — no paywall exists |
-| B3 insert disclaimer/privacy texts | ⏳ blocked on Section A drafts |
+| B3 insert disclaimer/privacy texts | ✅ all texts inserted (AI consent, AI label, push priming, /support) — nothing blocked |
 | B2 reviewer premium account | ⏳ blocked: no entitlement field exists yet (paywall not built) |
 | B9 StoreKit stub | ◑ plan documented (RevenueCat/Capacitor); needs the Capacitor project |
 
