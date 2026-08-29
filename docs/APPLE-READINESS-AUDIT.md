@@ -54,23 +54,28 @@ subscription? Everything IAP-related waits on that answer.
 
 ---
 
-## B6 — Audio provenance → **resolved: unused ambient files removed** ✅
+## B6 — Audio provenance → **only 3 cue files are actually played locally** ✅
 
-`audio/` now contains **19** `.mp3` files, all actually referenced by the app
-(audio map `Jo` + the cue player in `app.bundle.js`):
+How audio really works in the shipped app:
 
-- **Solfeggio tones:** `tone-174/285/396/417/432/528/639/741/852/963`
-- **Binaural beats:** `bin-alpha/beta/delta/gamma/theta/schumann`
-- **Cues:** `cue-in/out/gong`
+- **Breath cues (played locally, via Web Audio):** `cue-in`, `cue-out`,
+  `cue-gong` — short in/out/gong beeps during practices. **The only local
+  audio the app plays.** Synthesized short tones → no licensing question.
+- **Frequency practices (binaural / Solfeggio):** play via **external search
+  links** (Spotify / Apple Music / YouTube Music) rendered on the frequency
+  screen, and logged with `source:"youtube"`. The local `tone-*` / `bin-*`
+  mp3s were mapped to a `.file` field that **nothing ever reads** — dead code.
+- **Ambient beds** `amb-*` — referenced nowhere at all.
 
-All are pure/synthesized tones (identical byte sizes, consistent with
-programmatic sine-tone generation) → normally not copyrightable / no license
-needed.
+**Actions:**
+- `amb-*` (5 files) — deleted (earlier commit).
+- Dead `.file` audio map removed from `app.bundle.js`.
+- `tone-*` (10) + `bin-*` (6) — unused local files, pending deletion (the build
+  sandbox blocked the file removal; owner to delete or grant permission).
 
-The 5 **ambient beds** (`amb-calm/drone/ocean/rain/wind`) that had uncertain
-licensing were **not referenced anywhere** in the code (bundle, `sw.js`,
-manifest, or legacy `js/`) — dead assets. They were **deleted**, which removes
-the only real copyright question for App Review. Nothing else to confirm here.
+Net: **no third-party-licensed audio ships in the app** once the tone/bin files
+are removed — the only bundled audio is the three synthesized cue beeps. The B6
+copyright question for App Review is effectively closed.
 
 ---
 
@@ -118,7 +123,7 @@ end to end. (Best-effort, wrapped in try/catch; never blocks the UI.)
 | B1 audit | ✅ this document |
 | B4 login methods | ✅ email/password only → **no Sign in with Apple needed** |
 | B5 IAP present? | ✅ none; monetization is an unmade product decision |
-| B6 audio origin | ✅ unused `amb-*` deleted; remaining 19 are generated tones |
+| B6 audio origin | ✅ only 3 synth cue beeps play locally; freqs via external links; `amb-*` deleted, `tone-*`/`bin-*` pending delete |
 | B7 data inventory | ✅ table above; no payment data |
 | B8 push opt-out toggle | ✅ implemented (unsubscribe + row delete) |
 | B10 paywall text | n/a — no paywall exists |
