@@ -54,22 +54,23 @@ subscription? Everything IAP-related waits on that answer.
 
 ---
 
-## B6 — Audio provenance → **needs the owner to confirm licensing** ⚠️
+## B6 — Audio provenance → **resolved: unused ambient files removed** ✅
 
-`audio/` contains 25 `.mp3` files, no license/credits file anywhere in the repo:
+`audio/` now contains **19** `.mp3` files, all actually referenced by the app
+(audio map `Jo` + the cue player in `app.bundle.js`):
 
-- **Pure tones (likely generated, low risk):** `tone-174/285/396/417/432/528/
-  639/741/852/963` (Solfeggio), `bin-alpha/beta/delta/gamma/theta/schumann`
-  (binaural), `cue-gong/in/out`. All the tone files share identical byte sizes,
-  consistent with programmatic sine-tone generation → normally not
-  copyrightable / no license needed.
-- **Ambient beds (unconfirmed, the real risk):** `amb-calm`, `amb-drone`,
-  `amb-ocean`, `amb-rain`, `amb-wind`. These are the ones App Review could
-  challenge on copyright if they came from a third party.
+- **Solfeggio tones:** `tone-174/285/396/417/432/528/639/741/852/963`
+- **Binaural beats:** `bin-alpha/beta/delta/gamma/theta/schumann`
+- **Cues:** `cue-in/out/gong`
 
-**Action (owner):** confirm the origin of the 5 `amb-*` files — self-made,
-purchased with a license, or from a royalty-free source. If royalty-free, note
-the source + license terms. Once confirmed, Code adds a short `audio/CREDITS.md`.
+All are pure/synthesized tones (identical byte sizes, consistent with
+programmatic sine-tone generation) → normally not copyrightable / no license
+needed.
+
+The 5 **ambient beds** (`amb-calm/drone/ocean/rain/wind`) that had uncertain
+licensing were **not referenced anywhere** in the code (bundle, `sw.js`,
+manifest, or legacy `js/`) — dead assets. They were **deleted**, which removes
+the only real copyright question for App Review. Nothing else to confirm here.
 
 ---
 
@@ -117,7 +118,7 @@ end to end. (Best-effort, wrapped in try/catch; never blocks the UI.)
 | B1 audit | ✅ this document |
 | B4 login methods | ✅ email/password only → **no Sign in with Apple needed** |
 | B5 IAP present? | ✅ none; monetization is an unmade product decision |
-| B6 audio origin | ⚠️ **owner must confirm the 5 `amb-*` licenses** |
+| B6 audio origin | ✅ unused `amb-*` deleted; remaining 19 are generated tones |
 | B7 data inventory | ✅ table above; no payment data |
 | B8 push opt-out toggle | ✅ implemented (unsubscribe + row delete) |
 | B10 paywall text | n/a — no paywall exists |
@@ -125,6 +126,7 @@ end to end. (Best-effort, wrapped in try/catch; never blocks the UI.)
 | B2 reviewer premium account | ⏳ blocked on the monetization decision |
 | B9 StoreKit stub | ⏳ needs the Capacitor project (C1.3) |
 
-**Two things genuinely waiting on the owner:** (1) confirm the ambient-audio
-licensing (B6); (2) decide whether v1 is free or paid (unblocks B2/B9/C1.5).
-Everything else in Section B is either done above or waiting on Section A texts.
+**One thing genuinely waiting on the owner:** decide whether v1 is free or paid
+(unblocks B2/B9/C1.5). The audio-licensing question (B6) is now moot — the only
+unlicensed files were unused and have been deleted. Everything else in Section B
+is either done above or waiting on Section A texts.
