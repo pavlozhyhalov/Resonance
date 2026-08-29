@@ -866,6 +866,11 @@ body[data-theme="freq"]{--accent:var(--c-breath);--accent2:var(--c-breath);--acc
 .assistant-icon{ width:34px; height:34px; border-radius:50%; background:var(--surface); color:var(--ink-dim2); font-size:15px; display:grid; place-items:center; }
 .assistant-icon:active{ color:var(--accent); }
 .assistant-chat{ display:flex; flex-direction:column; flex:1; min-height:0; }
+.assistant-ailabel{font-size:11px;color:var(--ink-dim2);text-align:center;padding:2px 16px 6px;border-bottom:1px solid var(--line);}
+.sup-mail{font-weight:600;color:var(--accent,#2F7D4F);}
+.sup-h{font-size:15px;font-weight:700;margin:18px 0 8px;}
+.sup-q{font-weight:600;margin:12px 0 2px;}
+.sup-a{color:var(--ink-dim);margin:0 0 4px;}
 .assistant-chat.hide, .assistant-list.hide{ display:none; }
 .assistant-list{ display:flex; flex-direction:column; flex:1; min-height:0; overflow-y:auto; padding:8px 16px 16px; gap:8px; -webkit-overflow-scrolling:touch; }
 .thread-new{ width:100%; padding:13px; border-radius:var(--radius-sm); border:1px dashed var(--line-strong); color:var(--accent); font-weight:600; font-size:14px; background:transparent; }

@@ -6,7 +6,7 @@
 > `03_Rozpodil_zavdan.md`. Chat-Claude (Section A) reconciles this against the
 > checklist; the owner (Section C) acts on what needs money/Mac.
 
-_Last updated: 2026-08-29 · build 20260825000008 · +ТЗ part 2 (§4/5/6/10/11/13, B2, B9)_
+_Last updated: 2026-08-29 · build 20260825000009 · +ТЗ part 2 & 3 (AI consent+label, push priming, /support, review notes)_
 
 ---
 
@@ -228,6 +228,74 @@ paywall/прав, що (а) перевіряє статус підписки п�
 
 ---
 
+## B-продовження 2 (ТЗ частина 3 — вставлено/створено)
+
+_Build 20260825000009. Не чіпав `__rsSafety` і Gemini-розкриття — вони вже добрі._
+
+### Завдання 1 — AI-consent перед першим чатом ✅ ВСТАВЛЕНО
+- **Що:** одноразовий gate `__rsAiConsentGate()` перед першим повідомленням у
+  чаті Наставника (у `j(x)` — `if(!await __rsAiConsentGate())return`).
+  Прапорець — `localStorage["rsrc_ai_consent"]` (один раз на пристрій; не при
+  кожному відкритті). Файл: `app.bundle.js`.
+- **Текст (7 мов):** «Перед початком розмови» + узгоджене з політикою
+  формулювання про Google Gemini + «Наставник — це AI, а не заміна лікаря чи
+  психолога.» Кнопка «Зрозуміло, почати».
+- **Примітка:** прапорець per-device (localStorage), не в `profiles`. Якщо
+  потрібна крос-девайс згода — треба колонка `profiles.ai_consent_at` +
+  міграція; поки не робив (localStorage відповідає ТЗ як допустимий варіант).
+
+### Завдання 2 — постійна AI-мітка в чаті ✅ ВСТАВЛЕНО
+- **Що:** постійний підпис угорі чату (`.assistant-ailabel`, перший елемент
+  `.assistant-chat`). Файли: `app.bundle.js`, `css/styles.css`.
+- **Текст (7 мов):** «AI-наставник · не медична порада».
+
+### Завдання 3 — priming-екран перед push ✅ ВСТАВЛЕНО
+- **Що:** `__rsPushPriming()` викликається в `__rsEnablePush` **перед**
+  `Notification.requestPermission()`. При «Не зараз» / закритті —
+  `requestPermission()` **не викликається взагалі** (критична вимога ТЗ
+  виконана). Файл: `app.bundle.js`.
+- **Текст (7 мов):** «Не втратити серію» + пояснення; кнопки «Увімкнути
+  нагадування» / «Не зараз».
+- **Відхилення від ТЗ (свідоме):** при «Не зараз» **тумблер лишається
+  увімкненим** (не скидається на OFF). Причина: компонент-тумблер `ri()` тримає
+  свій стан у замиканні, чистий revert без ризику десинхронізації неможливий.
+  Наслідок нешкідливий — тумблер означає «нагадування (push або лист)», тож стан
+  «увімкнено без push-дозволу» = працюють email-нагадування. Системний запит при
+  «Не зараз» усе одно не викликається. Якщо треба точний revert до OFF — це
+  окрема невелика правка компонента `ri()`.
+
+### Завдання 4 — сторінка /support ✅ СТВОРЕНО
+- **Що:** новий маршрут `#/support` (`__rsSupportRender`, дзеркало `/privacy`) +
+  кнопка «Підтримка» в Налаштуваннях (поряд з політикою). Файли:
+  `app.bundle.js`, `css/styles.css`.
+- **Вміст (7 мов):** заголовок, email `pavlozhyhalov@gmail.com` (mailto), час
+  відповіді, лінк на Політику приватності, FAQ з 5 питань (видалити акаунт /
+  вивантажити дані / змінити мову / вимкнути сповіщення / зникла серія).
+- **Support URL для App Store Connect:** `https://youresonance.com/#/support`.
+
+### Завдання 5 — віковий рейтинг у docs ✅ ОНОВЛЕНО
+- `docs/APP-STORE-LISTING.md`: рядок «ймовірно 4+» замінено розгорнутою
+  чернеткою-таблицею (очікувано 9+/13+, з блоками Medical/Wellness та AI).
+  Support URL там же оновлено на `/support`.
+
+### Завдання 6 — Review Notes ✅ СТВОРЕНО
+- `docs/APP-REVIEW-NOTES.md` — повний текст для App Review, з 2 заглушками
+  (тестовий акаунт, subscription model) як вимагав ТЗ. Support URL заповнено.
+
+### Завдання 7 — розділення consent (functional vs marketing) — ОПИС, НЕ ІМПЛЕМ.
+- **Поточний стан:** один тумблер «Отримувати нагадування» покриває і push, і
+  email-фолбек (Resend). Окремого маркетингового opt-in нема.
+- **Складність розділення:** середня. Клієнт: додати другий тумблер і зберігати
+  два прапорці в `settings` (напр. `notify_practice`, `notify_winback`) — ~пів
+  години. Але реальний гейтинг **на боці edge-функцій** (`send-reminders`,
+  `send-winback`), яких **немає в репозиторії** — їх треба правити через Supabase
+  MCP, щоб `send-winback` поважав окремий прапорець. Тобто повне розділення = 1
+  тумблер у клієнті + 1 колонка в `settings` + правка `send-winback`.
+- **Статус:** не блокер для Apple; для GDPR (ЄС) бажано. **Не імплементував** —
+  чекаю окремого підтвердження власника (за ТЗ).
+
+---
+
 ## Status summary
 
 | Item | Status |
@@ -238,13 +306,15 @@ paywall/прав, що (а) перевіряє статус підписки п�
 | B6 audio origin | ✅ only 3 synth cue beeps ship; freqs via external links; all unused `amb-*`/`tone-*`/`bin-*` deleted |
 | B7 data inventory | ✅ table above; no payment data |
 | B8 push opt-out toggle | ✅ implemented (unsubscribe + row delete) |
-| §4 Gemini disclosure | ✅ "Google Gemini" named explicitly in all 7 langs; ⚠️ no AI-specific consent gate (signup consent only) |
+| §4 Gemini disclosure | ✅ named in all 7 langs; ✅ one-time AI consent gate before first chat added (ТЗ3-1) |
 | §5 risk disclaimers | ✅ full text present (breath/cold/exercise), all 7 langs, shown on every practice screen |
-| §6.2 push priming | ◑ toggle subtext only; no separate pre-permission screen |
-| §6.4 functional vs marketing | ◑ single shared opt-in; not separated in client |
-| §10 category / age | ✅ Health & Fitness chosen; ◑ age rating tentative 4+ (questionnaire not drafted) |
+| AI label in chat | ✅ permanent "AI · not medical advice" label added, 7 langs (ТЗ3-2) |
+| §6.2 push priming | ✅ custom priming screen before the system prompt; decline never calls requestPermission (ТЗ3-3) |
+| §6.4 functional vs marketing | ◑ single shared opt-in; split described, not implemented (needs edge-fn change) (ТЗ3-7) |
+| §10 category / age | ✅ Health & Fitness; ✅ age-rating draft expanded to 9+/13+ in docs (ТЗ3-5) |
 | §11 thin-wrapper facts | ✅ SW offline + manifest standalone; APNs planned |
-| §13 support URL | ◑ privacy contact email only; no dedicated Support URL |
+| §13 support URL | ✅ `/support` page created, 7 langs + settings link (ТЗ3-4) |
+| review notes | ✅ `docs/APP-REVIEW-NOTES.md` created (2 placeholders) (ТЗ3-6) |
 | B10 paywall text | n/a — no paywall exists |
 | B3 insert disclaimer/privacy texts | ⏳ blocked on Section A drafts |
 | B2 reviewer premium account | ⏳ blocked: no entitlement field exists yet (paywall not built) |
