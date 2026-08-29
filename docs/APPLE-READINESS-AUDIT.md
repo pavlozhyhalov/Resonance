@@ -6,7 +6,7 @@
 > `03_Rozpodil_zavdan.md`. Chat-Claude (Section A) reconciles this against the
 > checklist; the owner (Section C) acts on what needs money/Mac.
 
-_Last updated: 2026-08-29 · build 20260825000010 · +ТЗ part 2–4 (AI consent server-side, push priming reverts toggle, /support, review notes)_
+_Last updated: 2026-08-29 · build 20260825000011 · +paywall & server-enforced entitlement (founders, 14-day trial); assistant edge v13_
 
 ---
 
@@ -298,6 +298,57 @@ _Build 20260825000009. Не чіпав `__rsSafety` і Gemini-розкриття
 
 ---
 
+## B-продовження 3 (paywall + права доступу)
+
+_Build 20260825000011 · edge `assistant` v13. Модель: 6.99 €/міс, 44.99 €/рік,
+14 днів повного доступу; founders (усі до релізу) — довічно безкоштовно._
+
+**Що збудовано:**
+- **Схема (міграція в прод):** `profiles.access_type`
+  (`founder`/`trial`/`subscribed`/`expired`, default `founder`),
+  `profiles.trial_started_at`, `profiles.access_until` (null для founder).
+  Рядок `app_config.founder_cutoff` (placeholder `2099-01-01`) — дата відсічення
+  founders, змінюється без деплою. Усі наявні акаунти → `founder` (backfill).
+- **Права (сервер — джерело істини):** `public.is_entitled(uid)` (SQL, time-based).
+  Тригер `profiles_guard_access`: на INSERT ставить `founder`/`trial` за cutoff;
+  на UPDATE від кінцевого юзера **заморожує** access-колонки (підробити з браузера
+  не можна). RLS: юзер лише **читає** свій статус.
+- **Серверне блокування:** (1) RLS `INSERT` на `sessions` вимагає
+  `is_entitled(auth.uid())` — запис практик/XP/серій; (2) edge `assistant` v13
+  перевіряє `isEntitled` для `kind=chat` перед Gemini (обійти з консолі не можна).
+- **Клієнт:** `__rsEntitled()` (кеш `window.__rsAccess`), paywall-екран
+  `__rsPaywall()` (7 мов: що дає, 6.99/44.99 €, −46%, автопродовження+скасування,
+  лінк на політику). М'яке блокування: чат показує повідомлення в самому чаті +
+  paywall; запис практики — практику **можна завершити**, paywall на збереженні;
+  історія/статистика/рівень — **ніколи** не блокуються.
+- **Оплата:** кнопка — **заглушка** («Оплата буде доступна незабаром»), точка
+  інтеграції позначена `TODO(payment)` у `app.bundle.js`. Права й оплата
+  **розділені** — Apple IAP/Stripe додаються пізніше без зміни логіки прав.
+
+**Відповіді на питання ТЗ:**
+1. **Схема вписується** в наявну — access-поля лягли в `profiles` (там уже RLS
+   `select=true`, `update=own`), cutoff — рядок у наявному `app_config`. Окрема
+   таблиця `subscriptions` не потрібна на цьому етапі; коли підключатимеш IAP,
+   можна додати її для історії транзакцій, але `is_entitled` це не зачепить.
+2. **Точок входу до платних функцій — дві** (плюс UI-дзеркала): (а) `K.add`
+   (єдиний чок-поінт запису **всіх** практик → XP/серії), (б) чат Наставника
+   `j()`. Обидві продубльовані на сервері (RLS на `sessions`, гейт в edge-функції).
+   Історія/статистика/рівень навмисно не гейтяться.
+3. **Серверна перевірка запису — так, через RLS** (`with check
+   is_entitled(auth.uid())` на `sessions`), тригер не потрібен. Просто й надійно.
+4. **Founder не втратить статус**, якщо потім змінити cutoff: статус
+   **персиститься** при реєстрації (тригер стемпить `access_type` один раз), а не
+   перераховується з `created_at`. Зміна `founder_cutoff` впливає лише на
+   **майбутні** реєстрації.
+
+**Тестовий акаунт рев'юера (E):** поля прав уже є; **не створював акаунт із
+кодy** (не кладу креденшли в репо і не вставляю рядки в `auth.users` вручну).
+Найпростіше: зареєструвати акаунт у застосунку **до релізу** — він автоматично
+`founder` (повний доступ); креденшли — у приватну нотатку. Заглушку в
+`APP-REVIEW-NOTES.md` лишив.
+
+---
+
 ## Status summary
 
 | Item | Status |
@@ -317,15 +368,18 @@ _Build 20260825000009. Не чіпав `__rsSafety` і Gemini-розкриття
 | §11 thin-wrapper facts | ✅ SW offline + manifest standalone; APNs planned |
 | §13 support URL | ✅ `/support` page created, 7 langs + settings link (ТЗ3-4) |
 | review notes | ✅ `docs/APP-REVIEW-NOTES.md` created (2 placeholders) (ТЗ3-6) |
-| B10 paywall text | n/a — no paywall exists |
+| B10 paywall text | ✅ paywall screen built (Guideline 3.1.2: what/price/period/cancel/privacy), 7 langs; payment button stubbed |
 | B3 insert disclaimer/privacy texts | ✅ all texts inserted (AI consent, AI label, push priming, /support) — nothing blocked |
-| B2 reviewer premium account | ⏳ blocked: no entitlement field exists yet (paywall not built) |
-| B9 StoreKit stub | ◑ plan documented (RevenueCat/Capacitor); needs the Capacitor project |
+| B2 reviewer premium account | ✅ unblocked: `profiles.access_type` exists; any pre-release signup = lifetime founder → register one, creds to a private note |
+| B9 StoreKit stub | ◑ entitlement architecture + paywall built; payment is one stubbed point (`TODO(payment)`), Apple IAP plugs in later without touching rights |
 
 **Monetization is now decided** (6.99 €/mo, 44.99 €/yr, 14-day hard paywall), but
 it is **not built** — no paywall/entitlement code or DB field exists yet. So B2
 (reviewer premium account) and B9 (StoreKit) stay blocked on **building the
 paywall**, not on a decision. The audio-licensing question (B6) is moot (unused
-files deleted). All Section-A texts (AI-chat consent, AI label, safety
-disclaimers, the Support page) are already inserted. **The only repo-side work
-that remains is the paywall build.**
+files deleted). All Section-A texts and the **paywall + server-enforced
+entitlement** are now built. **The only remaining piece is wiring the payment
+provider** (Apple IAP) into the single `TODO(payment)` point — and that belongs
+to the September iOS phase (needs the Capacitor project + a paid Apple account),
+not the web repo. So the web/backend side of App Review prep is effectively
+complete.

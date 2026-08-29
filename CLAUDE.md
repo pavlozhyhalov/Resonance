@@ -55,10 +55,13 @@ light + dark themes, rounded cards (`--radius:16px`).
   (this is the main backend task for the App Store; see the handoff doc).
 
 ### Live edge functions (deployed via Supabase MCP; not in the repo)
-- `assistant` **v10** — Gemini chat + daily tip + greeting. Per-user rate limit
+- `assistant` **v13** — Gemini chat + daily tip + greeting. Per-user rate limit
   (15/h, 40/day via `bump_assistant_usage` RPC + `assistant_usage` table,
   configurable in `app_config`), a DB-independent per-isolate global backstop,
-  and durable `assistant_events` logging of fail-open/backstop events.
+  and durable `assistant_events` logging of fail-open/backstop events. **v13 adds
+  a server-side entitlement gate** (`isEntitled`) on `kind:"chat"` — returns
+  `{paywall:true}` when access has lapsed, so the paywall can't be bypassed from
+  the console.
 - `delete-account` **v2** — GDPR account deletion (all FKs to `auth.users` are
   ON DELETE CASCADE) + PII-free `account_deletions` audit row.
 - `send-reminders`, `send-winback` — cron push + email nudges (web-push today).
@@ -113,6 +116,22 @@ assistant_usage, assistant_events, account_deletions, app_config`.
   history: contrast/spline previews). Ask the user to verify on device.
 - Edge functions are deployed straight to prod (no staging) — be careful.
 
+## Monetization / access (paywall — built 2026-08-29)
+
+Model: **6.99 €/mo, 44.99 €/yr, 14-day full-access trial**, then a hard paywall.
+**Founders:** everyone who signs up **before the App Store release gets lifetime
+free** (a deliberate "last carriage" owner decision). Access lives in
+`profiles.access_type` (`founder`/`trial`/`subscribed`/`expired`) +
+`trial_started_at` + `access_until`; the founder cutoff is `app_config
+.founder_cutoff` (changeable without a deploy — only affects future signups, never
+demotes existing founders). Server is the source of truth: `is_entitled(uid)` SQL,
+a `profiles_guard_access` trigger (users can't self-grant), an RLS gate on
+`sessions` INSERT, and the `assistant` edge gate. Client mirror: `__rsEntitled()`
++ `__rsPaywall()`. **Payment is a stub** (`TODO(payment)` in `app.bundle.js`) —
+Apple IAP/Stripe plug into that single point later; entitlement logic is decoupled
+and must not be rewritten when adding a provider. Locked when not entitled: AI
+chat, new practice logging, XP, streaks. Never locked: history, stats, level.
+
 ## Where we're headed
 
 Ship Resonance as an **iPhone app on the App Store**, by **wrapping** the existing
@@ -120,4 +139,4 @@ web app (Capacitor) + adding **APNs** — not a rewrite. The full ordered plan,
 the "who does what" split, the App Privacy data map, and rejection risks are in
 **`docs/HANDOFF-iOS.md`**. Read it before starting App Store work.
 
-Current build version: **20260825000010**.
+Current build version: **20260825000011**.

@@ -15,10 +15,10 @@ skill trees, titles). The app includes a personal AI mentor for motivation
 and habit guidance, and a daily mood check-in.
 
 DEMO / TEST ACCOUNT
-Login: [TO BE FILLED — after paywall + entitlement field exist]
-Password: [TO BE FILLED]
-This account has full access so all features, including the AI mentor chat,
-can be reviewed.
+Login: [TO BE FILLED — private note]
+Password: [TO BE FILLED — private note]
+This account has full access (founder tier) so all features, including the
+AI mentor chat, can be reviewed without a purchase.
 
 WHY THIS IS NOT A REPACKAGED WEBSITE (Guideline 4.2)
 Resonance is a Capacitor-wrapped PWA. The iOS build adds capabilities the
@@ -55,10 +55,16 @@ Umami (cookieless, no personal data, no cross-app tracking) — the App
 Privacy card declares Tracking = none and no ATT prompt is required.
 
 SUBSCRIPTION MODEL
-[TO BE FILLED after paywall is built — will describe: 14-day full-access
-trial tracked server-side, after which new progress is locked while all
-earned history stays visible; unlock via Apple In-App Purchase, monthly
-and annual auto-renewable tiers.]
+New users get 14 days of full access (a trial tracked server-side). After
+that, three things lock: the AI mentor chat, logging new practices, and the
+XP/streak progression tied to them. Everything already earned stays fully
+visible and usable — history, statistics, charts, current level and titles
+are never locked. Unlock is via an auto-renewable Apple In-App Purchase:
+monthly (€6.99) or annual (€44.99, ~46% cheaper). The subscription renews
+automatically and can be cancelled anytime in App Store settings; this is
+stated on the paywall screen (all 7 languages), which also links to the
+Privacy Policy. Entitlement is enforced server-side (Postgres RLS + a check
+inside the assistant Edge Function), not only in the client.
 
 LANGUAGES
 Fully localized in 7 languages: Ukrainian, Russian, English, Polish,
@@ -73,16 +79,23 @@ Support page: https://youresonance.com/#/support
 
 ## Placeholders to fill before submission
 
-1. **DEMO / TEST ACCOUNT** — needs the paywall + an entitlement field (e.g.
-   `profiles.premium_until` or a `subscriptions` table) so a reviewer account
-   can be flagged premium. Create the account in Supabase Auth, set the flag,
-   put the credentials here (this file is in the repo — if that repo is public,
-   move the credentials to a private note and reference it instead).
-2. **SUBSCRIPTION MODEL** — fill once the paywall is built (final copy already
-   drafted inside the brackets; confirm the trial/lock behavior matches the
-   shipped implementation).
+1. **DEMO / TEST ACCOUNT** — the entitlement field now exists
+   (`profiles.access_type`). Simplest path: **register a fresh account in the
+   app before the App Store release** — every pre-release signup is
+   automatically a lifetime *founder* (full access), which is exactly what a
+   reviewer needs. Put those credentials in a **private note**, not in this
+   repo file. (Alternatively, create the account and set `access_type='founder'`
+   with the service role in Supabase.)
+
+2. **SUBSCRIPTION MODEL** — the copy above is final and matches the shipped
+   entitlement logic. **One caveat to wire before actual submission:** the
+   paywall's purchase button is currently a stub ("payment available soon") —
+   Apple In-App Purchase must be connected (single integration point, marked
+   `TODO(payment)` in `app.bundle.js`) so the described purchase actually works
+   at review time. Until then, do **not** submit to Apple.
 
 The claims about offline, third-party AI disclosure, the one-time AI consent,
-the permanent AI label, the safety disclaimers, data export/delete, and the
-`/support` page are all **already true in the shipped web app** (build
-20260825000009+).
+the permanent AI label, the safety disclaimers, data export/delete, the
+`/support` page, and the paywall/entitlement (server-enforced) are all
+**already true in the shipped web app** (build 20260825000011+); only the
+payment-provider hookup remains.
