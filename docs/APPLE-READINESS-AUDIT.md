@@ -6,7 +6,7 @@
 > `03_Rozpodil_zavdan.md`. Chat-Claude (Section A) reconciles this against the
 > checklist; the owner (Section C) acts on what needs money/Mac.
 
-_Last updated: 2026-08-29 · build 20260825000006+_
+_Last updated: 2026-08-29 · build 20260825000008 · +ТЗ part 2 (§4/5/6/10/11/13, B2, B9)_
 
 ---
 
@@ -115,6 +115,119 @@ end to end. (Best-effort, wrapped in try/catch; never blocks the UI.)
 
 ---
 
+## B-продовження (ТЗ частина 2)
+
+_Факт + Статус, без інтерпретацій «чи достатньо для Apple». Build 20260825000008._
+
+**Монетизація — уточнено (ТЗ ч.2):** 6.99 €/міс, 44.99 €/рік, хард-paywall після
+14 днів. Це знімає «рішення власника» з B5 і розблоковує B2/B9. У **коді/схемі
+такої моделі ще нема** (див. B5) — рішення продуктове, не реалізоване.
+
+### 4. Gemini-розкриття
+**Факт:** Політика приватності живе в коді (`__rsPrivacyContent` у
+`app.bundle.js`), 7 мов через `__rsT`. Отримувача даних чату названо **явно —
+«Google Gemini»**, не узагальнено «AI». uk-цитата: *«…запитання й короткий
+контекст твого профілю надсилаються до Google Gemini, щоб згенерувати відповідь.
+Не пиши туди чутливих персональних чи медичних даних.»* Плюс список передачі
+даних: *«Supabase (база даних і вхід), Google (наставник), Resend
+(листи-нагадування) та Umami (анонімна аналітика)»*. «Google Gemini» присутнє
+дослівно в усіх 7 мовах (uk/ru/en/pl/es/fr/de — підтверджено grep).
+**Статус:** ГОТОВО (4.1–4.3).
+
+**Факт (4.4):** Окремого consent-екрана саме перед першим AI-чатом **немає**. Є
+consent рівня реєстрації — чекбокс *«Реєструючись, я приймаю Політику
+приватності»*, що блокує створення акаунта без згоди. Окремого AI-специфічного
+gate нема.
+**Статус:** ЧАСТКОВО (privacy-consent при реєстрації є; AI-specific — нема).
+
+### 5. Дисклеймери фізичного ризику — повний текст
+**Факт (5.1–5.2):** Функція `__rsSafety(kind)` в `app.bundle.js`, показує ⚠-картку
+на екранах практик. Повний uk-текст (es/fr/de синхронізовано цією сесією; ru/pl/en
+вже були):
+- **Дихання:** *«Дихальні практики й затримки роби сидячи або лежачи — не за
+  кермом і не у воді. При вагітності, хворобах серця чи тиску спершу порадься з
+  лікарем.»*
+- **Холод:** *«Холод протипоказаний при хворобах серця чи тиску та під час
+  вагітності без дозволу лікаря. Ніколи не занурюйся сам. Виходь, якщо німіють
+  кінцівки або різко погіршало.»*
+- **Вправи:** *«Утримання роби плавно, диши рівно й не терпи гострий біль. При
+  травмах спини чи суглобів або вагітності порадься з лікарем. Зупинись, якщо
+  запаморочилось.»*
+
+**Факт (5.3):** Присутні явно: «не за кермом» (дихання), «не у воді» (дихання),
+«Ніколи не занурюйся сам» (холод), «порадься з лікарем» (усі три). Формулювання
+«не у ванні на самоті» окремо нема — але холод покриває «не занурюйся сам».
+**Факт (5.4):** Показується **inline при кожному відкритті екрана практики**
+(частина рендера), не одноразово й не як окремий дисміс.
+**Статус:** ГОТОВО.
+
+### 6.2–6.4. Push — UI та consent
+**Факт (6.2):** Окремого priming-екрана перед системним iOS-запитом **немає**.
+Контекст дає підпис під тумблером у Налаштуваннях: *«Якщо о цей час сьогодні ще
+не буде практики — нагадаємо push-сповіщенням (або листом), щоб не втратити
+серію.»* Увімкнення тумблера одразу викликає `Notification.requestPermission()`
+(у `__rsEnablePush`).
+**Статус:** ЧАСТКОВО (пояснення є підписом; окремого priming-екрана нема).
+
+**Факт (6.4):** Один спільний opt-in *«Отримувати нагадування»* покриває і push,
+і email-фолбек (Resend) — розділення на «функціональні» vs «маркетингові» згоди в
+UI **нема**. Re-engagement (`send-winback`) — серверна edge-функція, **не в
+репозиторії**; її гейтинг з коду підтвердити не можна.
+**Статус:** НЕ РОЗДІЛЕНО (єдиний opt-in у клієнті).
+
+### 10. Категорія App Store і віковий рейтинг
+**Факт (10.1):** Категорію обрано — **Health & Fitness**: `docs/HANDOFF-iOS.md`
+(рядки 171, 203, 215) та `docs/APP-STORE-LISTING.md:5`.
+**Факт (10.2):** Віковий рейтинг — лише чернетковий рядок
+`docs/APP-STORE-LISTING.md:246`: *«Age Rating: ймовірно 4+ …; анкету заповнити
+чесно.»* Повних відповідей на анкету нема.
+**Статус:** ЧАСТКОВО (категорія — ГОТОВО; рейтинг — орієнтовно 4+, анкета не
+розписана).
+
+### 11. Аргумент «не thin wrapper» — факти
+**Факт (11.1–11.2):** PWA-офлайн реалізовано в `sw.js` (service worker):
+- HTML/навігації — **network-first** (свіжий `index.html`, офлайн-фолбек до кешу
+  `./`);
+- версійні асети (`app.bundle.js?v=`, `css/styles.css?v=`, іконки), медіа
+  (`png/svg/woff2/mp3`) та Google Fonts — **cache-first**;
+- i18n JSON і Supabase — завжди мережа.
+`manifest.webmanifest`: `display: standalone`, `name`, `short_name`,
+`start_url`. → після першого завантаження оболонка застосунку працює офлайн.
+**Факт (11.3):** Нативне, заплановане для Capacitor понад звичайний сайт:
+**APNs-пуш** (головна нативна задача — web-push не працює в iOS-обгортці, за
+`CLAUDE.md`/`HANDOFF-iOS.md`). Інші нативні можливості в доках не зафіксовані.
+**Статус:** ГОТОВО (факти зібрані; сам аргумент пише Chat-Claude).
+
+### 13. Контакт і Support URL
+**Факт (13.1):** Контактний email **є** — `pavlozhyhalov@gmail.com`, у політиці
+приватності: *«Питання щодо приватності: pavlozhyhalov@gmail.com»*. Подано як
+privacy-контакт, усередині сторінки `/privacy`; окремої форми зворотного зв'язку
+в UI нема.
+**Факт (13.2):** Окремої сторінки підтримки (Support URL) **не знайдено**;
+`docs/HANDOFF-iOS.md:171` перелічує support URL як ще потрібний.
+**Статус:** контакт-email — ГОТОВО (лише в privacy-контексті); Support URL — НЕ
+ЗНАЙДЕНО.
+
+### B2. Тестовий акаунт для рев'юера
+**Факт:** Поля/концепту преміуму в схемі чи коді **нема** (див. B5). Прапорець
+типу `premium_override` був би **неробочим** — застосунку нема що по ньому
+відкривати (paywall відсутній). Отже осмислений преміум-акаунт можна створити
+лише **після** появи paywall + поля прав (напр. `profiles.premium_until` або
+таблиця `subscriptions`). Креденшли **не можна** класти в публічний репозиторій.
+**Статус:** НЕ ГОТОВО (блоковано відсутністю поля прав; далі — створити юзера в
+Supabase Auth + виставити прапорець, креденшли передати приватним каналом).
+
+### B9. StoreKit — заготовка
+**Факт:** Capacitor-проєкту нема (B5) → точки інтеграції ще не існує. План:
+плагін-кандидат **RevenueCat `@revenuecat/purchases-capacitor`** (або
+`@capacitor-community/in-app-purchases`); точка інтеграції — єдиний модуль
+paywall/прав, що (а) перевіряє статус підписки при старті, (б) блокує преміум
+після 14-денного вікна, (в) дає дії purchase/restore. У поточному коді природний
+гейт — шар рендеру екранів (`V()`/render), через хелпер `__rsEntitled()`.
+**Статус:** ЧАСТКОВО (план зафіксовано; нічого не підключено, треба Capacitor).
+
+---
+
 ## Status summary
 
 | Item | Status |
@@ -125,12 +238,21 @@ end to end. (Best-effort, wrapped in try/catch; never blocks the UI.)
 | B6 audio origin | ✅ only 3 synth cue beeps ship; freqs via external links; all unused `amb-*`/`tone-*`/`bin-*` deleted |
 | B7 data inventory | ✅ table above; no payment data |
 | B8 push opt-out toggle | ✅ implemented (unsubscribe + row delete) |
+| §4 Gemini disclosure | ✅ "Google Gemini" named explicitly in all 7 langs; ⚠️ no AI-specific consent gate (signup consent only) |
+| §5 risk disclaimers | ✅ full text present (breath/cold/exercise), all 7 langs, shown on every practice screen |
+| §6.2 push priming | ◑ toggle subtext only; no separate pre-permission screen |
+| §6.4 functional vs marketing | ◑ single shared opt-in; not separated in client |
+| §10 category / age | ✅ Health & Fitness chosen; ◑ age rating tentative 4+ (questionnaire not drafted) |
+| §11 thin-wrapper facts | ✅ SW offline + manifest standalone; APNs planned |
+| §13 support URL | ◑ privacy contact email only; no dedicated Support URL |
 | B10 paywall text | n/a — no paywall exists |
 | B3 insert disclaimer/privacy texts | ⏳ blocked on Section A drafts |
-| B2 reviewer premium account | ⏳ blocked on the monetization decision |
-| B9 StoreKit stub | ⏳ needs the Capacitor project (C1.3) |
+| B2 reviewer premium account | ⏳ blocked: no entitlement field exists yet (paywall not built) |
+| B9 StoreKit stub | ◑ plan documented (RevenueCat/Capacitor); needs the Capacitor project |
 
-**One thing genuinely waiting on the owner:** decide whether v1 is free or paid
-(unblocks B2/B9/C1.5). The audio-licensing question (B6) is now moot — the only
-unlicensed files were unused and have been deleted. Everything else in Section B
-is either done above or waiting on Section A texts.
+**Monetization is now decided** (6.99 €/mo, 44.99 €/yr, 14-day hard paywall), but
+it is **not built** — no paywall/entitlement code or DB field exists yet. So B2
+(reviewer premium account) and B9 (StoreKit) stay blocked on **building the
+paywall**, not on a decision. The audio-licensing question (B6) is moot (unused
+files deleted). What remains repo-side: Section-A text drafts to insert (B3, the
+AI-chat consent/disclaimer, a Support URL page), and the paywall build.
