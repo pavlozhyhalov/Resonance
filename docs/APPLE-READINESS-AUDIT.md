@@ -355,7 +355,7 @@ _Build 20260825000011 · edge `assistant` v13. Модель: 6.99 €/міс, 44
 |------|--------|
 | B1 audit | ✅ this document |
 | B4 login methods | ✅ email/password only → **no Sign in with Apple needed** |
-| B5 IAP present? | ✅ none; monetization is an unmade product decision |
+| B5 monetization | ✅ model decided **and built** (6.99/44.99 €, 14-day trial, founders free); only the payment provider (Apple IAP) is not yet wired |
 | B6 audio origin | ✅ only 3 synth cue beeps ship; freqs via external links; all unused `amb-*`/`tone-*`/`bin-*` deleted |
 | B7 data inventory | ✅ table above; no payment data |
 | B8 push opt-out toggle | ✅ implemented (unsubscribe + row delete) |
@@ -373,13 +373,18 @@ _Build 20260825000011 · edge `assistant` v13. Модель: 6.99 €/міс, 44
 | B2 reviewer premium account | ✅ unblocked: `profiles.access_type` exists; any pre-release signup = lifetime founder → register one, creds to a private note |
 | B9 StoreKit stub | ◑ entitlement architecture + paywall built; payment is one stubbed point (`TODO(payment)`), Apple IAP plugs in later without touching rights |
 
-**Monetization is now decided** (6.99 €/mo, 44.99 €/yr, 14-day hard paywall), but
-it is **not built** — no paywall/entitlement code or DB field exists yet. So B2
-(reviewer premium account) and B9 (StoreKit) stay blocked on **building the
-paywall**, not on a decision. The audio-licensing question (B6) is moot (unused
-files deleted). All Section-A texts and the **paywall + server-enforced
-entitlement** are now built. **The only remaining piece is wiring the payment
-provider** (Apple IAP) into the single `TODO(payment)` point — and that belongs
-to the September iOS phase (needs the Capacitor project + a paid Apple account),
-not the web repo. So the web/backend side of App Review prep is effectively
-complete.
+**The monetization model is decided AND built** (6.99 €/mo, 44.99 €/yr, 14-day
+trial; founders free). The paywall screen and server-enforced entitlement
+(`profiles.access_type`, `is_entitled()`, RLS on `sessions`, the `assistant`
+edge gate) are live. B2 is unblocked — the entitlement field exists and any
+pre-release signup is a founder. The audio-licensing question (B6) is moot. All
+Section-A texts are inserted. **The only code piece still open is wiring the
+payment provider** (Apple IAP) into the single `TODO(payment)` point — that
+belongs to the September iOS phase (needs the Capacitor project + a paid Apple
+account), not the web repo. So the web/backend side of App Review prep is
+effectively complete.
+
+> ⛔ **Do NOT submit to Apple while the pay button is a stub (`TODO(payment)`).**
+> The Review Notes describe the subscription as a working feature; shipping a
+> non-functional purchase is a guaranteed rejection under **Guideline 2.1**.
+> Wire Apple IAP first, then submit.

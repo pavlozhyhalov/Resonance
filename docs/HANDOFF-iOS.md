@@ -188,6 +188,20 @@ Give the reviewer access via **reader mode** (safe — no Gemini) or a test acco
 double-check the rejection risks below; submit; respond to reviewers.
 **Done when:** status is Approved / Ready for Sale.
 
+**⛔ Two hard pre-submission gates — do NOT submit until both are done:**
+
+1. **Wire the payment provider (Apple IAP).** The paywall's purchase button is
+   currently a stub (`TODO(payment)` in `app.bundle.js`) and the Review Notes
+   describe the subscription as a working feature. Shipping a non-functional
+   purchase is a guaranteed rejection under **Guideline 2.1**. Connect Apple IAP
+   into that single point first, then submit.
+2. **Set `app_config.founder_cutoff` to the real release date.** It is currently
+   the placeholder `2099-01-01`, which makes **every** new signup a lifetime
+   free founder. Forget this and **nobody who arrives from the App Store ever
+   pays** — a silent revenue failure (nothing breaks, income just never starts).
+   Change it in Supabase (one row, no deploy) right before going live. It only
+   affects future signups; existing founders keep their status.
+
 ### Step 7 — Post-release  **[BOTH]**
 Small web fixes can ship fast; **new big features must go through review** — not
 around it. Watch APNs key expiry, the 99 USD/yr renewal, certificates, and the
