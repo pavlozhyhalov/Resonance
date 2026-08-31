@@ -1468,6 +1468,11 @@ select.input{appearance:none;-webkit-appearance:none;}
 
 /* ---- language picker on the start screen ---- */
 .auth-card{position:relative;}
+/* bottom cluster: rely on the card's uniform 14px gap, drop stacked margins */
+.auth-card .btn.big{margin-top:0;}
+.auth-card .btn.ghost.block{margin-top:0;}
+.auth-card .auth-sep{margin:2px 0;}
+.auth-card .auth-msg{min-height:6px;}
 .auth-lang{position:absolute;top:12px;right:12px;z-index:6;}
 .auth-lang .lang-menu{right:0;left:auto;}
 
