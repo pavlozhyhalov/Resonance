@@ -1313,6 +1313,10 @@ select.input{appearance:none;-webkit-appearance:none;}
 .hh-btn{min-width:46px;padding:7px 10px;border-radius:10px;background:var(--surface-2);border:1px solid var(--line);color:var(--ink-dim);font-weight:600;font-size:13px;line-height:1.2;}
 .hh-btn.on-no{background:var(--accent);border-color:var(--accent);color:var(--accentInk);}
 .hh-btn.on-yes{background:var(--rs-neutral);border-color:var(--rs-neutral);color:#fff;}
+.hh-btn.on-done{background:rgba(78,157,92,0.18);border-color:#4E9D5C;color:var(--ink);}
+.hh-sub{font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-dim);margin:12px 0 0;}
+.hh-sub:first-child{margin-top:2px;}
+.hh-sub + .habit-home-row{border-top:none;}
 
 /* ---- habit sectors on calendar cells ---- */
 .cal-habits{position:absolute;inset:0;z-index:0;pointer-events:none;}
