@@ -171,7 +171,7 @@ input,select{font-family:inherit;}
 
 /* ---- fields ---- */
 .field{display:flex;flex-direction:column;gap:7px;}
-.field-label{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-dim2);}
+.field-label{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-dim2);margin:13px 0 4px;}
 .input,.select{
   background:var(--surface-2);border:1px solid var(--line-strong);color:var(--ink);
   border-radius:10px;padding:12px 13px;font-size:15px;width:100%;
