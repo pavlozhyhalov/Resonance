@@ -1556,6 +1556,7 @@ select.input{appearance:none;-webkit-appearance:none;}
 .wr-chap.done .wr-check{background:var(--accent);border-color:var(--accent);color:#1b1205;}
 .wr-chap-t{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;}
 .wr-chap-del{margin-left:auto;opacity:.5;flex:none;}
+.wr-chap-edit{opacity:.5;flex:none;}
 
 /* Writing book: compact card + chapter reorder (details modal) */
 .book-card.writing{cursor:pointer;}
