@@ -1552,3 +1552,13 @@ select.input{appearance:none;-webkit-appearance:none;}
 .wr-chap.done .wr-check{background:var(--accent);border-color:var(--accent);color:#1b1205;}
 .wr-chap-t{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;}
 .wr-chap-del{margin-left:auto;opacity:.5;flex:none;}
+
+/* Writing book: compact card + chapter reorder (details modal) */
+.book-card.writing{cursor:pointer;}
+.book-card.writing .book-row{display:flex;align-items:center;gap:12px;}
+.book-card.writing .book-row .btn.small{flex:none;}
+.wr-chev{margin-left:2px;color:var(--ink-dim2);font-size:22px;line-height:1;flex:none;}
+.wr-drag-h{color:var(--ink-dim2);font-size:16px;line-height:1;flex:none;cursor:grab;letter-spacing:-3px;padding-right:2px;}
+.wr-chap{touch-action:pan-y;user-select:none;-webkit-user-select:none;}
+.wr-chap.dragging{opacity:.98;transform:scale(1.03);position:relative;z-index:5;box-shadow:0 14px 32px rgba(0,0,0,.5),inset 0 0 0 1.5px var(--accent);}
+.reordering .wr-chap:not(.dragging){animation:navJiggle .28s ease-in-out infinite;}
