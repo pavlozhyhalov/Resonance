@@ -1562,3 +1562,8 @@ select.input{appearance:none;-webkit-appearance:none;}
 .wr-chap{touch-action:pan-y;user-select:none;-webkit-user-select:none;}
 .wr-chap.dragging{opacity:.98;transform:scale(1.03);position:relative;z-index:5;box-shadow:0 14px 32px rgba(0,0,0,.5),inset 0 0 0 1.5px var(--accent);}
 .reordering .wr-chap:not(.dragging){animation:navJiggle .28s ease-in-out infinite;}
+
+/* Writing details modal header */
+.wr-modal-head{display:flex;align-items:center;gap:10px;margin:0 0 12px;}
+.wr-modal-head .modal-title{flex:1;min-width:0;}
+.wr-modal-x{flex:none;}
