@@ -1574,3 +1574,12 @@ select.input{appearance:none;-webkit-appearance:none;}
 .hb-day.on{background:#4E9D5C;}
 .hb-done{width:100%;margin-top:6px;padding:12px;border-radius:12px;border:1px solid var(--line-strong);background:transparent;color:var(--ink);font-weight:600;font-size:14px;}
 .hb-done.on{background:rgba(78,157,92,0.18);border-color:#4E9D5C;}
+
+/* Level-up celebration */
+.levelup{text-align:center;padding:4px 2px;}
+.levelup-badge{width:96px;height:96px;margin:2px auto 14px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;background:linear-gradient(150deg,var(--accent),var(--accent2));color:#1b1205;}
+.levelup-cap{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;opacity:.8;}
+.levelup-lvl{font-size:40px;font-weight:800;line-height:1;}
+.levelup-title{margin:0 0 4px;font-size:20px;}
+.levelup-sub{margin:0;font-size:15px;font-weight:600;color:var(--ink);}
+.levelup-rank{margin:2px 0 0;font-size:13px;color:var(--ink-dim);}
