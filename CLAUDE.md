@@ -57,8 +57,9 @@ progression. Main pillars:
 **Languages**: uk (default) + ru / en / pl / es / fr / de — everything is localized.
 **Design**: warm, **flat** (no glows/shadows-as-decoration), oklch palette,
 light + dark themes, rounded cards (`--radius:16px`). Nav/menu icons live in the
-`M` glyph map (`ne('<path…>')`); each menu entry has a **unique, on-meaning** icon
-(no repeats).
+`M` glyph map — **Phosphor (regular)** paths inlined via `nf()` (256 viewBox, filled
+`currentColor`; the older stroke builder `ne()` stays for non-icon SVG). Each menu
+entry has a **unique, on-meaning** icon (no repeats).
 
 ## Tech & architecture
 
@@ -163,4 +164,4 @@ web app (Capacitor) + adding **APNs** — not a rewrite. The full ordered plan,
 the "who does what" split, the App Privacy data map, and rejection risks are in
 **`docs/HANDOFF-iOS.md`**. Read it before starting App Store work.
 
-Current build version: **20260905000016**.
+Current build version: **20260905000017**.
