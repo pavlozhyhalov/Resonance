@@ -38,7 +38,10 @@ progression. Main pillars:
   (uk/ru → Oksana Taran, en → Yoga With Adriene, es → Xuan Lan, fr → YogaCoaching,
   de → Mady Morrison; pl → generic) and shows 3 level tiles
   (Початківець/Середній/Просунутий) that open the class on YouTube. All in the
-  `__rsYoga` map (`__rsYogaPage` renderer) — links are trivial to swap.
+  `__rsYoga` map (`__rsYogaPage` renderer) — links are trivial to swap. The page
+  also has **manual time logging** (＋ Записати час → `exrun?type=yoga` →
+  `__rsExManual`); yoga is a `__RS_EXX`/`__rsExGrp` group that records a
+  `type:"exercise"` session with `details.group:"yoga"` (counts toward XP/streak).
 - **Books**: reading tracker (reading / read / dropped) with per-book chapters —
   reorder (drag), mark done (tap), delete (✕), and **rename** (✎).
 - **Goals** with auto-progress, tied to trackable conditions.
@@ -160,4 +163,4 @@ web app (Capacitor) + adding **APNs** — not a rewrite. The full ordered plan,
 the "who does what" split, the App Privacy data map, and rejection risks are in
 **`docs/HANDOFF-iOS.md`**. Read it before starting App Store work.
 
-Current build version: **20260905000015**.
+Current build version: **20260905000016**.
