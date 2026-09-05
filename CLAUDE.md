@@ -20,8 +20,27 @@ progression. Main pillars:
   cold (shower / ice bath), static holds (plank, arch, hang), antistress
   (grounding, PMR, autogenic, body-scan), frequency music (binaural, Solfeggio),
   reading.
-- **Habits**: breaking bad habits — the user marks *relapse* days ("зрив"); clean
-  days accrue streaks. (Green = clean, dark-neutral = relapse; never red.)
+- **Habits** — two kinds via `habits.kind`:
+  - **bad** (default): breaking a habit; the user marks *relapse* ("зрив") / *slip*
+    ("оступ") days, clean days accrue a streak (`__hbStats`).
+  - **good**: building a habit; the user marks a day *done* and the streak counts
+    consecutive done days (`__hbGoodStats`, inverse counting via the same
+    `habit_days.used=true`).
+  Good and bad are kept **apart everywhere**: the Habits-page tabs, the home hero
+  widget («Утримання від шкідливих звичок» vs «Набуття корисних звичок» — each with
+  its own stat), the «Звички сьогодні» daily widget (bad → Оступ/Зрив, good → a
+  «Позначити/Виконано» toggle), and in the AI context/event pickers (a broken good
+  streak is never reported as a "зрив"). Calendar, milestones, clean-day goals and
+  the report table are bad-habit only. (Green = clean/done, dark-neutral = relapse;
+  never red.)
+- **Exercises → Yoga**: a standalone `yoga` route (in the Вправи submenu + a tile on
+  the Static-exercises page). Picks an instructor by the current UI language
+  (uk/ru → Oksana Taran, en → Yoga With Adriene, es → Xuan Lan, fr → YogaCoaching,
+  de → Mady Morrison; pl → generic) and shows 3 level tiles
+  (Початківець/Середній/Просунутий) that open the class on YouTube. All in the
+  `__rsYoga` map (`__rsYogaPage` renderer) — links are trivial to swap.
+- **Books**: reading tracker (reading / read / dropped) with per-book chapters —
+  reorder (drag), mark done (tap), delete (✕), and **rename** (✎).
 - **Goals** with auto-progress, tied to trackable conditions.
 - **Development system** (RPG): levels, skill branches (Дихальна сила,
   Загартування, Вправи, Спокій, Знання), "Воля" multiplier for consistency,
@@ -34,7 +53,9 @@ progression. Main pillars:
 
 **Languages**: uk (default) + ru / en / pl / es / fr / de — everything is localized.
 **Design**: warm, **flat** (no glows/shadows-as-decoration), oklch palette,
-light + dark themes, rounded cards (`--radius:16px`).
+light + dark themes, rounded cards (`--radius:16px`). Nav/menu icons live in the
+`M` glyph map (`ne('<path…>')`); each menu entry has a **unique, on-meaning** icon
+(no repeats).
 
 ## Tech & architecture
 
@@ -139,4 +160,4 @@ web app (Capacitor) + adding **APNs** — not a rewrite. The full ordered plan,
 the "who does what" split, the App Privacy data map, and rejection risks are in
 **`docs/HANDOFF-iOS.md`**. Read it before starting App Store work.
 
-Current build version: **20260825000012**.
+Current build version: **20260905000015**.
