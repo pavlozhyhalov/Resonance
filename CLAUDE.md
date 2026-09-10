@@ -79,7 +79,7 @@ entry has a **unique, on-meaning** icon (no repeats).
   ⚠️ Web push does **not** work inside an iOS wrapper — the app needs **APNs**
   (this is the main backend task for the App Store; see the handoff doc).
 
-### Live edge functions (deployed via Supabase MCP; not in the repo)
+### Live edge functions (deployed via Supabase MCP; **source snapshot in `supabase/functions/`** — versioned for review/rollback, NOT auto-deployed)
 - `assistant` **v13** — Gemini chat + daily tip + greeting. Per-user rate limit
   (15/h, 40/day via `bump_assistant_usage` RPC + `assistant_usage` table,
   configurable in `app_config`), a DB-independent per-isolate global backstop,
@@ -87,8 +87,9 @@ entry has a **unique, on-meaning** icon (no repeats).
   a server-side entitlement gate** (`isEntitled`) on `kind:"chat"` — returns
   `{paywall:true}` when access has lapsed, so the paywall can't be bypassed from
   the console.
-- `delete-account` **v2** — GDPR account deletion (all FKs to `auth.users` are
-  ON DELETE CASCADE) + PII-free `account_deletions` audit row.
+- `delete-account` **v3** — GDPR account deletion (all FKs to `auth.users` are
+  ON DELETE CASCADE — verified: covers every user table incl. `learn_items`,
+  `water_intake`) + PII-free `account_deletions` audit row.
 - `send-reminders`, `send-winback` — cron push + email nudges (web-push today).
 
 ### Key DB tables
@@ -96,7 +97,7 @@ entry has a **unique, on-meaning** icon (no repeats).
 rewards, goals, books, day_ratings, water_intake, reminders, notifications,
 push_subscriptions, assistant_threads, communities, community_members,
 community_invites, community_challenges, challenge_participants,
-assistant_usage, assistant_events, account_deletions, app_config`.
+assistant_usage, assistant_events, account_deletions, app_config, learn_items`.
 
 ## How the code is organized (for editing app.bundle.js)
 
@@ -120,7 +121,8 @@ assistant_usage, assistant_events, account_deletions, app_config`.
 ## Dev conventions (do these every time)
 
 1. Edit the minified bundle **surgically** using long, unique anchor strings.
-   After **every** edit run `node --check app.bundle.js`.
+   After **every** edit run `node --check app.bundle.js`; before shipping run
+   **`bash scripts/smoke.sh`** (behavioural invariants beyond syntax).
 2. Any client change → **bump the cache-busting version** in all three files:
    `Ht="…"` in `app.bundle.js`, `VERSION = "…"` in `sw.js`, `?v=…` in
    `index.html`. They must match. Verify with **`bash scripts/release-check.sh`**.
