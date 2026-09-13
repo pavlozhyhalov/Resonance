@@ -172,7 +172,23 @@ web app (Capacitor) + adding **APNs** — not a rewrite. The full ordered plan,
 the "who does what" split, the App Privacy data map, and rejection risks are in
 **`docs/HANDOFF-iOS.md`**. Read it before starting App Store work.
 
-Current build version: **20260913000003** (streak/level day-boundary switched from UTC to **local time**; edge v7 + test-push v4 remain live).
+Current build version: **20260913000004** (SW black-screen fix + streak/level local time; edge v7 + test-push v4 remain live).
+
+### Service-worker black-screen fix — since 20260913000004
+Installed iOS PWAs could go black after a deploy and only a **reinstall** fixed
+it. Root cause: on a new deploy the SW `activate` purges old caches, then the
+boot's `controllerchange`→`location.reload()` fires; if that reload's network
+fetch of `index.html` raced/failed, the navigation handler's fallback found
+nothing cached (caches were just purged) and returned `undefined` → blank page.
+Fix (`sw.js`): **pre-cache the app shell on `install`** (`index.html` + `./`
+into the versioned cache, before `skipWaiting`/`claim`), and the navigation
+`.catch` now falls back `req → index.html → ./` and never returns `undefined`.
+Because the NEW SW's `install` runs before it claims, the fix protects its own
+transition and every future deploy. If the owner reports being **logged out**
+in the PWA, that was tied to the poisoned state (SW cache deletion never touches
+the localStorage auth token, key `supabase.auth.token`); watch for recurrence
+after this fix before touching auth (client is `flowType:"implicit"`,
+`persistSession`+`autoRefreshToken` on, default localStorage storage).
 
 ### Streak & level use local days (not UTC) — since 20260913000003
 The RPG streak, level (`Tl`/`El`), "days to next level", calendar month grouping

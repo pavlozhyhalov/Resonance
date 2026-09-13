@@ -4,10 +4,23 @@
    refresh, with a cached fallback for offline. Versioned/immutable assets
    (?v=, media, fonts) stay cache-first. Bump VERSION on each deploy so this
    worker updates and old caches are purged. */
-const VERSION = "20260913000003";
+const VERSION = "20260913000004";
 const CACHE = "resonance-assets-" + VERSION;
 
-self.addEventListener("install", function () { self.skipWaiting(); });
+// Pre-cache the app shell so a post-activate reload always has a fallback
+// even if the network momentarily fails (this was the black-screen cause on
+// installed iOS PWAs: activate purges old caches, then the forced reload's
+// network fetch races and there was no cached shell to fall back to).
+self.addEventListener("install", function (e) {
+  e.waitUntil(
+    caches.open(CACHE).then(function (c) {
+      return Promise.all([
+        c.add(new Request("index.html", { cache: "reload" })).catch(function () {}),
+        c.add(new Request("./", { cache: "reload" })).catch(function () {})
+      ]);
+    }).catch(function () {}).then(function () { return self.skipWaiting(); })
+  );
+});
 
 self.addEventListener("activate", function (e) {
   e.waitUntil(
@@ -36,7 +49,11 @@ self.addEventListener("fetch", function (e) {
         }
         return res;
       }).catch(function () {
-        return caches.match(req).then(function (hit) { return hit || caches.match("./"); });
+        return caches.match(req).then(function (hit) {
+          return hit || caches.match("index.html").then(function (s) {
+            return s || caches.match("./");
+          });
+        });
       })
     );
     return;
