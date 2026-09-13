@@ -4,7 +4,7 @@
    refresh, with a cached fallback for offline. Versioned/immutable assets
    (?v=, media, fonts) stay cache-first. Bump VERSION on each deploy so this
    worker updates and old caches are purged. */
-const VERSION = "20260913000001";
+const VERSION = "20260913000002";
 const CACHE = "resonance-assets-" + VERSION;
 
 self.addEventListener("install", function () { self.skipWaiting(); });
@@ -86,24 +86,4 @@ self.addEventListener("notificationclick", function (e) {
       if (self.clients.openWindow) return self.clients.openWindow(url);
     })
   );
-});
-
-// Re-subscribe when the browser/iOS rotates or drops the push subscription.
-// Keeps the browser subscription alive; the DB row is refreshed by the client's
-// boot reconcile (__rsPushReconcile) on the next app open, which has the user's auth.
-var VAPID_PUB = "BB34OSLtzN9U8awpAAuW7CW_i34LM1HaSQqIV5vH20TW_mh4ppNOciYD7GIEMgJVHECYV3sK-YR59I5Q9EXFo7s";
-function __swU8(b) {
-  var pad = "=".repeat((4 - (b.length % 4)) % 4);
-  var s = (b + pad).replace(/-/g, "+").replace(/_/g, "/");
-  var raw = atob(s), a = new Uint8Array(raw.length);
-  for (var i = 0; i < raw.length; i++) a[i] = raw.charCodeAt(i);
-  return a;
-}
-self.addEventListener("pushsubscriptionchange", function (e) {
-  e.waitUntil((async function () {
-    try {
-      var key = (e.oldSubscription && e.oldSubscription.options && e.oldSubscription.options.applicationServerKey) || __swU8(VAPID_PUB);
-      await self.registration.pushManager.subscribe({ userVisibleOnly: true, applicationServerKey: key });
-    } catch (_e) {}
-  })());
 });

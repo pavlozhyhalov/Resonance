@@ -172,4 +172,4 @@ web app (Capacitor) + adding **APNs** — not a rewrite. The full ordered plan,
 the "who does what" split, the App Privacy data map, and rejection risks are in
 **`docs/HANDOFF-iOS.md`**. Read it before starting App Store work.
 
-Current build version: **20260913000001**.
+Current build version: **20260913000002** (client rolled back from push-fix pending black-screen fix; edge v7 + test-push v4 remain live).
