@@ -172,4 +172,16 @@ web app (Capacitor) + adding **APNs** — not a rewrite. The full ordered plan,
 the "who does what" split, the App Privacy data map, and rejection risks are in
 **`docs/HANDOFF-iOS.md`**. Read it before starting App Store work.
 
-Current build version: **20260913000002** (client rolled back from push-fix pending black-screen fix; edge v7 + test-push v4 remain live).
+Current build version: **20260913000003** (streak/level day-boundary switched from UTC to **local time**; edge v7 + test-push v4 remain live).
+
+### Streak & level use local days (not UTC) — since 20260913000003
+The RPG streak, level (`Tl`/`El`), "days to next level", calendar month grouping
+and per-practice active-day counts all bucket a session's `started_at` by the
+**device's local day** (`X(new Date(started_at))`), not the UTC date
+(`started_at.slice(0,10)`). This removed a latent bug where the streak set was
+built on UTC dates but compared against the local "today" (`X(n)`), and aligns
+the visible streak with the reminder system (`reminders.tz`, local). Effect on
+the owner: longest streak 142 (UTC) → 126 (local) — **still level 5**
+(thresholds `gi=[0,7,21,50,100,175,…]`; L5 = 100 days, L6 = 175), days-to-next
+33 → 49. The «Як рахується рівень» (xpinfo) explainer gained one localized line
+(7 langs via `__rsT`) stating a day is counted in local time.
