@@ -196,8 +196,18 @@ and per-practice active-day counts all bucket a session's `started_at` by the
 **device's local day** (`X(new Date(started_at))`), not the UTC date
 (`started_at.slice(0,10)`). This removed a latent bug where the streak set was
 built on UTC dates but compared against the local "today" (`X(n)`), and aligns
-the visible streak with the reminder system (`reminders.tz`, local). Effect on
-the owner: longest streak 142 (UTC) → 126 (local) — **still level 5**
-(thresholds `gi=[0,7,21,50,100,175,…]`; L5 = 100 days, L6 = 175), days-to-next
-33 → 49. The «Як рахується рівень» (xpinfo) explainer gained one localized line
-(7 langs via `__rsT`) stating a day is counted in local time.
+the visible streak with the reminder system (`reminders.tz`, local).
+**Owner's real numbers (verified against `sessions`):** device-local for the
+owner is **Warsaw/Krakow (UTC+2)**, where the longest gap-free run is **142 days
+(2026-04-02 → 2026-08-21)** — the SAME as UTC for this data. An earlier note here
+claimed "142 → 126 (local)"; that **126 was a Kyiv-tz miscalculation**, not the
+owner's local time. The 16-day gap between Kyiv (126) and Warsaw/UTC (142) hinges
+on ONE late-night session (2026-08-06 21:39 UTC = 23:39 Warsaw, still Aug 6 →
+no gap; but 00:39 Kyiv Aug 7 → Aug 6 empty → run splits at 126). Owner is
+**level 5**, days-to-next = 175 − 142 = **33**. The 6 missed days ever
+(Warsaw tz): 04-01, 08-22, 08-23, 09-03, 09-05, 09-08 — all AFTER the 142-run,
+so the record is intact. The «Як рахується рівень» explainer gained a localized
+line (7 langs) stating a day is counted in local time, plus the days-to-next
+arithmetic. **Open choice:** device-local is the standard, but since most
+sessions predate the Poland move (Ukraine era), the owner may later prefer a
+fixed Kyiv tz — not changed without a decision.
