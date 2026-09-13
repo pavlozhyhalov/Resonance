@@ -172,7 +172,25 @@ web app (Capacitor) + adding **APNs** — not a rewrite. The full ordered plan,
 the "who does what" split, the App Privacy data map, and rejection risks are in
 **`docs/HANDOFF-iOS.md`**. Read it before starting App Store work.
 
-Current build version: **20260913000004** (SW black-screen fix + streak/level local time; edge v7 + test-push v4 remain live).
+Current build version: **20260913000006** (LEVEL now = cumulative practice days, streak decoupled; SW black-screen fix; local-time days; edge v7 + test-push v4 remain live).
+
+### Level model changed: cumulative practice days (not longest streak) — since 20260913000006
+**Owner decision (motivation fix):** the old model tied LEVEL to the *longest
+consecutive streak* — so a single miss meant the next level required beating your
+all-time record (≈half a year), which is demotivating. Now **level = total number
+of distinct practice days ever** (`activeDays`), which only ever goes up: a miss
+costs exactly one day, nothing retroactive. Code: the level object is built from
+`Sl(a.activeDays)` instead of `Sl(a.longest)` (single change in `Tl`'s consumer);
+thresholds `gi=[0,7,21,50,100,175,275,400,560,770,1040,1370,1780,2280,2920]`
+**kept** — for cumulative days they're well-paced (L10≈2y, L15≈8y of near-daily
+practice; max 1 day/day so no grinding). **Streak is decoupled**: `current`
+(momentum "flame", shown on home hero, resets on a miss) and `longest` (record)
+are separate stats that DO NOT affect level. Owner now: activeDays 163 → **level
+5**, days-to-next = 175 − 163 = **12 practice days**. The «Як рахується рівень»
+explainer + profile/greeting/AI copy were rewritten (7 langs) so nothing calls
+the level a "streak" anymore. **Open (not built):** owner mused thresholds could
+be steepened later so higher levels aren't too easy — current `gi` kept pending a
+decision.
 
 ### Service-worker black-screen fix — since 20260913000004
 Installed iOS PWAs could go black after a deploy and only a **reinstall** fixed
