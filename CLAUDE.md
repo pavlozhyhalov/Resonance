@@ -103,7 +103,7 @@ entry has a **unique, on-meaning** icon (no repeats).
 rewards, goals, books, day_ratings, water_intake, reminders, notifications,
 push_subscriptions, assistant_threads, communities, community_members,
 community_invites, community_challenges, challenge_participants,
-assistant_usage, assistant_events, account_deletions, app_config, learn_items`.
+assistant_usage, assistant_events, account_deletions, app_config, learn_items, streak_freezes, assistant_tips`.
 
 ## How the code is organized (for editing app.bundle.js)
 

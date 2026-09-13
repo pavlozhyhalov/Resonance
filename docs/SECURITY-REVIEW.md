@@ -67,6 +67,14 @@ challenge_participants, learn_items`. Транзитивний каскад те
 
 Пріоритет: середній (at-rest від Cloudflare вже є; це додатковий шар «наш ключ»).
 
+## Оновлення 2026-09-13 — нові таблиці (ТЗ B.3 / C.1)
+- `push_subscriptions`: додано `last_ok_at`, `fail_count` + `bump_push_fail()`
+  (SECURITY DEFINER, execute відкликано в anon/authenticated).
+- `streak_freezes` (B.3): FK `auth.users` **ON DELETE CASCADE** ✓, RLS ✓
+  (select/insert/delete для `auth.uid()=user_id`). delete-account покриває.
+- `assistant_tips` (C.1): FK `auth.users` **ON DELETE CASCADE** ✓, RLS ✓
+  (**SELECT-only** для власника; пише сервер через service role). delete-account покриває.
+
 ## Разом
 Модель доступу міцна: RLS скрізь, deny-all на службових таблицях коректний,
 видалення акаунта повне. Відкриті: дрібні харденінги RLS (1–2), клієнтське
