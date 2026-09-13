@@ -90,7 +90,13 @@ entry has a **unique, on-meaning** icon (no repeats).
 - `delete-account` **v3** — GDPR account deletion (all FKs to `auth.users` are
   ON DELETE CASCADE — verified: covers every user table incl. `learn_items`,
   `water_intake`) + PII-free `account_deletions` audit row.
-- `send-reminders`, `send-winback` — cron push + email nudges (web-push today).
+- `send-reminders` **v7**, `send-winback` v2 — cron push + email nudges (web-push
+  today). **v7:** email fallback fires whenever push did **not** deliver (a
+  dead-but-present subscription no longer swallows the reminder); `sendPush()`
+  provider-independent helper; `last_ok_at`/`fail_count` on `push_subscriptions`
+  (+ `bump_push_fail` RPC). Client self-heals the subscription on boot
+  (`__rsPushReconcile`, only when permission already granted) + `sw.js`
+  `pushsubscriptionchange`. TZ lives in `reminders` (tz/hour/minute), cron every 15 min.
 
 ### Key DB tables
 `profiles, settings, sessions, habits, habit_days, tasks, task_completions,
@@ -166,4 +172,4 @@ web app (Capacitor) + adding **APNs** — not a rewrite. The full ordered plan,
 the "who does what" split, the App Privacy data map, and rejection risks are in
 **`docs/HANDOFF-iOS.md`**. Read it before starting App Store work.
 
-Current build version: **20260905000019**.
+Current build version: **20260913000001**.

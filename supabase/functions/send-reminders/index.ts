@@ -23,6 +23,19 @@ function pushMsg(lang: string, streak: number): string {
   return JSON.stringify({ title: m.title, body: m.body, url: APP_URL, tag: 'daily-reminder' });
 }
 
+// Provider-independent single-push send. Returns the delivery outcome so the
+// caller can decide on cleanup / email fallback. (When we migrate web-push → APNs
+// for the iOS wrapper, only this function changes.)
+async function sendPush(webpush: any, sub: any, payload: string): Promise<{ ok: boolean; gone: boolean; code: number }> {
+  try {
+    await webpush.sendNotification({ endpoint: sub.endpoint, keys: { p256dh: sub.p256dh, auth: sub.auth } }, payload);
+    return { ok: true, gone: false, code: 200 };
+  } catch (err: any) {
+    const code = err?.statusCode || 0;
+    return { ok: false, gone: code === 404 || code === 410, code };
+  }
+}
+
 Deno.serve(async (req: Request) => {
   try {
     const url = Deno.env.get('SUPABASE_URL')!;
@@ -78,20 +91,24 @@ Deno.serve(async (req: Request) => {
         } catch (_e) { /* streak best-effort */ }
 
         for (const sub of subs) {
-          const payload = pushMsg(sub.lang || 'uk', streak);
-          try {
-            await webpush.sendNotification({ endpoint: sub.endpoint, keys: { p256dh: sub.p256dh, auth: sub.auth } }, payload);
+          const res = await sendPush(webpush, sub, pushMsg(sub.lang || 'uk', streak));
+          if (res.ok) {
             delivered = true; pushed++;
-          } catch (err: any) {
-            const code = err?.statusCode;
-            if (code === 404 || code === 410) {
-              await sb.from('push_subscriptions').delete().eq('endpoint', sub.endpoint);
-            } else {
-              failures.push('push:' + row.user_id + ':' + code);
-            }
+            try { await sb.from('push_subscriptions').update({ last_ok_at: new Date().toISOString(), fail_count: 0 }).eq('endpoint', sub.endpoint); } catch (_e) { /* columns optional */ }
+          } else if (res.gone) {
+            await sb.from('push_subscriptions').delete().eq('endpoint', sub.endpoint);
+            failures.push('push_gone:' + row.user_id + ':' + res.code);
+          } else {
+            try { await sb.rpc('bump_push_fail', { p_endpoint: sub.endpoint }); } catch (_e) { /* fn optional */ }
+            failures.push('push:' + row.user_id + ':' + res.code);
           }
         }
-      } else if (resendKey) {
+      }
+
+      // Email fallback whenever push did NOT deliver — a dead-but-present
+      // subscription must never silently swallow the reminder. Only fires when
+      // nothing was pushed this run, so no double-notify when push works.
+      if (!delivered && resendKey && row.email) {
         const html = "<div style='font-family:-apple-system,Segoe UI,Roboto,sans-serif;max-width:460px;margin:0 auto;padding:24px;color:#2b211a'>" +
           "<h2 style='margin:0 0 8px;font-weight:600'>Час для практики</h2>" +
           "<p style='margin:0 0 18px;line-height:1.5;color:#5a4f45'>Сьогодні ти ще не відзначив жодної практики. Кілька хвилин дихання чи медитації — і день зазвучить інакше.</p>" +
