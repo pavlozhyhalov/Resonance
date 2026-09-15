@@ -173,7 +173,23 @@ web app (Capacitor) + adding **APNs** — not a rewrite. The full ordered plan,
 the "who does what" split, the App Privacy data map, and rejection risks are in
 **`docs/HANDOFF-iOS.md`**. Read it before starting App Store work.
 
-Current build version: **20260915000002** (Воля now a REAL, responsive XP multiplier; Health workout bridge live via Health Auto Export; LEVEL = cumulative days; edge v7 + test-push v4 + ingest-workout v3 live).
+Current build version: **20260915000003** (save reliability: silent auth-retry on writes + honest error + dirty/saved Save button; Воля real; Health bridge; edge v7 + test-push v4 + ingest-workout v3 live).
+
+### Save reliability — silent auth-retry on writes — since 20260915000003
+Bug: writes often failed on the first click with a **misleading "sign in to save"**
+toast, then succeeded on retry. Cause: implicit-flow session token stale/not-yet-
+restored (PWA sleeps) → the write goes out before `autoRefreshToken` catches up →
+RLS 401 → the generic catch wrongly blamed sign-in. Fix: `__rsWrite(fn)` runs the
+write, and on an auth-shaped error resets `ze._uSet`, `await P.auth.getSession()`
+(refreshes an expired token), waits 150ms, and retries **once** — silently, no
+double-click. Wrapped the frequent writes: `Y.save` (settings — covers all toggles/
+persona/water-goal), `Rt.set` (day_ratings), `K.add` (sessions), `water_add` RPC,
+and both `habit_days` marks. The misleading "Увійди, щоб зберігати" / "Не вдалося
+(увійди)" copy (11 sites) → "Не збереглося, спробуй ще раз". Day-ratings Save button
+now tracks **dirty/saved**: muted "Збережено ✓" (disabled) until an input in the
+card changes (delegated `input` listener catches sliders too) → accent "Зберегти".
+Profile-form save navigates away on success (no indicator needed); goal/community
+saves are modals that close.
 
 ### «Воля» is now a real XP multiplier — since 20260915000002
 Finding: the old «Воля» (`mult = 1 + min(0.5, current*0.004)`) was **purely cosmetic**
