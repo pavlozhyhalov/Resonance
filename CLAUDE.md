@@ -104,6 +104,7 @@ rewards, goals, books, day_ratings, water_intake, reminders, notifications,
 push_subscriptions, assistant_threads, communities, community_members,
 community_invites, community_challenges, challenge_participants,
 assistant_usage, assistant_events, account_deletions, app_config, learn_items, streak_freezes, assistant_tips`.
+(+ `profiles.ingest_token` and `sessions.external_id` — Apple Health workout bridge.)
 
 ## How the code is organized (for editing app.bundle.js)
 
@@ -172,7 +173,28 @@ web app (Capacitor) + adding **APNs** — not a rewrite. The full ordered plan,
 the "who does what" split, the App Privacy data map, and rejection risks are in
 **`docs/HANDOFF-iOS.md`**. Read it before starting App Store work.
 
-Current build version: **20260913000006** (LEVEL now = cumulative practice days, streak decoupled; SW black-screen fix; local-time days; edge v7 + test-push v4 remain live).
+Current build version: **20260915000001** (Apple Health workout bridge; LEVEL = cumulative practice days; SW black-screen fix; local-time days; edge v7 + test-push v4 + ingest-workout v1 live).
+
+### Apple Health → Resonance workout bridge — since 20260915000001
+Owner runs with Nike Run Club, which writes workouts to Apple Health. Since a
+PWA can't read HealthKit, the bridge is **Apple Shortcuts → HTTP POST → edge
+`ingest-workout` → `sessions`**. A workout becomes a `type:"exercise"` session
+(`details.group:"cardio"`, `source:"health"`, optional `distance_km`/`kcal`), so
+it counts toward the cumulative-days level.
+- **Auth:** per-user secret `profiles.ingest_token` (a Shortcut can't hold a JWT).
+  RPCs `get_or_create_ingest_token()` / `rotate_ingest_token()` (SECURITY DEFINER,
+  authenticated). Settings → «Тренування з Apple Health» card (`__rsHealthSyncCard`,
+  after the reminders card) shows the URL + token (masked/copy/rotate) + 7-lang
+  setup steps.
+- **Dedup:** `sessions.external_id` (nullable) + partial unique index
+  `(user_id, external_id)`; the Shortcut passes the workout Start Date as
+  `external_id`, so re-runs don't double-insert.
+- **DB:** `ingest_workout(p_token,p_external_id,p_type,p_duration,p_started_at,p_details)`
+  SECURITY DEFINER (service_role only) — resolves token→uid, checks `is_entitled`,
+  inserts on-conflict-do-nothing. Edge fn is a thin wrapper, **verify_jwt=false**
+  (token auth), snapshot in `supabase/functions/ingest-workout/`.
+- **Not device-testable here** (prod outbound blocked); RPC path verified via SQL.
+  Long-term this is replaced by native HealthKit in the Capacitor wrapper.
 
 ### Level model changed: cumulative practice days (not longest streak) — since 20260913000006
 **Owner decision (motivation fix):** the old model tied LEVEL to the *longest
