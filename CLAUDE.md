@@ -173,7 +173,22 @@ web app (Capacitor) + adding **APNs** — not a rewrite. The full ordered plan,
 the "who does what" split, the App Privacy data map, and rejection risks are in
 **`docs/HANDOFF-iOS.md`**. Read it before starting App Store work.
 
-Current build version: **20260915000001** (Apple Health workout bridge; LEVEL = cumulative practice days; SW black-screen fix; local-time days; edge v7 + test-push v4 + ingest-workout v1 live).
+Current build version: **20260915000002** (Воля now a REAL, responsive XP multiplier; Health workout bridge live via Health Auto Export; LEVEL = cumulative days; edge v7 + test-push v4 + ingest-workout v3 live).
+
+### «Воля» is now a real XP multiplier — since 20260915000002
+Finding: the old «Воля» (`mult = 1 + min(0.5, current*0.004)`) was **purely cosmetic**
+— displayed "×N до всього XP" but never applied; skill XP came from raw minutes.
+It was also too flat (max ×1.5 only at a 125-day streak). Under the new level
+model (level = cumulative days), «Воля» is the *only* thing rewarding consecutive-day
+momentum, so it was made real and responsive:
+- **Real:** in `Ts()`, each session's skill points are weighted by that session's
+  **day-streak multiplier** — a per-day map `__dm` (streak length ending that day →
+  `1 + min(0.5, run*0.0125)`), computed from the local-day set. Historical, so it's
+  deterministic and never fluctuates when today's streak breaks.
+- **Responsive:** constant `0.0125` → cap ×1.5 at a **40-day** streak (7d ×1.09,
+  14d ×1.18, 30d ×1.38). The `will.mult` badge uses the live current streak; label
+  changed "до всього XP" → "до XP за серію".
+- Effect: consistent users' skill-branch levels rise (one-time re-baseline; intended).
 
 ### Apple Health → Resonance workout bridge — since 20260915000001
 Owner runs with Nike Run Club, which writes workouts to Apple Health. Since a
@@ -191,10 +206,18 @@ it counts toward the cumulative-days level.
   `external_id`, so re-runs don't double-insert.
 - **DB:** `ingest_workout(p_token,p_external_id,p_type,p_duration,p_started_at,p_details)`
   SECURITY DEFINER (service_role only) — resolves token→uid, checks `is_entitled`,
-  inserts on-conflict-do-nothing. Edge fn is a thin wrapper, **verify_jwt=false**
-  (token auth), snapshot in `supabase/functions/ingest-workout/`.
-- **Not device-testable here** (prod outbound blocked); RPC path verified via SQL.
-  Long-term this is replaced by native HealthKit in the Capacitor wrapper.
+  inserts on-conflict-do-nothing. Edge fn **verify_jwt=false** (token auth),
+  snapshot in `supabase/functions/ingest-workout/`.
+- **Working method (verified on owner's device):** the Apple Shortcuts route is a
+  DEAD END — stock Shortcuts "Find Health Samples" can't read Workouts. The working
+  path is the **Health Auto Export** app → REST API automation → our URL. Edge fn
+  **v2/v3** parse its `{data:{workouts:[…]}}` shape (duration=seconds, distance
+  `{qty,units}`, energy in **kJ** → v3 converts kJ→kcal ÷4.184). **Two headers
+  required:** `x-ingest-token` (per-user) AND `apikey` (the publishable key — the
+  Supabase functions gateway 404s without it). The Settings card shows URL + token
+  + apikey + Health-Auto-Export steps (7 langs). Confirmed live: a Nike run imported
+  as 32 min / 5.65 km / 483 kcal, deduped by the real workout UUID.
+- Long-term this is replaced by native HealthKit in the Capacitor wrapper.
 
 ### Level model changed: cumulative practice days (not longest streak) — since 20260913000006
 **Owner decision (motivation fix):** the old model tied LEVEL to the *longest
