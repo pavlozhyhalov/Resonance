@@ -173,7 +173,30 @@ web app (Capacitor) + adding **APNs** — not a rewrite. The full ordered plan,
 the "who does what" split, the App Privacy data map, and rejection risks are in
 **`docs/HANDOFF-iOS.md`**. Read it before starting App Store work.
 
-Current build version: **20260915000003** (save reliability: silent auth-retry on writes + honest error + dirty/saved Save button; Воля real; Health bridge; edge v7 + test-push v4 + ingest-workout v3 live).
+Current build version: **20260915000003** (client unchanged since; latest additions are server-side — personal MCP connector + Health bridge). Edge live: assistant v13, delete-account v3, send-reminders v7, send-winback v2, test-push v4, ingest-workout v3, **rs-mcp v1**.
+
+### Personal MCP connector (claude.ai custom connector) — since 2026-10-02
+The owner can log data into Resonance by chatting with Claude in any claude.ai
+chat, via a **remote MCP server** added once as a custom connector (Customize →
+Connectors → Add custom connector; no OAuth). Server = edge fn **`rs-mcp`**
+(Streamable HTTP, `verify_jwt=false`), snapshot in `supabase/functions/rs-mcp/`.
+- **Auth:** the per-user secret lives in the connector URL query — `?token=<ingest_token>`
+  (same `profiles.ingest_token` as the Health bridge) + `?apikey=<publishable>` so the
+  Supabase functions gateway doesn't 404. URL as secret; no OAuth.
+- **Tools:** `log_practice`, `log_workout`, `mark_habit`, `add_water`, `set_day_rating`,
+  `get_status` — each dispatches to a token-authed SECURITY DEFINER RPC
+  (`rs_log_session` / `rs_mark_habit` / `rs_add_water` / `rs_set_rating` / `rs_status`;
+  `rs_uid(token)` resolves token→uid; all service_role-only, entitlement-checked,
+  writes tagged `details.source:"claude"`). Habit semantics mirror the client
+  (`used=true` → done for good / relapse for bad; `slip_count` → оступ; delete → clear).
+  `rs_status` computes level/streak in **Europe/Warsaw** local time.
+- **Token rotated 2026-10-02** while building this (the old Health-bridge token was
+  overwritten during testing and can't be restored). The MCP connector URL and the
+  Health Auto Export `x-ingest-token` header now BOTH use the current token — the
+  Settings «Тренування з Apple Health» card (`get_or_create_ingest_token`) shows it;
+  if HAE starts returning `bad_token`, update its header to the card's token.
+- Verified end-to-end via SQL (all 6 RPCs); the claude.ai connector handshake is
+  owner-tested on device (can't reach prod from the build env).
 
 ### Save reliability — silent auth-retry on writes — since 20260915000003
 Bug: writes often failed on the first click with a **misleading "sign in to save"**
