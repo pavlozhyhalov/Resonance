@@ -173,7 +173,7 @@ web app (Capacitor) + adding **APNs** — not a rewrite. The full ordered plan,
 the "who does what" split, the App Privacy data map, and rejection risks are in
 **`docs/HANDOFF-iOS.md`**. Read it before starting App Store work.
 
-Current build version: **20260915000003** (client unchanged since; latest additions are server-side — personal MCP connector + Health bridge). Edge live: assistant v13, delete-account v3, send-reminders v7, send-winback v2, test-push v4, ingest-workout v3, **rs-mcp v1**.
+Current build version: **20261002000001** (removed the «Тренування з Apple Health» settings card — owner dropped Health Auto Export in favour of logging via the Resonance MCP connector / manual entry; `__rsHealthSyncCard` is now defined-but-unused dead code, the `ingest-workout` edge fn + token stay live for the shared connector). Edge live: assistant v13, delete-account v3, send-reminders v7, send-winback v2, test-push v4, ingest-workout v3, **rs-mcp v1**.
 
 ### Personal MCP connector (claude.ai custom connector) — since 2026-10-02
 The owner can log data into Resonance by chatting with Claude in any claude.ai
